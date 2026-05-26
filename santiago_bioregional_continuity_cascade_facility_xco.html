@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#192640">
+<title>Santiago Bioregional Continuity & Cryosphere–Moisture Cascade Facility</title>
+<meta name="description" content="A full XCO Dusk standalone concept paper for Santiago as a strategic option for stabilising biophysical cascades and proving a diffusable planetary response architecture.">
+<style>
+:root{
+  --shadow:#192640;
+  --midtone:#F27F3D;
+  --highlight:#FFFFFF;
+  --line:1.5px;
+  --hair:.75px;
+  --emph:2.5px;
+  --s3:3px;
+  --s5:5px;
+  --s8:8px;
+  --s13:13px;
+  --s21:21px;
+  --s34:34px;
+  --s55:55px;
+  --s89:89px;
+  --s144:144px;
+  --max:1480px;
+  --display:Inter,"Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --body:"Crimson Pro",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{background:var(--highlight);color:var(--shadow);scroll-behavior:smooth}
+body{margin:0;background:var(--highlight);color:var(--shadow);font-family:var(--body);font-size:21px;line-height:1.62;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(90deg,var(--shadow) 0 var(--hair),transparent var(--hair) 100%),linear-gradient(0deg,var(--shadow) 0 var(--hair),transparent var(--hair) 100%);background-size:55px 55px}
+a{color:inherit;text-decoration-thickness:var(--hair);text-underline-offset:var(--s5);text-decoration-color:var(--midtone)}
+a:hover{text-decoration-thickness:var(--line)}
+::selection{background:var(--midtone);color:var(--highlight)}
+.skip{position:absolute;left:var(--s34);top:-100px;background:var(--shadow);color:var(--highlight);padding:var(--s8) var(--s13);font-family:var(--mono);font-size:13px;z-index:20}
+.skip:focus{top:var(--s21)}
+.paper{width:min(calc(100vw - 44px),var(--max));margin:0 auto;padding:var(--s34) 0 var(--s89)}
+.top-rule,.bottom-rule{display:grid;grid-template-columns:1fr auto;gap:var(--s21);align-items:center;border-top:var(--line) solid var(--shadow);padding-top:var(--s13);font-family:var(--mono);font-size:13px;line-height:1.45;text-transform:uppercase;letter-spacing:.04em}
+.bottom-rule{margin-top:var(--s55);text-transform:none}
+.signal{display:inline-grid;grid-auto-flow:column;gap:var(--s5);justify-self:end}
+.signal i{display:block;width:13px;height:13px;border:var(--line) solid currentColor;background:var(--highlight)}
+.signal i:nth-child(2){background:var(--midtone)}
+.signal i:nth-child(3){background:var(--shadow)}
+.hero{display:grid;grid-template-columns:61.8fr 38.2fr;gap:var(--s55);min-height:calc(100vh - 68px);align-items:end;padding:var(--s89) 0 var(--s55);border-bottom:var(--line) solid var(--shadow)}
+.kicker,.label,.mono,.nav a,.caption,.mini,.source-label,.tag,.annotation,.number{font-family:var(--mono);font-size:13px;line-height:1.55;letter-spacing:.04em;text-transform:uppercase}
+.kicker{color:var(--midtone);margin:0 0 var(--s21)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;margin:0;line-height:1.03;letter-spacing:-.045em}
+h1{font-size:clamp(54px,8.9vw,132px);max-width:10ch}
+h2{font-size:clamp(36px,5.4vw,76px);max-width:13ch}
+h3{font-size:clamp(25px,2.8vw,42px);max-width:18ch}
+h4{font-size:23px;letter-spacing:-.03em;line-height:1.12;margin:0 0 var(--s8)}
+p{margin:0;max-width:74ch}
+p+p{margin-top:var(--s21)}
+.lede{font-size:clamp(24px,2.4vw,36px);line-height:1.24;max-width:32ch;margin-top:var(--s34)}
+.hero-side{display:grid;align-content:end;gap:var(--s21);border-left:var(--line) solid var(--midtone);padding-left:var(--s34);min-height:560px}
+.meta-grid{display:grid;grid-template-columns:1fr;gap:var(--s8)}
+.meta-row{display:grid;grid-template-columns:38.2fr 61.8fr;gap:var(--s13);border-top:var(--hair) solid currentColor;padding-top:var(--s8)}
+.meta-row span:first-child{color:var(--midtone)}
+.hero-card{border:var(--line) solid var(--shadow);padding:var(--s21);background:var(--highlight);box-shadow:var(--s13) var(--s13) 0 var(--shadow)}
+.hero-card p{font-size:19px;line-height:1.46}
+.nav{display:flex;flex-wrap:wrap;gap:var(--s8);margin-top:var(--s21)}
+.nav a{display:inline-flex;text-decoration:none;border:var(--hair) solid currentColor;padding:var(--s8) var(--s13);min-height:var(--s34);align-items:center}
+.nav a:hover{background:var(--shadow);color:var(--highlight)}
+.section{padding:var(--s89) 0;border-bottom:var(--line) solid var(--shadow)}
+.section.compact{padding:var(--s55) 0}
+.section.inverse{background:var(--shadow);color:var(--highlight);padding-left:var(--s34);padding-right:var(--s34);margin-left:calc(var(--s34) * -1);margin-right:calc(var(--s34) * -1);border-bottom:var(--line) solid var(--highlight)}
+.section-head{display:grid;grid-template-columns:220px minmax(0,1fr);gap:var(--s55);align-items:start;margin-bottom:var(--s34)}
+.section-code{font-family:var(--mono);font-size:13px;line-height:1.55;text-transform:uppercase;letter-spacing:.04em;color:var(--midtone);padding-top:var(--s8);border-top:var(--line) solid var(--midtone)}
+.section-copy{font-size:clamp(20px,1.6vw,25px);line-height:1.42;max-width:76ch;margin-top:var(--s21)}
+.two-col{display:grid;grid-template-columns:61.8fr 38.2fr;gap:var(--s55);align-items:start}
+.two-col.flip{grid-template-columns:38.2fr 61.8fr}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s21)}
+.four-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s13)}
+.six-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:var(--s8)}
+.card,.panel,.matrix-wrap,.diagram-frame,.callout,.source-card,.road-card,.portfolio-card,.trigger-card,.finance-card,.quote-panel{border:var(--line) solid currentColor;background:var(--highlight);color:var(--shadow)}
+.inverse .card,.inverse .panel,.inverse .diagram-frame,.inverse .callout,.inverse .matrix-wrap,.inverse .source-card,.inverse .road-card,.inverse .portfolio-card,.inverse .trigger-card,.inverse .finance-card,.inverse .quote-panel{background:var(--shadow);color:var(--highlight);border-color:var(--highlight)}
+.card,.panel,.callout,.source-card,.road-card,.portfolio-card,.trigger-card,.finance-card,.quote-panel{padding:var(--s21)}
+.card.accent,.panel.accent,.portfolio-card.accent,.trigger-card.accent,.finance-card.accent{border-top:var(--s8) solid var(--midtone)}
+.card.risk,.risk-node{background:var(--midtone);color:var(--highlight);border-color:var(--shadow)}
+.card.field,.field-node{border-style:dashed}
+.card h3,.panel h3,.portfolio-card h3,.trigger-card h3,.finance-card h3{margin-bottom:var(--s13)}
+.card p,.panel p,.portfolio-card p,.trigger-card p,.finance-card p{font-size:18px;line-height:1.48}
+.callout{border-left:var(--s8) solid var(--midtone)}
+.callout p{font-size:clamp(21px,2vw,30px);line-height:1.32;max-width:44ch}
+.quote-panel{border-left:var(--s8) solid var(--midtone)}
+.quote-panel p{font-size:clamp(25px,2.5vw,38px);line-height:1.25;font-style:italic;max-width:29ch}
+.hatch{background-image:repeating-linear-gradient(135deg,var(--shadow) 0 var(--hair),var(--highlight) var(--hair) var(--s8))}
+.inverse .hatch{background-image:repeating-linear-gradient(135deg,var(--highlight) 0 var(--hair),var(--shadow) var(--hair) var(--s8))}
+.dense{background-image:repeating-linear-gradient(135deg,var(--shadow) 0 var(--hair),var(--highlight) var(--hair) var(--s5))}
+.inverse .dense{background-image:repeating-linear-gradient(135deg,var(--highlight) 0 var(--hair),var(--shadow) var(--hair) var(--s5))}
+.hatch>*,.dense>*{background:inherit}
+.tag{display:inline-flex;min-height:var(--s34);align-items:center;border:var(--line) solid var(--midtone);color:var(--midtone);padding:var(--s5) var(--s13);width:max-content;max-width:100%;margin-top:var(--s13)}
+.tick-stack{display:grid;gap:var(--s5);width:var(--s55);margin-top:var(--s13)}
+.tick-stack span{display:block;height:var(--s3);background:var(--midtone)}
+.formula{border:var(--line) solid currentColor;border-left:var(--s8) solid var(--midtone);padding:var(--s34);font-family:var(--display);font-size:clamp(28px,3.5vw,58px);line-height:1.05;letter-spacing:-.045em;margin:var(--s34) 0}
+.formula .small{display:block;font-family:var(--mono);font-size:13px;line-height:1.55;letter-spacing:.04em;text-transform:uppercase;color:var(--midtone);margin-bottom:var(--s13)}
+.process-ladder{display:grid;gap:var(--s13);counter-reset:ladder;margin-top:var(--s34)}
+.ladder-step{counter-increment:ladder;display:grid;grid-template-columns:var(--s55) 1fr;border:var(--line) solid currentColor;min-height:var(--s89);background:var(--highlight);color:var(--shadow)}
+.inverse .ladder-step{background:var(--shadow);color:var(--highlight)}
+.ladder-step::before{content:counter(ladder,decimal-leading-zero);display:grid;place-items:center;border-right:var(--line) solid currentColor;background:var(--midtone);color:var(--highlight);font-family:var(--mono);font-size:13px}
+.ladder-step div{padding:var(--s13) var(--s21)}
+.ladder-step b{font-family:var(--display);font-weight:500;display:block;margin-bottom:var(--s5);font-size:19px;letter-spacing:-.03em}
+.matrix-wrap{overflow-x:auto;margin-top:var(--s34)}
+table{width:100%;border-collapse:collapse;min-width:880px}
+th,td{border:var(--hair) solid currentColor;padding:var(--s13) var(--s21);vertical-align:top;text-align:left;font-size:17px;line-height:1.43}
+th{font-family:var(--mono);font-size:12px;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;background:var(--shadow);color:var(--highlight);font-weight:400}
+.inverse th{background:var(--highlight);color:var(--shadow)}
+td .mini{display:block;color:var(--midtone);margin-bottom:var(--s5)}
+.diagram-frame{padding:var(--s21);margin:var(--s21) 0}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.svg-bg{fill:var(--highlight);stroke:var(--shadow);stroke-width:1.5}
+.inverse .svg-bg{fill:var(--shadow);stroke:var(--highlight)}
+.svg-line{stroke:var(--shadow);stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke}
+.inverse .svg-line{stroke:var(--highlight)}
+.svg-hair{stroke:var(--shadow);stroke-width:.75;fill:none;vector-effect:non-scaling-stroke}
+.inverse .svg-hair{stroke:var(--highlight)}
+.svg-dash{stroke-dasharray:8 8}
+.svg-emph{stroke:var(--midtone);stroke-width:2.5;fill:none;vector-effect:non-scaling-stroke}
+.svg-paper{fill:var(--highlight);stroke:var(--shadow);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.inverse .svg-paper{fill:var(--shadow);stroke:var(--highlight)}
+.svg-shadow{fill:var(--shadow);stroke:var(--shadow);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.inverse .svg-shadow{fill:var(--highlight);stroke:var(--highlight)}
+.svg-mid{fill:var(--midtone);stroke:var(--shadow);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.inverse .svg-mid{stroke:var(--highlight)}
+.svg-text{font-family:var(--display);font-size:17px;fill:var(--shadow);letter-spacing:-.02em}
+.svg-small{font-family:var(--mono);font-size:12px;fill:var(--shadow);letter-spacing:.04em;text-transform:uppercase}
+.svg-body{font-family:var(--body);font-size:16px;fill:var(--shadow)}
+.inverse .svg-text,.inverse .svg-small,.inverse .svg-body{fill:var(--highlight)}
+.svg-paper-text{fill:var(--highlight)}
+.inverse .svg-paper-text{fill:var(--shadow)}
+.svg-shadow-text{fill:var(--shadow)}
+.inverse .svg-shadow-text{fill:var(--highlight)}
+.annotation{font-style:italic;text-transform:none;letter-spacing:.01em;color:var(--midtone);margin-top:var(--s13)}
+.caption{font-style:italic;text-transform:none;letter-spacing:.01em;margin-top:var(--s13);max-width:76ch}
+.scale-rule{display:grid;grid-template-columns:var(--s144) 1fr;gap:var(--s21);align-items:center;margin:var(--s34) 0 var(--s21)}
+.scale-rule .scale-label{font-family:var(--mono);font-size:13px;line-height:1.4;font-style:italic;color:var(--midtone);text-transform:uppercase;letter-spacing:.04em}
+.scale-rule .rule{border-top:var(--hair) solid currentColor;height:0}
+.portfolio-card{min-height:360px;display:grid;grid-template-rows:auto auto 1fr auto}
+.portfolio-card .number{color:var(--midtone);margin-bottom:var(--s13)}
+.portfolio-card ul,.trigger-card ul,.finance-card ul,.road-card ul{margin:var(--s13) 0 0;padding:0;list-style:none;display:grid;gap:var(--s8)}
+.portfolio-card li,.trigger-card li,.finance-card li,.road-card li{border-top:var(--hair) solid currentColor;padding-top:var(--s8);font-size:16px;line-height:1.4}
+.trigger-card{min-height:260px}
+.finance-card{min-height:245px}
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s13)}
+.road-card{display:grid;grid-template-rows:auto auto 1fr;min-height:330px}
+.source-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s13)}
+.source-card p{font-size:16px;line-height:1.42}.source-card a{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.print-note{font-family:var(--mono);font-size:12px;line-height:1.55;color:var(--midtone);margin-top:var(--s21);max-width:80ch}
+@media(max-width:1120px){.hero,.two-col,.two-col.flip,.section-head{grid-template-columns:1fr}.hero-side{border-left:0;border-top:var(--line) solid var(--midtone);padding-left:0;padding-top:var(--s34);min-height:auto}.three-grid,.source-grid{grid-template-columns:1fr 1fr}.four-grid,.roadmap{grid-template-columns:1fr 1fr}.six-grid{grid-template-columns:1fr 1fr 1fr}.portfolio-card{min-height:auto}}
+@media(max-width:720px){.paper{width:min(calc(100vw - 28px),var(--max));padding-top:var(--s21)}.top-rule,.bottom-rule,.meta-row,.three-grid,.four-grid,.six-grid,.source-grid,.roadmap,.scale-rule{grid-template-columns:1fr}.hero{padding-top:var(--s55);min-height:auto}.section{padding:var(--s55) 0}.section.inverse{margin-left:0;margin-right:0;padding-left:var(--s21);padding-right:var(--s21)}h1{font-size:clamp(44px,13vw,72px)}.lede{font-size:22px}.formula{font-size:28px;padding:var(--s21)}.ladder-step{grid-template-columns:44px 1fr}table{min-width:760px}.hero-card{box-shadow:var(--s8) var(--s8) 0 var(--shadow)}}
+@media print{body::before{display:none}.paper{width:100%;padding:0}.hero{min-height:auto}.nav{display:none}.section,.hero,.card,.panel,.diagram-frame,.matrix-wrap,.portfolio-card,.trigger-card,.finance-card,.road-card,.source-card{break-inside:avoid}.hero-card{box-shadow:none}a{text-decoration:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to concept paper</a>
+<main class="paper" id="top">
+  <div class="top-rule" aria-label="document metadata">
+    <div>XCO Dusk preset // standalone concept paper // Santiago cascade stabilisation option</div>
+    <div class="signal" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <header class="hero">
+    <div>
+      <p class="kicker">Strategic option // biophysical cascade stabilisation // proof of possibility</p>
+      <h1>Santiago Continuity Facility</h1>
+      <p class="lede">A public-interest risk pool, capital pool, outcome accelerator, civic capability layer, and cryosphere–moisture cascade platform for keeping a city-region viable under heat, fire, glacier-water and aquifer stress.</p>
+    </div>
+    <aside class="hero-side">
+      <div class="meta-grid" aria-label="concept metadata">
+        <div class="meta-row"><span>Geography</span><span>Santiago Metropolitan Region · Maipo Basin · Andean cryosphere · peri-urban fire interface</span></div>
+        <div class="meta-row"><span>Object</span><span>Place-continuity field: the shared conditions that keep people, services, assets, insurance, credit, water, energy and civic trust viable.</span></div>
+        <div class="meta-row"><span>Core risks</span><span>Heat · wildfire · glacier retreat · snowpack loss · atmospheric-river flood pulse · aquifer stress · energy peak · smoke · abandonment.</span></div>
+        <div class="meta-row"><span>Institution</span><span>Public-interest facility with risk observatory, stability balance sheet, risk pool, capital pool, outcome contracts, civic layer and diffusion lab.</span></div>
+      </div>
+      <div class="hero-card">
+        <p class="label">Central claim</p>
+        <p>Santiago is not one adaptation case. It is a bounded proof that a city-region can manage a physical cascade before it becomes service failure, fiscal stress, insurance retreat, displacement, distrust and reduced future adaptive capacity.</p>
+      </div>
+      <nav class="nav" aria-label="page sections">
+        <a href="#argument">00 argument</a><a href="#santiago">01 why Santiago</a><a href="#cascade">02 cascade field</a><a href="#facility">03 facility</a><a href="#portfolios">04 portfolios</a><a href="#glaciers">05 glaciers</a><a href="#outcomes">06 outcomes</a><a href="#finance">07 finance</a><a href="#diffusion">08 diffusion</a><a href="#decision">09 decision</a><a href="#sources">10 anchors</a>
+      </nav>
+    </aside>
+  </header>
+
+  <section class="section compact" aria-label="primary visual thesis">
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1180 560" role="img" aria-labelledby="d1-title d1-desc">
+        <title id="d1-title">Santiago cascade stabilisation architecture</title>
+        <desc id="d1-desc">A flow diagram from biophysical cascade pressure through the Santiago place-continuity field into a public-interest facility, portfolios and planetary diffusion.</desc>
+        <defs>
+          <marker id="arrow1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#192640"></path></marker>
+          <pattern id="hatch1" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M-2 10 L10 -2 M0 12 L12 0" stroke="#192640" stroke-width=".75" fill="none"></path></pattern>
+        </defs>
+        <rect x="18" y="18" width="1144" height="524" class="svg-bg"></rect>
+        <line x1="56" y1="78" x2="1124" y2="78" class="svg-hair"></line>
+        <text x="56" y="56" class="svg-small">scale rule // atmosphere · Andes · basin · city · finance · civic layer</text>
+
+        <rect x="60" y="128" width="220" height="106" class="svg-mid"></rect>
+        <text x="82" y="164" class="svg-text svg-paper-text">BIOPHYSICAL</text>
+        <text x="82" y="188" class="svg-text svg-paper-text">CASCADE</text>
+        <text x="82" y="214" class="svg-small svg-paper-text">heat · fire · ice · water</text>
+        <line x1="280" y1="181" x2="340" y2="181" class="svg-line" marker-end="url(#arrow1)"></line>
+
+        <rect x="344" y="128" width="244" height="106" class="svg-paper" stroke-dasharray="8 8"></rect>
+        <text x="366" y="164" class="svg-text">PLACE-CONTINUITY</text>
+        <text x="366" y="188" class="svg-text">FIELD</text>
+        <text x="366" y="214" class="svg-small">shared viability conditions</text>
+        <line x1="588" y1="181" x2="648" y2="181" class="svg-line" marker-end="url(#arrow1)"></line>
+
+        <rect x="652" y="128" width="248" height="106" class="svg-paper"></rect>
+        <rect x="652" y="128" width="248" height="106" fill="url(#hatch1)"></rect>
+        <text x="674" y="164" class="svg-text">PUBLIC-INTEREST</text>
+        <text x="674" y="188" class="svg-text">FACILITY</text>
+        <text x="674" y="214" class="svg-small">pool · price · finance · verify</text>
+        <line x1="900" y1="181" x2="960" y2="181" class="svg-line" marker-end="url(#arrow1)"></line>
+
+        <rect x="964" y="128" width="132" height="106" class="svg-shadow"></rect>
+        <text x="982" y="164" class="svg-text svg-paper-text">DIFFUSION</text>
+        <text x="982" y="188" class="svg-text svg-paper-text">KIT</text>
+        <text x="982" y="214" class="svg-small svg-paper-text">copy the architecture</text>
+
+        <g>
+          <rect x="106" y="330" width="142" height="78" class="svg-paper"></rect><text x="128" y="362" class="svg-small">heat</text><text x="128" y="386" class="svg-small">commons</text>
+          <rect x="282" y="330" width="142" height="78" class="svg-paper"></rect><text x="304" y="362" class="svg-small">aquifer</text><text x="304" y="386" class="svg-small">baseflow</text>
+          <rect x="458" y="330" width="142" height="78" class="svg-paper"></rect><text x="480" y="362" class="svg-small">cryosphere</text><text x="480" y="386" class="svg-small">moisture</text>
+          <rect x="634" y="330" width="142" height="78" class="svg-paper"></rect><text x="656" y="362" class="svg-small">fire</text><text x="656" y="386" class="svg-small">smoke</text>
+          <rect x="810" y="330" width="142" height="78" class="svg-paper"></rect><text x="832" y="362" class="svg-small">energy</text><text x="832" y="386" class="svg-small">cooling</text>
+          <rect x="986" y="330" width="142" height="78" class="svg-paper"></rect><text x="1008" y="362" class="svg-small">civic</text><text x="1008" y="386" class="svg-small">capability</text>
+        </g>
+        <line x1="776" y1="234" x2="776" y2="286" class="svg-line"></line>
+        <path d="M177 330 C260 270, 448 270, 529 330" class="svg-emph"></path>
+        <path d="M529 330 C620 270, 850 270, 1057 330" class="svg-emph"></path>
+        <circle cx="776" cy="286" r="8" class="svg-mid"></circle>
+        <text x="56" y="488" class="svg-small">// [inference] the same intervention changes value by portfolio logic: outcome, risk relation, infrastructure, capability.</text>
+      </svg>
+    </div>
+    <p class="caption">Diagram 01. XCO grammar: rectangle is the unit; ember marks the triggering risk; dashed border marks a field; hatching marks weighted response; ticks and scale rules show multi-solve contribution and scale shift.</p>
+  </section>
+
+  <section class="section" id="argument">
+    <div class="section-head">
+      <div class="section-code">00 // standalone argument</div>
+      <div>
+        <h2>From cascade warning to stabilising option.</h2>
+        <p class="section-copy">The concept paper turns Santiago into a strategic option: a bounded test of whether public institutions, finance, civic capability, cryosphere monitoring and ecological infrastructure can stabilise a biophysical cascade before it becomes abandonment.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <p>Santiago sits inside a coupled field. Atmospheric-river pulses, Andean snowpack, glacier retreat, Maipo Basin flow, aquifer stress, heat-island exposure, smoke, energy peak load, health vulnerability and local fiscal constraint interact. The task is not to fund a green project list. The task is to build a public-interest institution that can hold the whole risk relation and pay for verified stability.</p>
+        <p>The facility proposed here works at three levels at once. At the bioregional level, it receives, slows, stores and recharges water while reducing accelerants of snow and ice loss. At the urban level, it builds a thermal commons, reduces fire and smoke risk, protects energy and water services, and prevents cooling from depleting aquifers. At the neighbourhood level, it builds civic capability: self-audits, participatory funds, cooling and care hubs, repair systems, open logs, public allocation trees and rehearsals.</p>
+        <div class="formula"><span class="small">central equation</span>heat + fire + cryosphere loss + aquifer stress + energy peak + inequality + fiscal constraint → continuity risk</div>
+      </div>
+      <aside class="quote-panel">
+        <p>The investment object is not the tree, roof, aquifer basin, sensor, tariff, microgrid or glacier cover. Those are instruments. The object is the field of conditions that keeps the city-region viable.</p>
+        <div class="annotation">// [inference] value is created when many small probability shifts reduce one shared cascade.</div>
+      </aside>
+    </div>
+    <div class="process-ladder">
+      <div class="ladder-step"><div><b>Risk becomes legible.</b> The observatory maps heat, fire, snowpack, glacier, albedo, dust, aquifer, baseflow, energy, health, insurance, credit, service and civic vulnerability data as one field.</div></div>
+      <div class="ladder-step"><div><b>Risk becomes pooled.</b> The facility holds a stability balance sheet and names the baseline, counterfactual, expected loss, avoided loss, probability shift and beneficiary classes.</div></div>
+      <div class="ladder-step"><div><b>Risk becomes investable.</b> Capital pays for verified cooling, recharge, baseflow, fire-risk reduction, continuity of critical services, reduced melt accelerants and civic capability.</div></div>
+      <div class="ladder-step"><div><b>Risk becomes governable.</b> Triggers release pre-funded packages before emergency appeals arrive: heat, fire weather, atmospheric-river forecast, aquifer threshold, snowpack deficit, smoke and grid stress.</div></div>
+      <div class="ladder-step"><div><b>Learning becomes diffusable.</b> Each intervention produces a public technology passport: design, cost, safety case, data schema, maintenance, failure modes, procurement and replication notes.</div></div>
+    </div>
+  </section>
+
+  <section class="section inverse" id="santiago">
+    <div class="section-head">
+      <div class="section-code">01 // why Santiago</div>
+      <div>
+        <h2>Santiago compresses the planetary problem.</h2>
+        <p class="section-copy">The city-region is a high-value test site because physical systems, social exposure and financial constraints are already coupled.</p>
+      </div>
+    </div>
+    <div class="three-grid">
+      <article class="card risk">
+        <p class="label">Risk convergence</p>
+        <h3>Heat, fire, water and ice meet in one basin.</h3>
+        <p>The Santiago region faces rising heat, drought and fire risk, with territorial heat inequality and vegetation deficits concentrated in vulnerable communes.</p>
+      </article>
+      <article class="card">
+        <p class="label">Water dependency</p>
+        <h3>Maipo Basin flows carry glacier and precipitation risk.</h3>
+        <p>The Maipo Basin is a main water source for the region. Existing assessments project large flow reductions by 2070 from precipitation loss and glacial retreat.</p>
+      </article>
+      <article class="card hatch">
+        <p class="label">Finance constraint</p>
+        <h3>Ordinary municipal borrowing cannot carry the response.</h3>
+        <p>Chile’s subnational borrowing rules make a new public-interest vehicle more plausible than a debt-heavy municipal capital programme.</p>
+      </article>
+    </div>
+    <div class="matrix-wrap">
+      <table aria-label="Santiago proof conditions">
+        <thead><tr><th>Condition</th><th>Why it matters</th><th>Strategic implication</th><th>Facility response</th></tr></thead>
+        <tbody>
+          <tr><td><span class="mini">01</span>Metropolitan heat exposure</td><td>Extreme heat converts into health risk, labour loss, indoor overheating, cooling demand and distrust when protection is uneven.</td><td>Cooling must become a shared public good, not only private air-conditioning.</td><td>Urban Thermal Commons portfolio: shade, cool surfaces, passive retrofit, cooling refuges, heat-health triggers.</td></tr>
+          <tr><td><span class="mini">02</span>Glacier and snowpack decline</td><td>Ice and snow act as timing and storage functions. Retreat can reduce late-season buffer capacity.</td><td>Stabilise the function, not only the ice surface.</td><td>Cryosphere–Moisture portfolio: albedo pollution control, snowpack monitoring, high-Andean wetlands, recharge, baseflow protection.</td></tr>
+          <tr><td><span class="mini">03</span>Atmospheric-river pulses</td><td>Wet pulses can bring snow and rain but also flood loss when the region cannot slow and store them.</td><td>Do not promise weather control. Build receiving capacity.</td><td>Forecast-informed capture readiness, flood-safe recharge, infiltration landscapes, sediment control and reservoir coordination.</td></tr>
+          <tr><td><span class="mini">04</span>Aquifer stress</td><td>Cooling and greening can worsen water stress if they require potable irrigation or unmanaged abstraction.</td><td>No cooling outcome should pass if it depletes the aquifer.</td><td>Water hierarchy, managed aquifer recharge, leakage reduction, reuse, recharge-zone protection.</td></tr>
+          <tr><td><span class="mini">05</span>Fire and smoke</td><td>Drought, heat and fuel conditions can convert ecological stress into smoke, infrastructure loss and public-health load.</td><td>Fire management must be ecological, social and financial at once.</td><td>Peri-urban buffers, fuel management, smoke shelters, detection, evacuation rehearsal, insurance-linked risk reduction.</td></tr>
+          <tr><td><span class="mini">06</span>Fiscal and credit limits</td><td>If risk reduction depends on municipal borrowing alone, the portfolio will remain too small and too fragmented.</td><td>Field-level finance is needed.</td><td>Risk pool, capital pool, outcome contracts, contribution compact and recognition rules.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="cascade">
+    <div class="section-head">
+      <div class="section-code">02 // cascade field</div>
+      <div>
+        <h2>The cascade is a sequence of conversions.</h2>
+        <p class="section-copy">The problem is not that climate pressure directly creates instability. The problem is that physical stress can pass through dependencies, unequal exposure, weak provision, trust loss and financial retreat.</p>
+      </div>
+    </div>
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1180 680" role="img" aria-labelledby="d2-title d2-desc">
+        <title id="d2-title">Santiago biophysical cascade field</title>
+        <desc id="d2-desc">A scale-crossing flow from atmospheric moisture and cryosphere through water, heat, fire, energy, health, finance and legitimacy.</desc>
+        <defs>
+          <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#192640"></path></marker>
+          <pattern id="hatch2" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M-2 9 L9 -2 M0 11 L11 0" stroke="#192640" stroke-width=".75" fill="none"></path></pattern>
+        </defs>
+        <rect x="18" y="18" width="1144" height="644" class="svg-bg"></rect>
+        <text x="54" y="60" class="svg-small">scale rule // atmosphere</text><line x1="210" y1="56" x2="1120" y2="56" class="svg-hair"></line>
+        <text x="54" y="178" class="svg-small">scale rule // Andes</text><line x1="210" y1="174" x2="1120" y2="174" class="svg-hair"></line>
+        <text x="54" y="300" class="svg-small">scale rule // basin</text><line x1="210" y1="296" x2="1120" y2="296" class="svg-hair"></line>
+        <text x="54" y="422" class="svg-small">scale rule // city</text><line x1="210" y1="418" x2="1120" y2="418" class="svg-hair"></line>
+        <text x="54" y="544" class="svg-small">scale rule // polity</text><line x1="210" y1="540" x2="1120" y2="540" class="svg-hair"></line>
+
+        <rect x="238" y="84" width="160" height="72" class="svg-paper"></rect><text x="258" y="119" class="svg-small">atmospheric</text><text x="258" y="140" class="svg-small">rivers</text>
+        <rect x="474" y="84" width="160" height="72" class="svg-paper" stroke-dasharray="8 8"></rect><text x="494" y="119" class="svg-small">forecast</text><text x="494" y="140" class="svg-small">receiving</text>
+        <line x1="398" y1="120" x2="474" y2="120" class="svg-line" marker-end="url(#arrow2)"></line>
+
+        <rect x="238" y="206" width="160" height="72" class="svg-mid"></rect><text x="258" y="238" class="svg-small svg-paper-text">snowpack</text><text x="258" y="259" class="svg-small svg-paper-text">glaciers</text>
+        <rect x="474" y="206" width="160" height="72" class="svg-paper"></rect><rect x="474" y="206" width="160" height="72" fill="url(#hatch2)"></rect><text x="494" y="238" class="svg-small">albedo</text><text x="494" y="259" class="svg-small">dust · carbon</text>
+        <line x1="554" y1="156" x2="554" y2="206" class="svg-line" marker-end="url(#arrow2)"></line>
+        <line x1="398" y1="242" x2="474" y2="242" class="svg-line" marker-end="url(#arrow2)"></line>
+
+        <rect x="238" y="328" width="160" height="72" class="svg-paper"></rect><text x="258" y="360" class="svg-small">soil moisture</text><text x="258" y="381" class="svg-small">wetlands</text>
+        <rect x="474" y="328" width="160" height="72" class="svg-paper"></rect><text x="494" y="360" class="svg-small">aquifer</text><text x="494" y="381" class="svg-small">recharge</text>
+        <rect x="710" y="328" width="160" height="72" class="svg-paper"></rect><text x="730" y="360" class="svg-small">baseflow</text><text x="730" y="381" class="svg-small">rivers</text>
+        <line x1="318" y1="278" x2="318" y2="328" class="svg-line" marker-end="url(#arrow2)"></line>
+        <line x1="398" y1="364" x2="474" y2="364" class="svg-line" marker-end="url(#arrow2)"></line>
+        <line x1="634" y1="364" x2="710" y2="364" class="svg-line" marker-end="url(#arrow2)"></line>
+
+        <rect x="238" y="450" width="160" height="72" class="svg-paper"></rect><text x="258" y="482" class="svg-small">thermal</text><text x="258" y="503" class="svg-small">commons</text>
+        <rect x="474" y="450" width="160" height="72" class="svg-paper"></rect><text x="494" y="482" class="svg-small">fire</text><text x="494" y="503" class="svg-small">smoke</text>
+        <rect x="710" y="450" width="160" height="72" class="svg-paper"></rect><text x="730" y="482" class="svg-small">energy</text><text x="730" y="503" class="svg-small">cooling</text>
+        <line x1="790" y1="400" x2="790" y2="450" class="svg-line" marker-end="url(#arrow2)"></line>
+        <path d="M318 400 C318 430, 318 430, 318 450" class="svg-line" marker-end="url(#arrow2)"></path>
+        <path d="M554 400 C554 430, 554 430, 554 450" class="svg-line" marker-end="url(#arrow2)"></path>
+
+        <rect x="238" y="572" width="160" height="72" class="svg-paper" stroke-dasharray="8 8"></rect><text x="258" y="604" class="svg-small">public</text><text x="258" y="625" class="svg-small">health</text>
+        <rect x="474" y="572" width="160" height="72" class="svg-paper" stroke-dasharray="8 8"></rect><text x="494" y="604" class="svg-small">insurance</text><text x="494" y="625" class="svg-small">credit</text>
+        <rect x="710" y="572" width="160" height="72" class="svg-mid"></rect><text x="730" y="604" class="svg-small svg-paper-text">legitimacy</text><text x="730" y="625" class="svg-small svg-paper-text">or abandonment</text>
+        <line x1="318" y1="522" x2="318" y2="572" class="svg-line" marker-end="url(#arrow2)"></line>
+        <line x1="554" y1="522" x2="554" y2="572" class="svg-line" marker-end="url(#arrow2)"></line>
+        <line x1="790" y1="522" x2="790" y2="572" class="svg-line" marker-end="url(#arrow2)"></line>
+        <path d="M398 608 H474" class="svg-line" marker-end="url(#arrow2)"></path>
+        <path d="M634 608 H710" class="svg-line" marker-end="url(#arrow2)"></path>
+        <text x="914" y="610" class="svg-small">// conversion control:</text><text x="914" y="632" class="svg-small">keep stress inside</text><text x="914" y="654" class="svg-small">legitimate channels</text>
+      </svg>
+    </div>
+    <div class="two-col">
+      <p>The facility treats these nodes as one conditional chain. A heat programme that increases electricity peak risk is not a success. A tree programme that drains potable water or fails in a drought is not a success. A glacier intervention that protects a tiny ice surface while ignoring black carbon, dust, baseflow and aquifer function is not a success.</p>
+      <p class="annotation">// [method] every intervention must declare the conversion it interrupts and the capability it leaves behind.</p>
+    </div>
+  </section>
+
+  <section class="section" id="facility">
+    <div class="section-head">
+      <div class="section-code">03 // institution</div>
+      <div>
+        <h2>The facility holds the risk relation.</h2>
+        <p class="section-copy">Existing agencies can own assets or operate services. The proposed facility holds the cross-risk balance sheet, allocates capital against outcomes, and prevents one sector’s solution from becoming another sector’s risk.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Mandate</h3>
+        <p>Prevent coupled heat, fire, glacier-water, aquifer, energy, ecological, financial and civic risks from converting into abandonment, service failure, fiscal stress, insurance retreat, displacement, distrust and reduced adaptive capacity.</p>
+        <div class="formula"><span class="small">operating loop</span>sense → pool → allocate → deliver → verify → maintain → learn → diffuse</div>
+      </div>
+      <div class="callout"><p>It is a public-interest institution, not a private climate fund. It must publish the balance sheet, contribution rules, verification methods, payments, failures and maintenance duties.</p></div>
+    </div>
+    <div class="four-grid" style="margin-top:var(--s34)">
+      <article class="card accent"><p class="label">01</p><h3>Cascade Risk Observatory</h3><p>Integrates physical, social, financial and civic exposure data.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card"><p class="label">02</p><h3>Continuity Balance Sheet</h3><p>Names baseline, counterfactual, expected loss, avoided loss and probability shift.</p><div class="tick-stack"><span></span><span></span></div></article>
+      <article class="card field"><p class="label">03</p><h3>Risk Pool</h3><p>Pools heat, fire, water, cryosphere, aquifer, energy, health and civic continuity risk.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card hatch"><p class="label">04</p><h3>Capital Pool</h3><p>Combines public, utility, insurance, bank, climate-finance and mission capital.</p><div class="tick-stack"><span></span><span></span></div></article>
+      <article class="card"><p class="label">05</p><h3>Outcome Contracting Unit</h3><p>Pays for verified stability outcomes, not only installed assets.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card accent"><p class="label">06</p><h3>Outcome Accelerator Network</h3><p>Builds delivery methods, procurement, technology, maintenance and standards.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card"><p class="label">07</p><h3>Civic Autonomy Layer</h3><p>Funds self-audits, participatory funds, care hubs, repair loops, open logs and rehearsals.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card field"><p class="label">08</p><h3>Diffusion Lab</h3><p>Turns working interventions into documented modules for other bioregions.</p><div class="tick-stack"><span></span><span></span></div></article>
+    </div>
+  </section>
+
+  <section class="section inverse" id="portfolios">
+    <div class="section-head">
+      <div class="section-code">04 // portfolio stack</div>
+      <div>
+        <h2>Seven portfolios, one field.</h2>
+        <p class="section-copy">The facility does not choose between water, heat, fire, energy, civic capability and glacier work. It composes them into one risk-reduction field.</p>
+      </div>
+    </div>
+    <div class="four-grid">
+      <article class="portfolio-card accent">
+        <div class="number">A</div><h3>Andean Cryosphere & Moisture Cascade</h3>
+        <p>Preserves and replaces the storage, timing, cooling and buffering functions of snowpack, glaciers, high-Andean wetlands and mountain soils.</p>
+        <ul><li>Atmospheric-river forecasting</li><li>Albedo and dust ledger</li><li>High-Andean wetland protection</li><li>Cryosphere hazard warning</li></ul>
+      </article>
+      <article class="portfolio-card">
+        <div class="number">B</div><h3>Aquifer, River & Baseflow Continuity</h3>
+        <p>Converts episodic moisture pulses into long-duration storage and reduces dependence on unstable glacier melt timing.</p>
+        <ul><li>Managed aquifer recharge</li><li>Stormwater-to-infiltration</li><li>Leakage reduction</li><li>Environmental flow rules</li></ul>
+      </article>
+      <article class="portfolio-card hatch">
+        <div class="number">C</div><h3>Urban Thermal Commons</h3>
+        <p>Reduces heat exposure without worsening water stress or electricity peak fragility.</p>
+        <ul><li>Shade corridors</li><li>Cool roofs and surfaces</li><li>Passive survivability retrofits</li><li>Cooling and hydration refuges</li></ul>
+      </article>
+      <article class="portfolio-card">
+        <div class="number">D</div><h3>Fire Landscape & Smoke Continuity</h3>
+        <p>Reduces peri-urban ignition, spread and smoke-health exposure.</p>
+        <ul><li>Fuel management</li><li>Fire-aware ecological buffers</li><li>Clean-air rooms</li><li>Evacuation rehearsal</li></ul>
+      </article>
+      <article class="portfolio-card">
+        <div class="number">E</div><h3>Energy Continuity & Resilient Cooling</h3>
+        <p>Prevents heat adaptation from overloading the grid or deepening fossil dependence.</p>
+        <ul><li>Transformer resilience</li><li>Demand response</li><li>Microgrids for hubs</li><li>Solar and storage for critical sites</li></ul>
+      </article>
+      <article class="portfolio-card accent">
+        <div class="number">F</div><h3>Civic Autonomy & Neighbourhood Capability</h3>
+        <p>Makes communities active producers of continuity rather than passive recipients of emergency provision.</p>
+        <ul><li>Heat and water self-audits</li><li>Participatory resilience funds</li><li>Repair and retrofit workshops</li><li>Public allocation trees</li></ul>
+      </article>
+      <article class="portfolio-card field">
+        <div class="number">G</div><h3>Mutual Sensing, Open Data & Verification</h3>
+        <p>Builds trusted intelligence while preventing risk data from becoming extractive surveillance.</p>
+        <ul><li>Community data compacts</li><li>Public risk dashboards</li><li>Independent verification</li><li>Failure logs</li></ul>
+      </article>
+      <article class="portfolio-card dense">
+        <div class="number">X</div><h3>Option Discipline</h3>
+        <p>Every intervention is tested under four logics: outcome, intersectional risk relation, infrastructure performance and capability gain.</p>
+        <ul><li>Target state</li><li>Risk relation</li><li>Service stock</li><li>Power of action</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="moisture">
+    <div class="section-head">
+      <div class="section-code">04b // moisture cascade</div>
+      <div>
+        <h2>Atmospheric-river capture becomes receiving capacity.</h2>
+        <p class="section-copy">The diagram you supplied is useful if translated from weather-control language into water-cycle receiving, slowing, storage, recharge and feedback capacity.</p>
+      </div>
+    </div>
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1180 620" role="img" aria-labelledby="d3-title d3-desc">
+        <title id="d3-title">Moisture-cascade receiving system</title>
+        <desc id="d3-desc">A sequence diagram showing atmospheric-river forecast, Andean snow and wetland systems, soil moisture, aquifer recharge, baseflow, vegetation cooling and regional water security.</desc>
+        <defs>
+          <marker id="arrow3" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#192640"></path></marker>
+          <pattern id="hatch3" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M-2 10 L10 -2 M0 12 L12 0" stroke="#192640" stroke-width=".75" fill="none"></path></pattern>
+        </defs>
+        <rect x="18" y="18" width="1144" height="584" class="svg-bg"></rect>
+        <text x="52" y="58" class="svg-small">moisture-cascade portfolio // receive · slow · store · recharge · recycle · govern</text>
+        <rect x="70" y="102" width="190" height="82" class="svg-paper"></rect><text x="92" y="136" class="svg-small">01 forecast</text><text x="92" y="158" class="svg-small">atmospheric river</text>
+        <rect x="330" y="102" width="190" height="82" class="svg-paper" stroke-dasharray="8 8"></rect><text x="352" y="136" class="svg-small">02 prepare</text><text x="352" y="158" class="svg-small">receiving capacity</text>
+        <rect x="590" y="102" width="190" height="82" class="svg-mid"></rect><text x="612" y="136" class="svg-small svg-paper-text">03 snowpack</text><text x="612" y="158" class="svg-small svg-paper-text">storage window</text>
+        <rect x="850" y="102" width="190" height="82" class="svg-paper"></rect><rect x="850" y="102" width="190" height="82" fill="url(#hatch3)"></rect><text x="872" y="136" class="svg-small">04 albedo</text><text x="872" y="158" class="svg-small">pollution control</text>
+        <line x1="260" y1="143" x2="330" y2="143" class="svg-line" marker-end="url(#arrow3)"></line>
+        <line x1="520" y1="143" x2="590" y2="143" class="svg-line" marker-end="url(#arrow3)"></line>
+        <line x1="780" y1="143" x2="850" y2="143" class="svg-line" marker-end="url(#arrow3)"></line>
+
+        <rect x="110" y="276" width="190" height="82" class="svg-paper"></rect><text x="132" y="310" class="svg-small">05 wetland</text><text x="132" y="332" class="svg-small">soil sponge</text>
+        <rect x="370" y="276" width="190" height="82" class="svg-paper"></rect><text x="392" y="310" class="svg-small">06 managed</text><text x="392" y="332" class="svg-small">aquifer recharge</text>
+        <rect x="630" y="276" width="190" height="82" class="svg-paper"></rect><text x="652" y="310" class="svg-small">07 baseflow</text><text x="652" y="332" class="svg-small">river continuity</text>
+        <rect x="890" y="276" width="190" height="82" class="svg-paper"></rect><text x="912" y="310" class="svg-small">08 vegetation</text><text x="912" y="332" class="svg-small">cooling feedback</text>
+        <path d="M685 184 C620 220, 300 220, 205 276" class="svg-line" marker-end="url(#arrow3)"></path>
+        <line x1="300" y1="317" x2="370" y2="317" class="svg-line" marker-end="url(#arrow3)"></line>
+        <line x1="560" y1="317" x2="630" y2="317" class="svg-line" marker-end="url(#arrow3)"></line>
+        <line x1="820" y1="317" x2="890" y2="317" class="svg-line" marker-end="url(#arrow3)"></line>
+
+        <rect x="235" y="452" width="250" height="86" class="svg-paper" stroke-dasharray="8 8"></rect><text x="258" y="488" class="svg-small">09 lower fire and heat</text><text x="258" y="510" class="svg-small">amplification</text>
+        <rect x="610" y="452" width="250" height="86" class="svg-shadow"></rect><text x="632" y="488" class="svg-small svg-paper-text">10 regional water</text><text x="632" y="510" class="svg-small svg-paper-text">security outcome</text>
+        <path d="M985 358 C930 420, 820 440, 735 452" class="svg-emph"></path>
+        <path d="M735 452 C620 420, 485 420, 360 452" class="svg-emph"></path>
+        <line x1="485" y1="495" x2="610" y2="495" class="svg-line" marker-end="url(#arrow3)"></line>
+        <text x="52" y="582" class="svg-small">// [governance] cloud seeding and cloud brightening remain research-only until attribution, consent, liability and safety tests pass.</text>
+      </svg>
+    </div>
+    <div class="two-col">
+      <div class="callout"><p>Do not promise control over atmospheric rivers. Build the region’s capacity to receive wet pulses, store them safely and convert them into dry-season continuity.</p></div>
+      <div>
+        <p>The updated proposal adds a dedicated cryosphere and moisture-cascade platform. It uses forecasting, sediment control, infiltration, managed recharge, high-Andean wetlands, soil-water retention, albedo and pollution control, and baseflow protection as the core. Weather modification remains outside the bankable core unless it passes scientific and governance tests.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="glaciers">
+    <div class="section-head">
+      <div class="section-code">05 // glacier system stabilisation</div>
+      <div>
+        <h2>Stabilise the glacier system by function, not fantasy.</h2>
+        <p class="section-copy">“Cover the glacier” is too narrow. The facility should stabilise melt drivers, selected ice and snow surfaces, the water-storage function and glacier hazards, while treating cloud interventions as research.</p>
+      </div>
+    </div>
+    <div class="four-grid">
+      <article class="card accent"><p class="label">Level 01</p><h3>Reduce accelerated melt drivers.</h3><p>Map and reduce black carbon, dust, mining dust, diesel, road dust, construction dust and wildfire smoke. Publish an annual Andean Albedo and Deposition Ledger.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card hatch"><p class="label">Level 02</p><h3>Test selected ice and snow protection.</h3><p>Use geotextiles, snow fences or shading only in small governed test ranges. Measure avoided melt per peso, hectare and disturbance.</p><div class="tick-stack"><span></span></div></article>
+      <article class="card"><p class="label">Level 03</p><h3>Replace the water-tower function.</h3><p>Use recharge, wetlands, soil moisture, baseflow protection, leakage reduction, reuse and demand management to preserve timing and storage.</p><div class="tick-stack"><span></span><span></span><span></span></div></article>
+      <article class="card field"><p class="label">Level 04</p><h3>Monitor and stabilise hazards.</h3><p>Track glacier lakes, rock glaciers, permafrost, slopes, debris flows and water intakes. Build early warning and protected siting rules.</p><div class="tick-stack"><span></span><span></span></div></article>
+    </div>
+    <div class="matrix-wrap">
+      <table aria-label="Glacier stabilisation hierarchy">
+        <thead><tr><th>Intervention class</th><th>Status</th><th>Why it belongs</th><th>Payment rule</th><th>Safeguard</th></tr></thead>
+        <tbody>
+          <tr><td>Black-carbon and dust reduction</td><td>Core portfolio</td><td>Directly reduces local melt accelerants and also improves air quality.</td><td>Pay for verified emission reduction, snow impurity reduction and albedo protection.</td><td>Do not count distant pollution reduction unless deposition effects are measured.</td></tr>
+          <tr><td>High-Andean wetland and soil-water restoration</td><td>Core portfolio</td><td>Builds sponge function and stores moisture outside glacier ice.</td><td>Pay for soil moisture, infiltration, vegetation survival and baseflow contribution.</td><td>Protect wetlands from overuse, grazing pressure and land tenure conflict.</td></tr>
+          <tr><td>Geotextile or reflective covers</td><td>Selective test range</td><td>Can reduce melt locally, but cannot be sold as a basin-scale solution.</td><td>Pay only for measured avoided melt and clean removal.</td><td>Material waste, access damage and false confidence must be controlled.</td></tr>
+          <tr><td>Cloud seeding, white cloud cover, or brightening</td><td>Research governance sandbox</td><td>Possible field of study, not a bankable outcome yet.</td><td>No outcome payment until attribution, safety, legal and consent thresholds pass.</td><td>Liability, transboundary impact, public consent and ecological effects must be explicit.</td></tr>
+          <tr><td>Cryosphere hazard early warning</td><td>Core portfolio</td><td>Retreating ice can create slope, lake, sediment and infrastructure hazards.</td><td>Pay for warning coverage, response time and protected critical intakes.</td><td>Emergency protocols must include downstream communities and utilities.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section inverse" id="outcomes">
+    <div class="section-head">
+      <div class="section-code">06 // outcome ledger</div>
+      <div>
+        <h2>Pay for stability outcomes.</h2>
+        <p class="section-copy">The facility should not pay for project activity alone. It should pay for verified probability shifts and continuity value.</p>
+      </div>
+    </div>
+    <div class="matrix-wrap">
+      <table aria-label="Outcome ledger">
+        <thead><tr><th>Domain</th><th>Outcome</th><th>Verification</th><th>Maladaptation test</th></tr></thead>
+        <tbody>
+          <tr><td>Heat</td><td>Reduced surface temperature, lower indoor overheating, lower heat morbidity, improved cooling access.</td><td>Land-surface temperature, fixed sensors, indoor monitors, health data and hub-use logs.</td><td>Cooling must not increase aquifer depletion or unmanaged electricity peak.</td></tr>
+          <tr><td>Water</td><td>Recharge volume, aquifer-head recovery, lower leakage, late-season baseflow days.</td><td>Groundwater monitoring, recharge metering, water-use data and hydrology review.</td><td>Recharge must not mobilise contamination or shift harm downstream.</td></tr>
+          <tr><td>Cryosphere</td><td>Reduced impurity loading, protected albedo, better snowpack intelligence, hazard warning coverage.</td><td>Snow and ice sampling, remote sensing, deposition monitoring, hazard system tests.</td><td>Surface interventions must include removal, waste and ecological controls.</td></tr>
+          <tr><td>Fire and smoke</td><td>Reduced ignition and spread probability, cleaner air during smoke episodes, faster detection.</td><td>Fire-risk models, vegetation/fuel mapping, incident data, smoke sensors and response logs.</td><td>Vegetation buffers must not become unmanaged fuel corridors.</td></tr>
+          <tr><td>Energy</td><td>Lower peak cooling load, fewer critical-service outage hours, resilient power for hubs.</td><td>Utility data, transformer stress, outage records and microgrid performance.</td><td>Backup systems must not create fossil lock-in.</td></tr>
+          <tr><td>Civic capability</td><td>More self-audits, public allocation trees, trained stewards, rehearsals, open technology passports.</td><td>Public logs, training records, participatory fund records and passport repository.</td><td>Data collection must be reciprocal and non-punitive.</td></tr>
+          <tr><td>Finance</td><td>Reduced expected loss, maintained insurability, protected collateral, lower emergency fiscal burden.</td><td>Actuarial model, insurer/bank data, avoided-cost accounting and independent verification.</td><td>No recognised risk benefit without contribution.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="scale-rule"><div class="scale-label">trigger field</div><div class="rule"></div></div>
+    <div class="four-grid">
+      <article class="trigger-card accent"><h3>Heat forecast</h3><p>Open cooling refuges, extend hydration points, start welfare checks, deploy mobile care.</p><ul><li>Trigger must include vulnerable-commune exposure.</li><li>Hubs require backup power.</li></ul></article>
+      <article class="trigger-card"><h3>Atmospheric-river forecast</h3><p>Prepare flood-safe capture, infiltration, sediment controls, drainage and emergency water protection.</p><ul><li>Receiving capacity must be ready before rain arrives.</li><li>Flood risk and recharge benefit must be co-managed.</li></ul></article>
+      <article class="trigger-card dense"><h3>Aquifer threshold</h3><p>Restrict non-essential extraction, release leakage funds, activate reuse and recharge measures.</p><ul><li>Cooling projects face water hierarchy review.</li><li>Public dashboard records threshold breach.</li></ul></article>
+      <article class="trigger-card"><h3>Fire-weather threshold</h3><p>Activate patrols, fuel crews, smoke shelters, evacuation readiness and clean-air rooms.</p><ul><li>Smoke protocols cover schools and clinics.</li><li>Insurer risk-reduction compact activates.</li></ul></article>
+    </div>
+  </section>
+
+  <section class="section" id="finance">
+    <div class="section-head">
+      <div class="section-code">07 // continuity finance</div>
+      <div>
+        <h2>Beneficiaries must co-finance the field.</h2>
+        <p class="section-copy">The facility converts pooled systemic risk reduction into shared investment duties. It protects against private capture of public stability value.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="callout"><p>No contribution, no recognised risk benefit.</p></div>
+      <div>
+        <p>Banks, insurers, utilities, large asset owners, developers and public agencies benefit when Santiago remains insurable, lendable, habitable, serviceable and governable. The recognition rule is simple: institutions do not receive reduced risk recognition, insurance relief, collateral benefit or tariff advantage without verified contribution to the systems that produce the benefit.</p>
+      </div>
+    </div>
+    <div class="six-grid" style="margin-top:var(--s34)">
+      <article class="finance-card"><p class="label">Public</p><h3>Mandate and first capital</h3><p>Regional and national contributions anchor legitimacy and first-wave portfolios.</p></article>
+      <article class="finance-card accent"><p class="label">Utilities</p><h3>Avoided disruption</h3><p>Water and electricity utilities contribute where portfolios reduce emergency cost and peak stress.</p></article>
+      <article class="finance-card"><p class="label">Insurers</p><h3>Claim reduction</h3><p>Insurers support fire, heat, flood and continuity portfolios tied to expected-loss reduction.</p></article>
+      <article class="finance-card dense"><p class="label">Banks</p><h3>Collateral protection</h3><p>Lenders contribute where reduced field risk protects repayment and asset durability.</p></article>
+      <article class="finance-card"><p class="label">Climate finance</p><h3>Concessional stack</h3><p>Adaptation funds and development banks support project preparation, guarantees and first loss.</p></article>
+      <article class="finance-card field"><p class="label">Outcome payers</p><h3>Verified stability</h3><p>Payments attach to measured cooling, recharge, baseflow, warning coverage and continuity outcomes.</p></article>
+    </div>
+    <div class="matrix-wrap">
+      <table aria-label="Finance mechanisms">
+        <thead><tr><th>Mechanism</th><th>Use case</th><th>Recognition logic</th><th>Risk control</th></tr></thead>
+        <tbody>
+          <tr><td>Outcome payments</td><td>Heat reduction, recharge, fire-risk reduction, warning coverage.</td><td>Payment follows verified change, not installation.</td><td>Independent verification and counterfactual model.</td></tr>
+          <tr><td>Utility resilience contribution</td><td>Demand reduction, microgrids, water reuse, leakage, recharge.</td><td>Contribution tied to avoided outage, demand stability or emergency cost.</td><td>Public tariff fairness test.</td></tr>
+          <tr><td>Insurance savings share</td><td>Peri-urban fire, flood-to-recharge, smoke protection, cooling hubs.</td><td>Premium or claim reduction partly returns to facility.</td><td>Do not reward risk transfer without underlying risk reduction.</td></tr>
+          <tr><td>Bank continuity compact</td><td>Collateral-risk zones, retrofit packages, resilient service corridors.</td><td>Lenders contribute to field interventions that protect loan books.</td><td>No benefit recognition without contribution and public reporting.</td></tr>
+          <tr><td>Maintenance reserve</td><td>Canopy, sensors, hubs, recharge basins, microgrids.</td><td>Capital works cannot proceed without renewal funding.</td><td>Prevents one-off pilot decay.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="governance">
+    <div class="section-head">
+      <div class="section-code">07b // governance</div>
+      <div>
+        <h2>Legitimacy is a design variable.</h2>
+        <p class="section-copy">A risk facility that cannot be trusted becomes another extraction layer. The governance model must protect public interest, data rights, local voice and maintenance duties.</p>
+      </div>
+    </div>
+    <div class="three-grid">
+      <article class="card accent"><h3>Public-interest board</h3><p>Regional government, municipalities, national agencies, utilities, universities, insurers, banks, civil society, vulnerable-commune representatives, watershed actors and independent science advisers.</p></article>
+      <article class="card"><h3>Technical councils</h3><p>Cryosphere; Maipo and aquifers; heat-health; fire and ecology; energy; civic capability; finance and insurance; data governance; climate-intervention research ethics.</p></article>
+      <article class="card hatch"><h3>Public accountability</h3><p>Publish risk balance sheets, outcome metrics, contribution rules, verification methods, payments, failures, maintenance duties, allocation rules and equity statements.</p></article>
+    </div>
+    <div class="scale-rule"><div class="scale-label">anti-failure register</div><div class="rule"></div></div>
+    <div class="matrix-wrap">
+      <table aria-label="Anti-failure safeguards">
+        <thead><tr><th>Failure mode</th><th>Safeguard</th><th>Design note</th></tr></thead>
+        <tbody>
+          <tr><td>Project list without portfolio logic</td><td>Each project must declare outcome, risk relation, infrastructure performance and capability gain.</td><td>Activities fail if not linked to field change.</td></tr>
+          <tr><td>Water-depleting cooling</td><td>Apply water hierarchy and aquifer impact test.</td><td>Passive shade and cool materials first; potable-water misting only for emergency health protection.</td></tr>
+          <tr><td>Green displacement</td><td>Prioritise vulnerable communes and add anti-displacement safeguards.</td><td>Cooling cannot become a property-value extraction mechanism.</td></tr>
+          <tr><td>Data extraction</td><td>Use mutual sensing, community data compacts and visible benefit return.</td><td>Signals must release support, not punishment.</td></tr>
+          <tr><td>Glacier-cover fantasy</td><td>Keep covers inside governed test ranges.</td><td>Protect function first: albedo pollution, recharge, baseflow and hazards.</td></tr>
+          <tr><td>Weather-modification overclaim</td><td>Place cloud seeding and brightening inside research governance only.</td><td>No bankable outcome before attribution, safety and consent tests.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section inverse" id="diffusion">
+    <div class="section-head">
+      <div class="section-code">08 // planetary diffusion</div>
+      <div>
+        <h2>Santiago becomes a template generator.</h2>
+        <p class="section-copy">What travels is not the exact asset list. What travels is the architecture: risk observatory, continuity balance sheet, public-interest risk pool, outcome portfolios, civic capability, trigger finance, open learning and replication modules.</p>
+      </div>
+    </div>
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1180 500" role="img" aria-labelledby="d4-title d4-desc">
+        <title id="d4-title">Planetary diffusion architecture</title>
+        <desc id="d4-desc">Flow from Santiago proof to documented modules and other cascade-prone bioregions.</desc>
+        <defs>
+          <marker id="arrow4" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF"></path></marker>
+          <pattern id="hatch4" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M-2 10 L10 -2 M0 12 L12 0" stroke="#FFFFFF" stroke-width=".75" fill="none"></path></pattern>
+        </defs>
+        <rect x="18" y="18" width="1144" height="464" class="svg-bg"></rect>
+        <text x="52" y="58" class="svg-small">diffusion syntax // place-specific portfolio · common institutional grammar</text>
+        <rect x="70" y="110" width="180" height="96" class="svg-mid"></rect><text x="94" y="150" class="svg-small svg-paper-text">Santiago</text><text x="94" y="172" class="svg-small svg-paper-text">proof site</text>
+        <rect x="326" y="110" width="180" height="96" class="svg-paper"></rect><text x="350" y="150" class="svg-small">technology</text><text x="350" y="172" class="svg-small">passports</text>
+        <rect x="582" y="110" width="180" height="96" class="svg-paper"></rect><rect x="582" y="110" width="180" height="96" fill="url(#hatch4)"></rect><text x="606" y="150" class="svg-small">procurement</text><text x="606" y="172" class="svg-small">templates</text>
+        <rect x="838" y="110" width="180" height="96" class="svg-paper" stroke-dasharray="8 8"></rect><text x="862" y="150" class="svg-small">governance</text><text x="862" y="172" class="svg-small">compact</text>
+        <line x1="250" y1="158" x2="326" y2="158" class="svg-line" marker-end="url(#arrow4)"></line>
+        <line x1="506" y1="158" x2="582" y2="158" class="svg-line" marker-end="url(#arrow4)"></line>
+        <line x1="762" y1="158" x2="838" y2="158" class="svg-line" marker-end="url(#arrow4)"></line>
+        <rect x="104" y="316" width="170" height="70" class="svg-paper"></rect><text x="126" y="356" class="svg-small">Andean cities</text>
+        <rect x="334" y="316" width="170" height="70" class="svg-paper"></rect><text x="356" y="356" class="svg-small">Mediterranean basins</text>
+        <rect x="564" y="316" width="170" height="70" class="svg-paper"></rect><text x="586" y="356" class="svg-small">Himalayan cities</text>
+        <rect x="794" y="316" width="170" height="70" class="svg-paper"></rect><text x="816" y="356" class="svg-small">Fire-water regions</text>
+        <path d="M928 206 C760 280, 360 280, 189 316" class="svg-emph"></path>
+        <path d="M928 206 C760 280, 540 280, 419 316" class="svg-emph"></path>
+        <path d="M928 206 C780 280, 690 280, 649 316" class="svg-emph"></path>
+        <path d="M928 206 C890 280, 840 280, 879 316" class="svg-emph"></path>
+        <text x="52" y="454" class="svg-small">// replication is not copying the asset. It is copying the risk-pool + outcome + civic capability grammar.</text>
+      </svg>
+    </div>
+    <div class="three-grid">
+      <article class="card"><h3>Mountain-fed cities</h3><p>Glacier, snowpack, atmospheric-river, flood-to-recharge and baseflow portfolios.</p></article>
+      <article class="card accent"><h3>Heat-fire-water basins</h3><p>Thermal commons, fire interface, aquifer recharge and energy peak portfolios.</p></article>
+      <article class="card field"><h3>Fiscal-constrained regions</h3><p>Continuity finance, contribution compacts, outcome payments and public-interest vehicles.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="section-head">
+      <div class="section-code">09 // implementation</div>
+      <div>
+        <h2>Build the institution while proving the portfolios.</h2>
+        <p class="section-copy">The first twelve months should not be a study that waits for action. It should produce the first risk balance sheet, facility design, priority portfolios and demonstrator geographies.</p>
+      </div>
+    </div>
+    <div class="roadmap">
+      <article class="road-card accent"><p class="label">0—12 months</p><h3>Pre-establishment programme</h3><ul><li>Risk balance sheet v0.1</li><li>Legal and financial design</li><li>Observatory prototype</li><li>Priority portfolio pipeline</li><li>Public accountability charter</li></ul></article>
+      <article class="road-card"><p class="label">Year 1—2</p><h3>First demonstrators</h3><ul><li>Heat commons district</li><li>Aquifer recharge zone</li><li>Peri-urban fire interface</li><li>Andean albedo monitoring</li><li>Civic capability hubs</li></ul></article>
+      <article class="road-card hatch"><p class="label">Year 2—5</p><h3>Facility launch</h3><ul><li>Capitalised risk pool</li><li>Outcome contracting unit</li><li>Contribution compact</li><li>Trigger-based action</li><li>Annual continuity balance sheet</li></ul></article>
+      <article class="road-card"><p class="label">Year 5—10</p><h3>Bioregional scaling</h3><ul><li>Priority commune coverage</li><li>Maipo basin integration</li><li>Mature cryosphere platform</li><li>Procurement and training system</li><li>Global diffusion playbook</li></ul></article>
+    </div>
+  </section>
+
+  <section class="section inverse" id="decision">
+    <div class="section-head">
+      <div class="section-code">10 // decision memo</div>
+      <div>
+        <h2>Fund the twelve-month design programme.</h2>
+        <p class="section-copy">The decision is not whether Santiago needs climate adaptation. The decision is whether Santiago becomes the first full public-interest facility for biophysical cascade stabilisation at city-region scale.</p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div>
+        <h3>Immediate ask</h3>
+        <p>Authorize and fund a 12-month Santiago Cascade Stabilisation Design Programme with seven deliverables: risk balance sheet, legal and financial facility design, cryosphere and moisture-cascade platform blueprint, priority portfolio pipeline, first demonstration geographies, capital stack and contribution compact, and open diffusion system.</p>
+        <div class="formula"><span class="small">decision sentence</span>Santiago is the place where avoided cascade risk becomes measurable, investable, democratic and diffusable.</div>
+      </div>
+      <div class="card risk"><p class="label">Proof of possibility</p><h3>Success condition</h3><p>Within twelve months, the programme should show that one city-region can hold a shared risk balance sheet, pool cascade risk, finance stability outcomes, activate civic capability and document enough of the architecture for other regions to adapt it.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="sources">
+    <div class="section-head">
+      <div class="section-code">11 // evidence and source anchors</div>
+      <div>
+        <h2>Anchors used in the concept paper.</h2>
+        <p class="section-copy">The document uses public sources for Santiago risk and technical constraints, and XCO internal papers for risk architecture, portfolio logic, continuity finance and civic capability.</p>
+      </div>
+    </div>
+    <div class="source-grid">
+      <article class="source-card"><p class="source-label">Santiago risk</p><p>Regional climate discussion identifying drought, fires, extreme heat, aquifer stress, water insecurity, vulnerable populations and heat-island inequality.</p><a href="https://www.pas.va/en/publications/scripta-varia/sv156pas/orrego.html">PAS Santiago climate crisis</a></article>
+      <article class="source-card"><p class="source-label">Maipo Basin</p><p>Assessment citing projected 40 percent Maipo Basin water-flow reduction by 2070 due to precipitation loss and glacial retreat.</p><a href="https://www.preventionweb.net/news/new-report-climate-change-will-exacerbate-chiles-water-management-challenges-metropolitan">PreventionWeb / NRDC</a></article>
+      <article class="source-card"><p class="source-label">Andean glaciers</p><p>WMO identifies Andean glaciers as a critical water tower for approximately 90 million people.</p><a href="https://wmo.int/news/media-centre/rising-land-and-ocean-temperatures-wilder-water-cycle-glacier-retreat-hit-latin-america-and">WMO Latin America climate report</a></article>
+      <article class="source-card"><p class="source-label">Energy</p><p>IEA climate-resilience assessment links precipitation decline, hydropower capacity, thermal cooling water and rising cooling demand.</p><a href="https://www.iea.org/reports/national-climate-resilience-assessment-for-chile">IEA Chile resilience assessment</a></article>
+      <article class="source-card"><p class="source-label">Finance constraint</p><p>World Observatory profile states subnational borrowing is prohibited in Chile for current and capital financing, with municipalities not generally allowed to borrow.</p><a href="https://www.sng-wofi.org/country_profiles/chile.html">SNG-WOFI Chile profile</a></article>
+      <article class="source-card"><p class="source-label">Atmospheric rivers</p><p>NASA described 2023 atmospheric rivers bringing rain and snow to central Chile, while also causing floods, mudslides, damaged infrastructure, destroyed homes and displacement.</p><a href="https://science.nasa.gov/earth/earth-observatory/atmospheric-rivers-swamp-central-chile-151783/">NASA Earth Observatory</a></article>
+      <article class="source-card"><p class="source-label">Albedo pollution</p><p>Scientific Reports measurements found black carbon and other light-absorbing impurities in Chilean Andes snow, with albedo and radiative forcing effects near Santiago.</p><a href="https://www.nature.com/articles/s41598-019-39312-0">Rowe et al. 2019</a></article>
+      <article class="source-card"><p class="source-label">Glacier covers</p><p>Research on geotextile-covered Swiss glacier areas shows local melt reduction but limited scalability.</p><a href="https://www.sciencedirect.com/science/article/pii/S0165232X21000185">Huss et al. 2021</a></article>
+      <article class="source-card"><p class="source-label">Weather modification</p><p>WMO and GAO sources treat weather modification and cloud seeding as scientifically and governance-sensitive; GAO reviewed estimates from 0 to 20 percent added precipitation.</p><a href="https://www.gao.gov/products/gao-25-107328">GAO cloud seeding technology assessment</a></article>
+    </div>
+    <div class="source-grid" style="margin-top:var(--s13)">
+      <article class="source-card"><p class="source-label">XCO diagram grammar</p><p>Rectangles as atomic units, hatching for weight, Risk / Option / Field nodes, scale rules and annotations.</p><a href="https://xco-style-guide-woad.vercel.app/diagrams">XCO diagram guide</a></article>
+      <article class="source-card"><p class="source-label">XCO grid</p><p>Golden-ratio split, Fibonacci spacing scale and diagram type discipline.</p><a href="https://xco-style-guide-woad.vercel.app/grid">XCO grid guide</a></article>
+      <article class="source-card"><p class="source-label">XCO tone</p><p>Method register: specific verbs, real places, uncertainty marked inline, no vague corporate register.</p><a href="https://xco-style-guide-woad.vercel.app/tone">XCO tone guide</a></article>
+    </div>
+    <p class="print-note">Internal paper anchors used: biophysical cascade risk; portfolio logics; civic autonomy security; continuity finance; climate-pandemic prevention architecture. The HTML is fully embedded: no external CSS, no external scripts, no images, no font files.</p>
+  </section>
+
+  <div class="bottom-rule">
+    <div>Santiago Bioregional Continuity & Cryosphere–Moisture Cascade Facility // XCO Dusk concept paper</div>
+    <div>Dusk palette: #192640 / #F27F3D / #FFFFFF</div>
+  </div>
+</main>
+</body>
+</html>

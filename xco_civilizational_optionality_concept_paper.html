@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Expanding Civilizational Optionality — xCO Concept Paper</title>
+  <style>
+    :root {
+      --shadow: #192640;
+      --midtone: #F27F3D;
+      --highlight: #FFFFFF;
+      --page-pad: 55px;
+      --measure: 760px;
+      --phi-major: 61.8fr;
+      --phi-minor: 38.2fr;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--highlight);
+      color: var(--shadow);
+    }
+
+    body {
+      margin: 0;
+      background: var(--highlight);
+      color: var(--shadow);
+      font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.62;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: var(--shadow);
+      text-decoration-color: var(--midtone);
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover { color: var(--midtone); }
+
+    h1, h2, h3, .display, .nav-title, .kicker, .matrix th, .architecture th {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(56px, 9vw, 122px);
+      max-width: 1120px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 4.4vw, 58px);
+      margin: 0 0 34px 0;
+    }
+
+    h3 {
+      font-size: clamp(25px, 2.4vw, 34px);
+      margin: 42px 0 13px 0;
+    }
+
+    p {
+      margin: 0 0 21px 0;
+      max-width: var(--measure);
+    }
+
+    strong { font-weight: 500; }
+
+    .mono, .eyebrow, .label, .data, .caption, .nav, .footnote-index, .source-list, .matrix .meta-no {
+      font-family: "DM Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .small { font-size: 15px; line-height: 1.55; }
+
+    .page-shell {
+      min-height: 100vh;
+      border-left: 13px solid var(--shadow);
+    }
+
+    .top-rule {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--shadow);
+      z-index: 20;
+    }
+
+    .top-rule::after {
+      content: "";
+      display: block;
+      width: 34vw;
+      height: 8px;
+      background: var(--midtone);
+      margin-left: 13px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, var(--phi-major)) minmax(340px, var(--phi-minor));
+      gap: 55px;
+      padding: 89px var(--page-pad) 55px var(--page-pad);
+      align-items: end;
+    }
+
+    .hero-copy { padding-bottom: 21px; }
+
+    .eyebrow {
+      font-size: 14px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 0 34px 0;
+    }
+
+    .subtitle {
+      max-width: 850px;
+      font-size: clamp(24px, 2.4vw, 36px);
+      line-height: 1.32;
+      margin-top: 34px;
+    }
+
+    .hero-panel {
+      border: 1.5px solid var(--shadow);
+      padding: 21px;
+      min-height: 610px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background:
+        linear-gradient(90deg, var(--shadow) 0 1px, transparent 1px),
+        linear-gradient(0deg, var(--shadow) 0 1px, transparent 1px),
+        var(--highlight);
+      background-size: 55px 55px, 55px 55px, auto;
+      background-position: -1px -1px, -1px -1px, 0 0;
+    }
+
+    .hero-panel::before {
+      content: "VIABILITY HOURGLASS";
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      line-height: 1.2;
+      background: var(--highlight);
+      padding-right: 8px;
+    }
+
+    .hero-panel svg { width: 100%; height: auto; display: block; }
+
+    .document-meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1.5px solid var(--shadow);
+      border-bottom: 1.5px solid var(--shadow);
+      margin-top: 55px;
+      max-width: 960px;
+    }
+
+    .document-meta div {
+      padding: 13px 21px 13px 0;
+      border-right: 1.5px solid var(--shadow);
+      min-height: 89px;
+    }
+
+    .document-meta div:last-child { border-right: 0; }
+
+    .document-meta .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 13px;
+    }
+
+    .document-meta .value {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .toc-block {
+      display: grid;
+      grid-template-columns: minmax(0, var(--phi-minor)) minmax(0, var(--phi-major));
+      gap: 55px;
+      padding: 55px var(--page-pad) 89px var(--page-pad);
+      border-top: 1.5px solid var(--shadow);
+      border-bottom: 1.5px solid var(--shadow);
+      background: var(--shadow);
+      color: var(--highlight);
+    }
+
+    .toc-block a { color: var(--highlight); text-decoration-color: var(--midtone); }
+
+    .toc-block h2 { color: var(--highlight); }
+
+    .toc-list {
+      columns: 2;
+      column-gap: 55px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .toc-list li {
+      break-inside: avoid;
+      padding: 0 0 13px 0;
+      font-family: "DM Mono", monospace;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .toc-list span { color: var(--midtone); }
+
+    main { padding: 0; }
+
+    .section {
+      display: grid;
+      grid-template-columns: minmax(230px, var(--phi-minor)) minmax(0, var(--phi-major));
+      gap: 55px;
+      padding: 89px var(--page-pad);
+      border-bottom: 1.5px solid var(--shadow);
+    }
+
+    .section-label {
+      position: sticky;
+      top: 34px;
+      align-self: start;
+      font-family: "DM Mono", monospace;
+      font-size: 14px;
+      line-height: 1.55;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding-top: 8px;
+    }
+
+    .section-label::before {
+      content: "";
+      display: block;
+      width: 55px;
+      height: 1.5px;
+      background: var(--midtone);
+      margin-bottom: 13px;
+    }
+
+    .section-content { min-width: 0; }
+
+    .lead {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(28px, 3.2vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 1060px;
+      margin-bottom: 55px;
+    }
+
+    .quote-block {
+      margin: 55px 0;
+      border-left: 8px solid var(--midtone);
+      padding: 21px 0 21px 34px;
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 1060px;
+    }
+
+    .quote-block p { max-width: 1060px; margin: 0; }
+
+    .aside-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 21px;
+      margin: 34px 0 55px 0;
+      max-width: 1060px;
+    }
+
+    .card {
+      border: 1.5px solid var(--shadow);
+      padding: 21px;
+      min-height: 180px;
+      position: relative;
+      background: var(--highlight);
+    }
+
+    .card .label, .diagram-card .label {
+      display: block;
+      font-size: 12px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 21px;
+    }
+
+    .card p { font-size: 18px; line-height: 1.45; margin-bottom: 0; }
+
+    .dark-card {
+      background: var(--shadow);
+      color: var(--highlight);
+    }
+
+    .dark-card .label { color: var(--midtone); }
+
+    .dark-card a { color: var(--highlight); }
+
+    .accent-card {
+      border-left: 13px solid var(--midtone);
+    }
+
+    .diagram-card {
+      border: 1.5px solid var(--shadow);
+      padding: 21px;
+      margin: 55px 0;
+      max-width: 1060px;
+      background: var(--highlight);
+    }
+
+    .diagram-card svg { width: 100%; height: auto; display: block; }
+
+    .caption {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 13px;
+      max-width: 780px;
+    }
+
+    .hatch {
+      background: repeating-linear-gradient(135deg, var(--shadow) 0 1px, transparent 1px 8px);
+    }
+
+    .table-wrap {
+      max-width: 1240px;
+      overflow-x: auto;
+      border: 1.5px solid var(--shadow);
+      margin: 55px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 17px;
+      line-height: 1.42;
+    }
+
+    th, td {
+      vertical-align: top;
+      text-align: left;
+      border-bottom: 1.5px solid var(--shadow);
+      border-right: 1.5px solid var(--shadow);
+      padding: 21px;
+    }
+
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child td { border-bottom: 0; }
+
+    th {
+      font-size: 13px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--shadow);
+      color: var(--highlight);
+    }
+
+    .matrix .meta-no {
+      width: 72px;
+      color: var(--midtone);
+      font-size: 15px;
+    }
+
+    .matrix .meta-name {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      max-width: 260px;
+    }
+
+    .matrix .question { font-style: italic; }
+
+    .source-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-width: 1060px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .source-list li {
+      border-top: 1.5px solid var(--shadow);
+      padding: 13px 0;
+    }
+
+    .footnote-index {
+      color: var(--midtone);
+      padding-right: 8px;
+    }
+
+    sup {
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      line-height: 0;
+    }
+
+    .unit-note {
+      border: 1.5px solid var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin: 34px 0 55px 0;
+      max-width: 1060px;
+    }
+
+    .unit-note div {
+      padding: 21px;
+      border-right: 1.5px solid var(--shadow);
+    }
+
+    .unit-note div:last-child { border-right: 0; }
+
+    .unit-note .value {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 28px;
+      line-height: 1.1;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .split-callout {
+      display: grid;
+      grid-template-columns: minmax(0, var(--phi-major)) minmax(0, var(--phi-minor));
+      gap: 34px;
+      max-width: 1120px;
+      margin: 55px 0;
+    }
+
+    .pull-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1.5px solid var(--shadow);
+      max-width: 1120px;
+      margin: 55px 0;
+    }
+
+    .pull-grid div {
+      padding: 21px;
+      border-right: 1.5px solid var(--shadow);
+      min-height: 240px;
+    }
+
+    .pull-grid div:last-child { border-right: 0; }
+
+    .pull-grid .big {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      display: block;
+      margin-bottom: 21px;
+      color: var(--midtone);
+    }
+
+    .reading-list {
+      padding: 89px var(--page-pad);
+      border-bottom: 0;
+    }
+
+    .footer {
+      padding: 55px var(--page-pad);
+      background: var(--shadow);
+      color: var(--highlight);
+      display: grid;
+      grid-template-columns: minmax(0, var(--phi-major)) minmax(0, var(--phi-minor));
+      gap: 55px;
+      align-items: end;
+    }
+
+    .footer a { color: var(--highlight); text-decoration-color: var(--midtone); }
+
+    .final-line {
+      font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(36px, 5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    @media (max-width: 980px) {
+      :root { --page-pad: 34px; }
+      .hero, .section, .toc-block, .footer, .split-callout {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 89px; }
+      .hero-panel { min-height: auto; }
+      .section-label { position: static; }
+      .toc-list { columns: 1; }
+      .aside-grid, .pull-grid, .unit-note { grid-template-columns: 1fr; }
+      .document-meta { grid-template-columns: 1fr; }
+      .document-meta div, .pull-grid div, .unit-note div { border-right: 0; border-bottom: 1.5px solid var(--shadow); }
+      .document-meta div:last-child, .pull-grid div:last-child, .unit-note div:last-child { border-bottom: 0; }
+    }
+
+    @media print {
+      .top-rule { position: static; }
+      .section-label { position: static; }
+      .section, .toc-block, .reading-list, .footer { page-break-inside: avoid; }
+      a { text-decoration: none; }
+      body { font-size: 14pt; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-rule" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">xCO Concept Paper · Dusk Preset · Meta-Target Architecture</p>
+        <h1>Expanding Civilizational Optionality</h1>
+        <p class="subtitle">A concept paper on single-point targets, meta-targets, the viability hourglass, and systemic antifragile viability in an age of compound biophysical volatility.</p>
+        <div class="document-meta" aria-label="document metadata">
+          <div><span class="label">Mode</span><span class="value">Pre-operational missioning framework</span></div>
+          <div><span class="label">Core test</span><span class="value">Does the target widen or narrow viable futures?</span></div>
+          <div><span class="label">Palette</span><span class="value">#192640 · #F27F3D · #FFFFFF</span></div>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Viability hourglass diagram">
+        <svg viewBox="0 0 520 680" role="img" aria-labelledby="hourglass-title hourglass-desc">
+          <title id="hourglass-title">Viability hourglass</title>
+          <desc id="hourglass-desc">A diagram showing depletion-backed optionality narrowing into a bottleneck and diverging toward collapse compression or regenerative re-expansion.</desc>
+          <defs>
+            <pattern id="denseHatch" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="10" stroke="#192640" stroke-width="1"/>
+            </pattern>
+            <pattern id="openHatch" patternUnits="userSpaceOnUse" width="18" height="18" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="18" stroke="#192640" stroke-width="0.75"/>
+            </pattern>
+          </defs>
+
+          <rect x="1" y="1" width="518" height="678" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+          <line x1="54" y1="100" x2="466" y2="100" stroke="#192640" stroke-width="1.5"/>
+          <line x1="54" y1="340" x2="466" y2="340" stroke="#F27F3D" stroke-width="2.5"/>
+          <line x1="54" y1="580" x2="466" y2="580" stroke="#192640" stroke-width="1.5"/>
+
+          <polygon points="95,105 425,105 295,306 225,306" fill="url(#openHatch)" stroke="#192640" stroke-width="1.5"/>
+          <polygon points="225,374 295,374 430,575 90,575" fill="none" stroke="#192640" stroke-width="1.5"/>
+          <polygon points="218,307 302,307 302,373 218,373" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+
+          <path d="M225 374 C178 440,130 510,90 575" fill="none" stroke="#192640" stroke-width="1.5" stroke-dasharray="6 8"/>
+          <path d="M295 374 C335 445,390 510,430 575" fill="none" stroke="#F27F3D" stroke-width="2.5"/>
+
+          <rect x="75" y="72" width="240" height="28" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+          <text x="88" y="91" font-family="DM Mono, monospace" font-size="13" fill="#192640">depletion-backed optionality</text>
+
+          <rect x="307" y="324" width="145" height="32" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+          <text x="320" y="345" font-family="DM Mono, monospace" font-size="13" fill="#FFFFFF">bottleneck</text>
+
+          <rect x="54" y="596" width="174" height="38" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+          <text x="68" y="619" font-family="DM Mono, monospace" font-size="13" fill="#192640">collapse compression</text>
+
+          <rect x="263" y="596" width="202" height="38" fill="#192640" stroke="#192640" stroke-width="1.5"/>
+          <text x="277" y="619" font-family="DM Mono, monospace" font-size="13" fill="#FFFFFF">regenerative re-expansion</text>
+
+          <text x="54" y="145" font-family="Inter, sans-serif" font-size="23" fill="#192640">apparent width</text>
+          <text x="54" y="169" font-family="DM Mono, monospace" font-size="12" fill="#192640">choices financed by drawdown</text>
+          <text x="54" y="386" font-family="Inter, sans-serif" font-size="23" fill="#192640">narrowing aperture</text>
+          <text x="54" y="410" font-family="DM Mono, monospace" font-size="12" fill="#192640">compound volatility / fewer viable moves</text>
+          <text x="263" y="520" font-family="Inter, sans-serif" font-size="23" fill="#192640">future width</text>
+          <text x="263" y="544" font-family="DM Mono, monospace" font-size="12" fill="#192640">earned through regeneration</text>
+        </svg>
+      </aside>
+    </header>
+
+    <nav class="toc-block" aria-label="Table of contents">
+      <div>
+        <p class="eyebrow">Document structure</p>
+        <h2>Single-point targets provide accounting. Meta-targets provide validity.</h2>
+      </div>
+      <ol class="toc-list">
+        <li><span>01</span> <a href="#core-thesis">Core thesis</a></li>
+        <li><span>02</span> <a href="#missioning-environment">The changed missioning environment</a></li>
+        <li><span>03</span> <a href="#single-point-targets">Why single-point targets no longer work</a></li>
+        <li><span>04</span> <a href="#carbon-example">Carbon as the clearest example</a></li>
+        <li><span>05</span> <a href="#beyond-carbon">The same failure beyond carbon</a></li>
+        <li><span>06</span> <a href="#optionality">Civilizational optionality</a></li>
+        <li><span>07</span> <a href="#hourglass">The viability hourglass</a></li>
+        <li><span>08</span> <a href="#antifragility">Systemic antifragile viability</a></li>
+        <li><span>09</span> <a href="#target-architecture">Target architecture</a></li>
+        <li><span>10</span> <a href="#matrix">The Meta-Target Validity Matrix</a></li>
+        <li><span>11</span> <a href="#reading-matrix">Reading the matrix</a></li>
+        <li><span>12</span> <a href="#validity-test">The target validity test</a></li>
+        <li><span>13</span> <a href="#machinery">The antifragile machinery</a></li>
+        <li><span>14</span> <a href="#macro-sectoral">Macro and sectoral targets</a></li>
+        <li><span>15</span> <a href="#framework-clarifies">What the framework clarifies</a></li>
+        <li><span>16</span> <a href="#cleaned-argument">Cleaned core argument</a></li>
+        <li><span>17</span> <a href="#conclusion">Conclusion</a></li>
+      </ol>
+    </nav>
+
+    <main>
+      <section class="section" id="core-thesis">
+        <div class="section-label">01 · Core thesis</div>
+        <div class="section-content">
+          <p class="lead">The central mission is not simply to reduce harm, absorb shocks, or meet sectoral targets. The deeper mission is to expand civilizational optionality.</p>
+          <p>By <strong>civilizational optionality</strong>, this paper means the durable, shared capacity to generate and choose among viable, just, regenerative futures under constraint. It is not generic choice. It is not the preservation of every existing option. It is not the freedom to continue extracting, emitting, displacing harm, or consuming the future. It is the capacity to keep meaningful futures open without destroying the ecological, social, institutional, and moral foundations that make future choice possible.</p>
+          <p>This mission has become urgent because inherited forms of optionality are now contracting. Much of the apparent optionality of the fossil-industrial era was produced by drawing down climate stability, ecological integrity, material abundance, social trust, and intergenerational safety. What appeared as an expanding field of freedom was, in part, <strong>depletion-backed optionality</strong>: a widening of near-term choices purchased by narrowing the long-term conditions of life.</p>
+          <p>The world is therefore entering a <strong>viability hourglass</strong>. The upper chamber represents the apparent abundance of choices produced by high-energy, high-throughput, globally expansive systems. The neck represents the present and emerging bottleneck: a narrowing window of climate, ecological, material, social, and political constraint. Below the neck lie two broad possibilities. One is <strong>collapse compression</strong>, in which optionality continues to shrink until societies are left with primarily coercive, defensive, scarcity-governed choices. The other is <strong>regenerative re-expansion</strong>, in which societies preserve enough ecological, social, institutional, and material capacity through the bottleneck to widen the space of viable futures again.</p>
+          <div class="quote-block"><p>A target can be technically achieved but mission-invalid. It can be physically true while systemically false.</p></div>
+          <p>This is why conventional targets are no longer sufficient by themselves. Tonnes CO₂e abated, tonnes CO₂ removed, hectares restored, megawatts installed, or units of efficiency gained may all be materially real achievements. They may also be necessary. But they do not, by themselves, tell us whether the wider system is moving away from civilizational self-termination or toward it.</p>
+          <p>The core argument of this paper is therefore: <strong>a target is mission-valid only to the extent that it preserves or expands civilizational optionality</strong>: the durable, shared capacity to move through volatility without sacrificing ecological foundations, human dignity, social cooperation, future agency, or what cannot be recovered.</p>
+          <p>This requires a higher-order target architecture. First-order targets must be governed by <strong>meta-targets</strong>. Meta-targets are not additional aspirations. They are validity conditions. They determine whether a target genuinely contributes to viable futures or merely produces narrow success inside a boundary too small to see the damage it causes.</p>
+        </div>
+      </section>
+
+      <section class="section" id="missioning-environment">
+        <div class="section-label">02 · Missioning environment</div>
+        <div class="section-content">
+          <h2>The changed missioning environment</h2>
+          <p>Missioning is the process by which societies set direction, organize collective action, mobilize resources, coordinate institutions, and judge progress. In a more stable environment, missions can be framed as discrete programs: decarbonize electricity, restore ecosystems, reduce poverty, modernize infrastructure, improve public health, expand clean technology, or strengthen food systems.</p>
+          <p>The current environment is different. Societies are operating inside a field of <strong>compound volatility</strong>. Climate hazards interact with water systems. Water stress affects food production. Food shocks affect social stability. Energy shocks affect political legitimacy. Material scarcity affects the speed and justice of transition. Ecological degradation reduces the capacity of landscapes to absorb climate extremes. Debt, inequality, conflict, and displacement determine who can adapt and who is left exposed.</p>
+          <p>This is not merely a rhetorical claim. The IPCC states with high confidence that climate risks are becoming more complex and difficult to manage; multiple climate hazards will occur simultaneously, climatic and non-climatic risks will interact, and risks will compound and cascade across sectors and regions. The IPCC also notes that some responses to climate change can create new impacts and risks.<sup><a href="#fn1">1</a></sup></p>
+          <p>In this environment, the missioning context itself becomes unstable. A plan that appears rational under one set of assumptions may become fragile when conditions shift. A target that makes sense within one sector may increase risk across another. A policy that optimizes for efficiency may destroy redundancy. A project that appears cost-effective may create long-term lock-in. A national success may conceal global harm.</p>
+          <p>This changes the function of targets. Targets cannot only ask whether a planned output was delivered. They must also ask what that output did to the wider system. Did it reduce fragility or increase it? Did it preserve future options or close them down? Did it regenerate the foundations of future action or consume them? Did it strengthen cooperation or undermine legitimacy? Did it reduce harm overall or simply move harm elsewhere?</p>
+          <div class="quote-block"><p>Did this intervention make the system more capable of sustaining life, dignity, cooperation, and adaptation under stress, or did it narrow the future while producing a measurable output?</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="single-point-targets">
+        <div class="section-label">03 · Single-point targets</div>
+        <div class="section-content">
+          <h2>Why single-point targets no longer work as governing targets</h2>
+          <p>Single-point targets still matter as accounting measures. They help quantify emissions, removals, restoration, efficiency, energy capacity, water use, or financial flows. They remain necessary because a mission without quantities becomes vague.</p>
+          <p>But single-point targets no longer work as <strong>self-validating mission targets</strong>.</p>
+          <p>A gigatonne-scale target tells us that something happened. It does not tell us whether the future became more viable. It answers a narrow accounting question, but not a civilizational question.</p>
+          <p>A million tonnes CO₂ removed may be real and still fail as progress if it is achieved through land dispossession, biodiversity loss, water stress, fragile permanence, food-system pressure, or speculative offsetting that delays gross emissions cuts. A gigatonne CO₂e abated may be real and still coexist with rising material scarcity, energy insecurity, ecological degradation, political backlash, and institutional breakdown. A million hectares of soil restored may be real and still sit inside a food system that is becoming less nutritionally secure, more water-stressed, more economically fragile, or more politically illegitimate.</p>
+          <p>The problem is not only false measurement. It is <strong>true but insufficient measurement</strong>.</p>
+          <p>Single-point targets measure quantity without validating trajectory. They tell us how much carbon dioxide, how much energy, how much land, how much abatement, how much restoration, or how much efficiency. They do not necessarily tell us whether the achievement widened or narrowed the set of reachable viable futures.</p>
+          <div class="diagram-card" aria-label="Single-point targets versus meta-target validity diagram">
+            <span class="label">Diagram · output is not progress</span>
+            <svg viewBox="0 0 1080 470" role="img" aria-labelledby="single-title single-desc">
+              <title id="single-title">Single-point targets and mission validity</title>
+              <desc id="single-desc">Diagram showing scalar outputs passing through a validity field before becoming progress.</desc>
+              <defs>
+                <pattern id="hatchA" patternUnits="userSpaceOnUse" width="12" height="12" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="12" stroke="#192640" stroke-width="0.75"/>
+                </pattern>
+              </defs>
+              <rect x="1" y="1" width="1078" height="468" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="34" y="52" font-family="DM Mono, monospace" font-size="15" fill="#192640">single-point accounting</text>
+              <rect x="34" y="82" width="250" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="55" y="125" font-family="Inter, sans-serif" font-size="24" fill="#192640">tCO₂e abated</text>
+              <rect x="34" y="173" width="250" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="55" y="216" font-family="Inter, sans-serif" font-size="24" fill="#192640">tCO₂ removed</text>
+              <rect x="34" y="264" width="250" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="55" y="307" font-family="Inter, sans-serif" font-size="24" fill="#192640">hectares restored</text>
+              <rect x="34" y="355" width="250" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="55" y="398" font-family="Inter, sans-serif" font-size="24" fill="#192640">MW installed</text>
+
+              <line x1="305" y1="235" x2="420" y2="235" stroke="#192640" stroke-width="1.5"/>
+              <circle cx="430" cy="235" r="7" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+
+              <rect x="455" y="82" width="286" height="343" fill="url(#hatchA)" stroke="#192640" stroke-width="1.5"/>
+              <rect x="477" y="105" width="242" height="54" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+              <text x="498" y="140" font-family="Inter, sans-serif" font-size="24" fill="#FFFFFF">validity field</text>
+              <text x="498" y="195" font-family="DM Mono, monospace" font-size="14" fill="#192640">fragility?</text>
+              <text x="498" y="228" font-family="DM Mono, monospace" font-size="14" fill="#192640">displaced harm?</text>
+              <text x="498" y="261" font-family="DM Mono, monospace" font-size="14" fill="#192640">cascade risk?</text>
+              <text x="498" y="294" font-family="DM Mono, monospace" font-size="14" fill="#192640">legitimacy?</text>
+              <text x="498" y="327" font-family="DM Mono, monospace" font-size="14" fill="#192640">regeneration?</text>
+              <text x="498" y="360" font-family="DM Mono, monospace" font-size="14" fill="#192640">irreversible loss?</text>
+
+              <line x1="760" y1="235" x2="872" y2="235" stroke="#192640" stroke-width="1.5"/>
+              <circle cx="882" cy="235" r="7" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+              <rect x="910" y="164" width="132" height="142" fill="#192640" stroke="#192640" stroke-width="1.5"/>
+              <text x="932" y="220" font-family="Inter, sans-serif" font-size="26" fill="#FFFFFF">mission</text>
+              <text x="932" y="252" font-family="Inter, sans-serif" font-size="26" fill="#FFFFFF">validity</text>
+            </svg>
+            <p class="caption">Single-point targets provide the accounting. Meta-targets provide the validity. A quantity becomes progress only when its mode of achievement preserves or expands civilizational optionality.</p>
+          </div>
+          <div class="quote-block"><p>A civilization can meet many narrow targets while still destroying the conditions of its own viable continuation.</p></div>
+          <p>A carbon target can be met while water security, biodiversity, food systems, social legitimacy, material feasibility, and future option space deteriorate. A restoration target can be met while monoculture, exclusion, or land conflict increases. A clean-energy target can be met while extraction harms, supply-chain fragility, and geopolitical exposure rise. The target may be technically achieved. The mission may still be failing.</p>
+          <p>That is why output is not the same as progress.</p>
+        </div>
+      </section>
+
+      <section class="section" id="carbon-example">
+        <div class="section-label">04 · Carbon example</div>
+        <div class="section-content">
+          <h2>Carbon as the clearest example</h2>
+          <p>Carbon targets remain essential. The climate system responds to cumulative greenhouse gas emissions, and rapid gross emissions reduction is non-negotiable. UNEP’s 2025 <em>Emissions Gap Report</em> states that annual emissions reductions of 35% and 55% by 2035, compared with 2019 levels, are needed to align with 2°C and 1.5°C pathways respectively; it also reports that current policies point to around 2.8°C of warming this century.<sup><a href="#fn2">2</a></sup></p>
+          <p>But even carbon targets do not automatically answer the wider civilizational question. A carbon pathway can become mission-invalid if it relies on implausible removals, destructive land use, delayed mitigation, material bottlenecks, or social breakdown.</p>
+          <div class="pull-grid" aria-label="Carbon evidence summary">
+            <div><span class="big">35%</span><p>Annual emissions reduction by 2035 relative to 2019 needed for a 2°C pathway, according to UNEP.</p></div>
+            <div><span class="big">55%</span><p>Annual emissions reduction by 2035 relative to 2019 needed for a 1.5°C pathway, according to UNEP.</p></div>
+            <div><span class="big">7–9</span><p>Billion tonnes CO₂ per year of removal by mid-century estimated for a 1.5°C-consistent pathway in the 2024 State of CDR report.</p></div>
+          </div>
+          <p>The 2024 <em>State of Carbon Dioxide Removal</em> report estimates that around 7–9 billion tonnes CO₂ per year would need to be removed by mid-century for a 1.5°C-consistent pathway, while stressing that emissions reduction remains the primary route to net zero and carbon dioxide removal plays a critical complementary role.<sup><a href="#fn3">3</a></sup></p>
+          <p>That scale matters. But the number alone is not enough. A removal target must also ask: removed how, from where, for how long, at whose expense, with what land pressure, with what biodiversity impact, with what food-system consequences, and with what effect on gross emissions reduction?</p>
+          <p>The IPCC warns that large-scale land conversion for bioenergy, biochar, or afforestation can increase risks to biodiversity, water, and food security. It contrasts these risks with approaches such as restoring natural forests and drained peatlands, which can enhance resilience of carbon stocks and reduce ecosystem vulnerability.<sup><a href="#fn4">4</a></sup></p>
+          <p>The conclusion is not that tonnes CO₂ do not matter. They do. The conclusion is that carbon quantities provide <strong>accounting</strong>, not <strong>mission validity</strong>.</p>
+          <div class="unit-note" aria-label="Carbon unit discipline">
+            <div><span class="value">tCO₂</span><p class="small">Carbon dioxide mass. Used for emissions or removals of CO₂.</p></div>
+            <div><span class="value">tCO₂e</span><p class="small">Greenhouse gases expressed as carbon dioxide equivalent.</p></div>
+            <div><span class="value">tC</span><p class="small">Elemental carbon. One tonne C is about 3.67 tonnes CO₂ by molecular weight.<sup><a href="#fn5">5</a></sup></p></div>
+          </div>
+          <p>Two pathways can produce the same carbon number. One may reduce gross emissions, restore ecosystems, strengthen livelihoods, reduce demand, and increase social legitimacy. Another may delay mitigation, enclose land, pressure food systems, damage biodiversity, and deepen inequality. Both may claim carbon progress. Only one expands civilizational optionality.</p>
+          <div class="quote-block"><p>The question is no longer only: how many tonnes? It is: what kind of world did those tonnes help create?</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="beyond-carbon">
+        <div class="section-label">05 · Beyond carbon</div>
+        <div class="section-content">
+          <h2>The same failure applies beyond carbon</h2>
+          <p>The weakness of single-point targets is not unique to carbon. It appears wherever a scalar measure is treated as a governing measure.</p>
+          <p>A clean-energy target can install megawatts while increasing material dependency, extraction harm, geopolitical exposure, grid fragility, or political backlash. The IEA’s 2025 <em>Global Critical Minerals Outlook</em> warns that current copper mine project pipelines point to a potential 30% supply shortfall by 2035, with concentrated supply chains and supply shocks remaining material risks for the energy transition.<sup><a href="#fn6">6</a></sup></p>
+          <p>A restoration target can count hectares while producing monocultures, excluding communities, reducing biodiversity, or weakening livelihoods. A water-efficiency target can improve efficiency while total water demand keeps rising. A food-output target can increase calories while degrading soils, aquifers, nutrition, biodiversity, and farmer resilience. A resilience target can protect wealthy assets while transferring risk downstream or outward. A national emissions target can improve domestic inventories while importing emissions, ecological damage, or labor exploitation from elsewhere.</p>
+          <p>The deeper problem is dimensional. Single-point targets are one-dimensional measures inside a multi-dimensional, dynamic, coupled system.</p>
+          <div class="aside-grid">
+            <div class="card"><span class="label">Single-point target</span><p>Did we deliver the measured output?</p></div>
+            <div class="card accent-card"><span class="label">Meta-target</span><p>Did the achievement preserve or expand civilizational optionality?</p></div>
+          </div>
+          <p>Single-point targets ask whether we delivered the measured output. They do not ask whether the achievement reduced systemic fragility, preserved future option space, avoided displaced harm, strengthened social cooperation, reduced cascade risk, regenerated foundations, protected what cannot be recovered, or helped keep the viability hourglass open.</p>
+          <div class="quote-block"><p>Single-point targets provide the accounting. Meta-targets provide the validity.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="optionality">
+        <div class="section-label">06 · Optionality</div>
+        <div class="section-content">
+          <h2>Civilizational optionality</h2>
+          <p><strong>Civilizational optionality</strong> is the durable, shared capacity to generate viable futures under constraint.</p>
+          <p>The word <strong>durable</strong> matters because short-term flexibility purchased by long-term depletion is not real optionality. The word <strong>shared</strong> matters because optionality for a protected minority at the expense of wider abandonment is not civilizational optionality; it is elite insulation. The word <strong>viable</strong> matters because not all options deserve preservation. Some options should close: fossil lock-in, extractive sacrifice zones, accounting games, coerced displacement, authoritarian crisis management, and adaptation strategies that protect the powerful by abandoning the vulnerable.</p>
+          <p>Civilizational optionality does not mean preserving a single civilizational form. It means preserving the conditions under which many societies, cultures, and ways of living can continue to generate viable futures. It is therefore both practical and moral. It is practical because societies need flexibility, redundancy, diversity, and adaptive capacity to survive volatility. It is moral because dignity, ecological integrity, justice, and future agency matter in themselves, not only because they stabilize systems.</p>
+          <p>This framework treats dignity, ecological integrity, justice, and future agency as both intrinsic commitments and operating conditions of viability. They matter in themselves, and systems that violate them become more fragile.</p>
+          <p>The mission is not to maximize all possible options. It is to expand <strong>viable optionality</strong> while retiring destructive optionality.</p>
+          <div class="quote-block"><p>Expanding civilizational optionality means increasing the range of just, regenerative, adaptive futures that remain reachable under conditions of ecological constraint and systemic volatility.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="hourglass">
+        <div class="section-label">07 · Viability hourglass</div>
+        <div class="section-content">
+          <h2>The viability hourglass</h2>
+          <p>The <strong>viability hourglass</strong> is a strategic model of civilizational optionality under compound biophysical volatility. It describes a movement from depletion-backed apparent optionality, through a narrowing bottleneck of ecological, material, social, and political constraint, toward either collapse compression or regenerative re-expansion.</p>
+          <p>At the top of the hourglass lies inherited optionality: the apparent abundance of choices produced by high-energy, high-throughput, globally expansive systems. This included unprecedented mobility, production, consumption, technological acceleration, financial leverage, and infrastructure expansion. But much of this optionality was depletion-backed. It depended on externalizing carbon, ecological damage, material extraction, social harm, and intergenerational risk.</p>
+          <p>At the neck of the hourglass lies the present and emerging constriction. This is the period in which climate volatility, ecological degradation, material scarcity, water stress, food insecurity, displacement, geopolitical fragmentation, and institutional overload reduce the number of viable choices available. Under this pressure, societies may be driven toward emergency extraction, defensive enclosure, authoritarian control, sacrifice zones, militarized borders, or conflict.</p>
+          <div class="diagram-card" aria-label="Viability hourglass expanded diagram">
+            <span class="label">Diagram · aperture of optionality</span>
+            <svg viewBox="0 0 1080 520" role="img" aria-labelledby="hourglass2-title hourglass2-desc">
+              <title id="hourglass2-title">Viability hourglass with two outcomes</title>
+              <desc id="hourglass2-desc">Expanded diagram of depletion-backed optionality narrowing into a bottleneck and diverging into collapse compression or regenerative re-expansion.</desc>
+              <defs>
+                <pattern id="hatchB" patternUnits="userSpaceOnUse" width="16" height="16" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="16" stroke="#192640" stroke-width="0.75"/>
+                </pattern>
+                <pattern id="hatchC" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="8" stroke="#192640" stroke-width="0.75"/>
+                </pattern>
+              </defs>
+              <rect x="1" y="1" width="1078" height="518" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <line x1="80" y1="92" x2="1000" y2="92" stroke="#192640" stroke-width="1.5"/>
+              <text x="80" y="64" font-family="DM Mono, monospace" font-size="14" fill="#192640">inherited optionality</text>
+              <polygon points="250,112 830,112 610,246 470,246" fill="url(#hatchB)" stroke="#192640" stroke-width="1.5"/>
+              <rect x="466" y="246" width="148" height="74" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+              <text x="489" y="290" font-family="Inter, sans-serif" font-size="25" fill="#FFFFFF">bottleneck</text>
+              <polygon points="470,320 610,320 815,460 280,460" fill="none" stroke="#192640" stroke-width="1.5"/>
+              <path d="M470 320 C378 370,318 420,280 460" fill="none" stroke="#192640" stroke-width="1.5" stroke-dasharray="7 8"/>
+              <path d="M610 320 C688 370,762 420,815 460" fill="none" stroke="#F27F3D" stroke-width="2.5"/>
+              <rect x="146" y="438" width="280" height="45" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="166" y="467" font-family="DM Mono, monospace" font-size="14" fill="#192640">collapse compression</text>
+              <rect x="646" y="438" width="310" height="45" fill="#192640" stroke="#192640" stroke-width="1.5"/>
+              <text x="666" y="467" font-family="DM Mono, monospace" font-size="14" fill="#FFFFFF">regenerative re-expansion</text>
+              <text x="250" y="160" font-family="Inter, sans-serif" font-size="27" fill="#192640">apparent width</text>
+              <text x="250" y="188" font-family="DM Mono, monospace" font-size="13" fill="#192640">near-term choices purchased by drawdown</text>
+              <text x="635" y="382" font-family="Inter, sans-serif" font-size="27" fill="#192640">earned width</text>
+              <text x="635" y="410" font-family="DM Mono, monospace" font-size="13" fill="#192640">future choices built on regeneration</text>
+              <text x="103" y="385" font-family="Inter, sans-serif" font-size="27" fill="#192640">narrowing</text>
+              <text x="103" y="413" font-family="DM Mono, monospace" font-size="13" fill="#192640">triage / coercion / scarcity</text>
+            </svg>
+            <p class="caption">The hourglass is a strategic model, not a deterministic forecast. It frames a narrowing window in which societies either preserve the conditions for re-expansion or fall into collapse compression.</p>
+          </div>
+          <p>The first possibility below the neck is <strong>collapse compression</strong>. In collapse compression, optionality continues to narrow. Societies still have choices, but the choices become increasingly coercive, defensive, extractive, and future-closing. Collapse does not arrive only when choices disappear. It also arrives when the remaining choices are dominated by triage rather than transformation.</p>
+          <p>The second possibility is <strong>regenerative re-expansion</strong>. In regenerative re-expansion, societies preserve enough ecological, social, institutional, and material capacity through the bottleneck to widen the space of viable futures again. This re-expansion cannot be a return to the false width of the fossil-industrial era. It must be based on different foundations: reduced fragility, lower throughput, ecological regeneration, social legitimacy, adaptive governance, and non-displacement of harm.</p>
+          <p>Earth-system research supports the seriousness of this bottleneck, while not proving any single deterministic collapse pathway. The 2025 <em>Planetary Health Check</em> assesses seven of nine planetary boundaries as breached, adding ocean acidification as the seventh transgressed boundary.<sup><a href="#fn7">7</a></sup> The Earth Commission’s safe and just Earth-system boundaries work reports that seven of eight globally quantified safe and just boundaries have already been crossed, and that two or more regional safe and just boundaries are transgressed across 52% of global land area, affecting 86% of the global population.<sup><a href="#fn8">8</a></sup></p>
+          <p>These assessments should not be treated as precise predictions of collapse. Their significance is that they indicate rising Earth-system pressure, declining margins of safety, and worsening conditions for maintaining humane, cooperative, regenerative futures.</p>
+          <div class="quote-block"><p>Hold open and re-widen the viability hourglass.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="antifragility">
+        <div class="section-label">08 · Antifragile viability</div>
+        <div class="section-content">
+          <h2>Systemic antifragile viability</h2>
+          <p>To move through the viability hourglass, societies need more than sustainability and more than resilience. They need <strong>systemic antifragile viability</strong>.</p>
+          <p>Sustainability is insufficient if it means sustaining systems that are already extractive, brittle, unjust, and ecologically destabilizing. Resilience is insufficient if it means returning to a prior state that helped generate the crisis. Survival is insufficient if it is achieved through enclaves, coercion, abandonment, or sacrifice zones.</p>
+          <p>Systemic antifragile viability means the designed capacity to convert unavoidable disruption into learning, redesign, cooperation, regeneration, and expanded future capacity, while protecting people and irreplaceable systems from becoming the material through which the system learns.</p>
+          <p>This must be bounded carefully. Antifragility does not mean disruption is good. It does not mean shocks should be welcomed. It does not mean vulnerable people or ecosystems should be exposed to avoidable harm so that the system becomes stronger. That would be a brutal misuse of the concept.</p>
+          <div class="aside-grid">
+            <div class="card accent-card"><span class="label">Stress-test</span><p>Assumptions. Models. Infrastructure designs. Supply-chain logics. Governance procedures.</p></div>
+            <div class="card dark-card"><span class="label">Protect</span><p>Children. Drinking water. Food security. Human dignity. Public health. Irreplaceable ecosystems.</p></div>
+          </div>
+          <p>The proper distinction is this: assumptions should be stress-tested; children should not. Infrastructure designs should be stress-tested; drinking water access should not. Supply-chain models should be stress-tested; food security should not. Governance procedures should be stress-tested; human dignity, public health, political rights, and irreplaceable ecosystems should be protected from catastrophic stress.</p>
+          <p>A shock has been properly metabolized only when the response reduces future vulnerability and increases future capacity, rather than merely restoring the conditions that made the shock so damaging.</p>
+          <p>This framing is consistent with social-ecological systems research that distinguishes resilience, adaptability, and transformability, including the capacity to create fundamentally new systems when existing ecological, economic, or social structures become untenable.<sup><a href="#fn9">9</a></sup> The framework here extends that logic into missioning: the point is not only to withstand shocks, but to preserve the possibility of transformation without sacrificing the vulnerable or the irreplaceable.</p>
+        </div>
+      </section>
+
+      <section class="section" id="target-architecture">
+        <div class="section-label">09 · Architecture</div>
+        <div class="section-content">
+          <h2>Target architecture</h2>
+          <p>The framework requires a clear target architecture. At the highest level is the mission: <strong>expand civilizational optionality</strong>. Beneath that is the temporal frame: <strong>hold open and re-widen the viability hourglass</strong>. Beneath that is the strategic condition: <strong>systemic antifragile viability</strong>. Beneath that sit the <strong>meta-targets</strong>, which determine whether ordinary targets count as mission-valid. Finally, beneath the meta-targets sit the <strong>sectoral and macro targets</strong>: carbon, water, food, energy, materials, ecology, health, housing, adaptation, governance, security, productivity, and investment.</p>
+          <div class="diagram-card" aria-label="Target architecture stack">
+            <span class="label">Diagram · target architecture</span>
+            <svg viewBox="0 0 1080 520" role="img" aria-labelledby="arch-title arch-desc">
+              <title id="arch-title">Target architecture</title>
+              <desc id="arch-desc">Stacked architecture from core mission to operational target layer.</desc>
+              <rect x="1" y="1" width="1078" height="518" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <rect x="90" y="60" width="900" height="70" fill="#192640" stroke="#192640" stroke-width="1.5"/>
+              <text x="120" y="104" font-family="Inter, sans-serif" font-size="28" fill="#FFFFFF">Core mission · expanding civilizational optionality</text>
+              <rect x="140" y="150" width="800" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="170" y="194" font-family="Inter, sans-serif" font-size="26" fill="#192640">Temporal frame · viability hourglass</text>
+              <rect x="190" y="240" width="700" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="220" y="284" font-family="Inter, sans-serif" font-size="26" fill="#192640">Strategic condition · antifragile viability</text>
+              <rect x="240" y="330" width="600" height="70" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/>
+              <text x="270" y="374" font-family="Inter, sans-serif" font-size="26" fill="#FFFFFF">Formal layer · meta-target validity matrix</text>
+              <rect x="290" y="420" width="500" height="50" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="320" y="452" font-family="DM Mono, monospace" font-size="15" fill="#192640">operational targets · carbon / water / food / energy / materials</text>
+            </svg>
+            <p class="caption">The architecture prevents lower-level targets from overriding the mission. Outputs matter only within the discipline of the meta-targets.</p>
+          </div>
+          <p>This architecture prevents lower-level targets from overriding the mission. A renewable energy target should not count as mission-valid if it increases extractive harm, material fragility, social conflict, and ecological degradation. A carbon removal target should not count as mission-valid if it delays gross emissions cuts or competes with food, water, and biodiversity. An adaptation target should not count as mission-valid if it protects one group by transferring risk to another. A food security target should not count as mission-valid if it undermines the ecological base of future food security.</p>
+          <div class="quote-block"><p>Targets deliver outputs. Meta-targets determine whether those outputs count as progress.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="matrix">
+        <div class="section-label">10 · Matrix</div>
+        <div class="section-content">
+          <h2>The Meta-Target Validity Matrix</h2>
+          <p>The ten meta-targets form the formal backbone of this framework. Each identifies a distinct way that targets can fail. Together, they test whether action is holding open and re-widening the viability hourglass, or merely producing narrow output while the future closes.</p>
+          <div class="table-wrap">
+            <table class="matrix">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Meta-target</th>
+                  <th>Core question</th>
+                  <th>Function in expanding civilizational optionality</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="meta-no">01</td><td class="meta-name">Net systemic fragility decline</td><td class="question">Is the whole system becoming less prone to cascading failure?</td><td>Ensures progress reduces total brittleness rather than shifting or hiding it.</td></tr>
+                <tr><td class="meta-no">02</td><td class="meta-name">Resilience gain faster than hazard growth</td><td class="question">Are we adapting faster than conditions are worsening?</td><td>Keeps response capacity ahead of the rate at which volatility removes options.</td></tr>
+                <tr><td class="meta-no">03</td><td class="meta-name">Expanded future option space</td><td class="question">Are we preserving flexibility, reversibility, and diversity?</td><td>Maintains multiple viable routes through the bottleneck.</td></tr>
+                <tr><td class="meta-no">04</td><td class="meta-name">Reduced cascade coupling</td><td class="question">Can failure in one system be prevented from taking down others?</td><td>Prevents one failure from accelerating closure of the whole aperture.</td></tr>
+                <tr><td class="meta-no">05</td><td class="meta-name">Regenerative surplus</td><td class="question">Are we rebuilding ecological and social capacity, not just slowing harm?</td><td>Builds the foundations for re-expansion beyond the constriction.</td></tr>
+                <tr><td class="meta-no">06</td><td class="meta-name">Non-displacement of harm</td><td class="question">Are we avoiding sacrifice zones, hidden extraction, and future burden-shifting?</td><td>Prevents one group’s passage through the bottleneck from being bought by closing the future for others.</td></tr>
+                <tr><td class="meta-no">07</td><td class="meta-name">Institutional learning speed</td><td class="question">Can governance update faster than the crisis evolves?</td><td>Allows governance to adapt while the window narrows.</td></tr>
+                <tr><td class="meta-no">08</td><td class="meta-name">Social cooperation capacity</td><td class="question">Does the transition preserve legitimacy, fairness, and conflict resilience?</td><td>Maintains the collective ability to act under stress rather than fragment.</td></tr>
+                <tr><td class="meta-no">09</td><td class="meta-name">Irreversible loss avoidance</td><td class="question">Are we prioritizing what cannot be recovered?</td><td>Protects foundations whose loss would permanently close futures.</td></tr>
+                <tr><td class="meta-no">10</td><td class="meta-name">Cross-scale coherence</td><td class="question">Do local, national, corporate, and global targets reinforce each other?</td><td>Prevents success at one scale from narrowing the global or systemic aperture.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>This matrix is not a list of optional virtues. It is a validity test. A target that succeeds on its own terms but fails materially across this matrix may still be an output, but it is not fully mission-valid. It may be technically achieved while civilizationally invalid.</p>
+        </div>
+      </section>
+
+      <section class="section" id="reading-matrix">
+        <div class="section-label">11 · Reading matrix</div>
+        <div class="section-content">
+          <h2>Reading the matrix</h2>
+          <p><strong>Net systemic fragility decline</strong> asks whether the system as a whole is becoming less brittle. It prevents progress in one domain from hiding rising fragility elsewhere. A clean energy transition that reduces emissions while increasing geopolitical dependency, ecological harm, material vulnerability, and grid fragility may still leave the whole system more brittle.</p>
+          <p><strong>Resilience gain faster than hazard growth</strong> introduces the question of pace. A society can improve and still fall behind if hazards intensify faster than adaptive capacity grows. In an hourglass frame, the question is not simply whether resilience is increasing. It is whether resilience is increasing fast enough to resist collapse compression.</p>
+          <p><strong>Expanded future option space</strong> is one meta-target within the wider mission of civilizational optionality. It asks whether particular decisions preserve flexibility, reversibility, diversity, modularity, repairability, and future agency. Civilizational optionality is the whole mission; future option space is one property that helps produce it.</p>
+          <p><strong>Reduced cascade coupling</strong> asks whether failures can be contained. A drought should not automatically become a food crisis, energy crisis, health crisis, debt crisis, migration crisis, and conflict crisis. A grid failure should not disable hospitals, water systems, communications, and emergency response. Failure must be bounded rather than contagious.</p>
+          <p><strong>Regenerative surplus</strong> asks whether action rebuilds the foundations of future possibility. It is not enough to reduce depletion. Degraded systems require net renewal: soils, watersheds, biodiversity, public health, institutional legitimacy, local capability, and social trust must be strengthened.</p>
+          <p><strong>Non-displacement of harm</strong> prevents false progress. A transition that succeeds by exporting damage to other communities, ecosystems, territories, or generations is not expanding civilizational optionality. It is reallocating risk. A target only counts to the extent that it reduces harm across the full system boundary.</p>
+          <p><strong>Institutional learning speed</strong> asks whether governance can keep up with reality. Static plans fail in volatile systems. Institutions must detect weak signals, update assumptions, stop failed interventions, revise plans, and redeploy resources quickly enough to remain ahead of compounding risk.</p>
+          <p><strong>Social cooperation capacity</strong> recognizes that transition is not only technical. It depends on legitimacy, fairness, trust, participation, livelihoods, and conflict resilience. A technically sound pathway that destroys social cooperation will not remain viable. Cooperation is not a soft variable; it is an operating condition.</p>
+          <p><strong>Irreversible loss avoidance</strong> protects what cannot be recovered. Some losses do not merely impose costs; they close futures. Species extinction, old-growth destruction, aquifer collapse, cultural erasure, mass mortality, democratic breakdown, permanent displacement, and the destruction of social trust cannot be treated as ordinary trade-offs. This meta-target has special status as a red-line constraint: foreseeable, preventable, material irreversible losses should not be treated as acceptable costs of target achievement.</p>
+          <p><strong>Cross-scale coherence</strong> prevents boundary games. A local target can undermine a regional system. A national target can export harm globally. A corporate target can conflict with community resilience. A climate target can undermine biodiversity. Cross-scale coherence does not mean uniformity. It means actions at different scales should not systematically undermine one another or hide failure through boundary shifting.</p>
+          <p>Together, the ten meta-targets make visible the difference between genuine progress and narrow output production.</p>
+        </div>
+      </section>
+
+      <section class="section" id="validity-test">
+        <div class="section-label">12 · Validity test</div>
+        <div class="section-content">
+          <h2>The target validity test</h2>
+          <p>The matrix can be used as a target validity test.</p>
+          <p>A target is mission-valid to the extent that it reduces total systemic brittleness; increases adaptive capacity faster than risk is intensifying; preserves flexibility, reversibility, diversity, and future agency; prevents failure in one system from spreading into others; rebuilds ecological and social capacity; avoids shifting harm onto other people, places, ecosystems, or generations; helps governance update faster than the crisis evolves; strengthens legitimacy, fairness, trust, and conflict resilience; protects what cannot be recovered; and aligns action across local, national, corporate, and global scales.</p>
+          <p>This is not a purity test. Almost every serious transition target will involve uncertainty, trade-offs, and partial failure. The point is not that every target must score perfectly across all ten dimensions. The point is that no target should be allowed to claim success while hiding material failures against these dimensions.</p>
+          <p>A target may deliver an output and still fail the mission. It may remove CO₂ while creating land conflict. It may abate emissions while increasing material fragility. It may restore soil while leaving food-system vulnerability intact. It may build clean energy while expanding sacrifice zones. It may protect infrastructure while displacing flood risk. It may improve national metrics while exporting harm globally.</p>
+          <div class="quote-block"><p>After this achievement, is the system more capable of moving through the viability hourglass without sacrificing people, ecosystems, legitimacy, or future agency?</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="machinery">
+        <div class="section-label">13 · Antifragile machinery</div>
+        <div class="section-content">
+          <h2>The antifragile machinery around the meta-targets</h2>
+          <p>The Meta-Target Validity Matrix provides the formal test of whether targets expand civilizational optionality. But the matrix cannot operate in isolation. Meta-targets are not self-executing. They require a surrounding missioning environment capable of making systemic effects visible, holding actors accountable across boundaries, protecting legitimacy, and allowing action to be revised under changing conditions.</p>
+          <p>This surrounding environment can be described as <strong>antifragile machinery</strong>. Antifragile machinery is not a fixed process, a single institution, or a linear operating model. It is the broad landscape of capacities that allows societies to convert volatility into learning, redesign, regeneration, cooperation, and expanded future capacity. The meta-targets define what must be tested. The antifragile machinery describes the capacities required for those tests to matter in practice.</p>
+          <div class="diagram-card" aria-label="Antifragile machinery grid">
+            <span class="label">Diagram · machinery as capacity field</span>
+            <svg viewBox="0 0 1080 520" role="img" aria-labelledby="machinery-title machinery-desc">
+              <title id="machinery-title">Antifragile machinery capacity field</title>
+              <desc id="machinery-desc">A grid of eight capacities: epistemic, accounting, governance, design, regenerative, legitimacy, allocation, and boundary discipline.</desc>
+              <rect x="1" y="1" width="1078" height="518" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/>
+              <text x="34" y="52" font-family="DM Mono, monospace" font-size="15" fill="#192640">capacity field around the matrix</text>
+              <g font-family="Inter, sans-serif" font-size="24" fill="#192640">
+                <rect x="34" y="86" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="55" y="138">epistemic</text><text x="55" y="168" font-family="DM Mono, monospace" font-size="13">see compound risk</text>
+                <rect x="284" y="86" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="305" y="138">accounting</text><text x="305" y="168" font-family="DM Mono, monospace" font-size="13">reveal full boundary</text>
+                <rect x="534" y="86" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="555" y="138">governance</text><text x="555" y="168" font-family="DM Mono, monospace" font-size="13">revise without rupture</text>
+                <rect x="784" y="86" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="805" y="138">design</text><text x="805" y="168" font-family="DM Mono, monospace" font-size="13">graceful failure</text>
+                <rect x="34" y="248" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="55" y="300">regenerative</text><text x="55" y="330" font-family="DM Mono, monospace" font-size="13">rebuild foundations</text>
+                <rect x="284" y="248" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="305" y="300">legitimacy</text><text x="305" y="330" font-family="DM Mono, monospace" font-size="13">maintain cooperation</text>
+                <rect x="534" y="248" width="230" height="122" fill="#FFFFFF" stroke="#192640" stroke-width="1.5"/><text x="555" y="300">allocation</text><text x="555" y="330" font-family="DM Mono, monospace" font-size="13">fund optionality</text>
+                <rect x="784" y="248" width="230" height="122" fill="#F27F3D" stroke="#192640" stroke-width="1.5"/><text x="805" y="300" fill="#FFFFFF">boundary</text><text x="805" y="330" font-family="DM Mono, monospace" font-size="13" fill="#FFFFFF">stop hidden failure</text>
+              </g>
+              <rect x="284" y="410" width="480" height="50" fill="#192640" stroke="#192640" stroke-width="1.5"/>
+              <text x="312" y="442" font-family="DM Mono, monospace" font-size="15" fill="#FFFFFF">meta-targets become meaningful only in this field</text>
+            </svg>
+          </div>
+          <p>The first capacity is <strong>epistemic</strong>: the ability to see compound risk before it becomes crisis. This means understanding dependencies between climate, water, food, energy, materials, finance, health, migration, conflict, and ecological systems. The point is not simply more data. The point is to perceive where fragility is accumulating and where apparent progress may be hiding future risk.</p>
+          <p>The second capacity is <strong>accounting</strong>: the ability to reveal full-system consequences. In a coupled world, narrow accounting produces false success. Emissions can be outsourced. Ecological damage can be hidden in supply chains. Adaptation can move risk downstream. Material extraction can be separated from clean-energy claims. Accounting must therefore make visible the geographic, ecological, social, temporal, and intergenerational boundaries of action.</p>
+          <p>The third capacity is <strong>governance</strong>: the ability to revise assumptions, coordinate across scales, and correct course without losing legitimacy. Mission-oriented innovation research emphasizes that missions require more than narrow market fixing; they require direction-setting, market-shaping, and coordination across actors and sectors.<sup><a href="#fn10">10</a></sup></p>
+          <p>The fourth capacity is <strong>design</strong>: the ability to build flexibility, reversibility, diversity, repairability, modularity, and graceful failure into systems. This applies to infrastructure, food systems, energy systems, housing, supply chains, digital systems, and public institutions. The aim is not maximum efficiency under ideal conditions. The aim is durable functionality under stress.</p>
+          <p>The fifth capacity is <strong>regenerative</strong>: the ability to rebuild ecological and social foundations rather than merely slow their depletion. This means treating soils, watersheds, biodiversity, public health, local capability, and institutional legitimacy as productive foundations rather than externalities.</p>
+          <p>The sixth capacity is <strong>legitimacy</strong>: the ability to maintain fairness, participation, livelihood security, recognition, accountability, and conflict resilience. Transition cannot succeed if it is experienced as extraction, abandonment, or elite insulation.</p>
+          <p>The seventh capacity is <strong>allocation</strong>: the ability to direct finance, procurement, subsidies, public investment, insurance, and industrial strategy toward reduced fragility and expanded optionality rather than narrow output maximization.</p>
+          <p>The eighth capacity is <strong>boundary discipline</strong>: the ability to prevent actors from drawing boundaries narrow enough to declare success while exporting failure elsewhere. Boundary discipline asks whether local gains produce regional losses, whether national progress depends on global extraction, whether corporate claims undermine community resilience, and whether present benefits are being purchased by future depletion.</p>
+          <p>In this sense, systemic antifragile viability is not a separate target alongside the matrix. It is the condition generated when the matrix is embedded in the right missioning environment.</p>
+        </div>
+      </section>
+
+      <section class="section" id="macro-sectoral">
+        <div class="section-label">14 · Macro / sectoral</div>
+        <div class="section-content">
+          <h2>How macro and sectoral targets sit within the framework</h2>
+          <p>This framework does not abolish macro or sectoral targets. It makes them more demanding.</p>
+          <p>A carbon target is meaningful only if it reduces gross emissions, avoids speculative dependence on future removals, protects ecosystems, and does not shift emissions through imported goods or accounting tricks.</p>
+          <p>An energy target is meaningful only if it reduces fossil dependence while increasing reliability, affordability, material circularity, and social legitimacy.</p>
+          <p>A food and water target is meaningful only if it improves nutrition, protects watersheds, restores soils, reduces scarcity risk, and strengthens local adaptive capacity.</p>
+          <p>An adaptation target is meaningful only if it reduces total risk rather than relocating it.</p>
+          <p>A material target is meaningful only if it supports transition while reducing extraction pressure, supply-chain fragility, and ecological harm.</p>
+          <p>A governance target is meaningful only if it improves learning, legitimacy, response speed, and coordination.</p>
+          <p>The same is true of macro targets. Growth that increases fragility is not progress. Security that destroys legitimacy is not progress. Decarbonization that creates sacrifice zones is not progress. Adaptation that shifts risk onto the vulnerable is not progress. Productivity that consumes ecological foundations is not progress.</p>
+          <p>The meta-targets sit above macro and sectoral targets because they ask whether those targets are serving the deeper mission: holding open and re-widening the viability hourglass.</p>
+        </div>
+      </section>
+
+      <section class="section" id="framework-clarifies">
+        <div class="section-label">15 · Clarifications</div>
+        <div class="section-content">
+          <h2>What the framework clarifies</h2>
+          <p>This framework clarifies why the age of biophysical volatility requires a new target architecture.</p>
+          <p>It does not say that carbon targets, soil targets, biodiversity targets, energy targets, water targets, or adaptation targets are unimportant. It says they cannot validate themselves.</p>
+          <p>It does not say that complexity makes measurement impossible. It says measurement must be disciplined by whole-system validity.</p>
+          <p>It does not say that everything matters equally. It says the decisive question is whether a target expands or narrows the set of reachable viable futures.</p>
+          <p>It does not say that antifragility means celebrating disruption. It says unavoidable disruption must be converted into learning and redesign without making the vulnerable or the irreplaceable bear the cost of learning.</p>
+          <p>It does not say that coherence means uniformity. It says action at one scale should not produce hidden failure at another.</p>
+          <p>It does not say that optionality means preserving all choices. It says destructive choices must be retired so that viable choices can expand.</p>
+          <p>The framework is deliberately pre-operational. It does not yet prescribe a full governance model, implementation process, or automatic trigger system. Its purpose is to clarify the architecture of meaning: what targets are for, what makes them valid, and what kind of missioning environment they require.</p>
+        </div>
+      </section>
+
+      <section class="section" id="cleaned-argument">
+        <div class="section-label">16 · Core argument</div>
+        <div class="section-content">
+          <h2>Cleaned core argument</h2>
+          <p>The operating environment is becoming one of compound biophysical and social volatility. In this environment, single-point targets can no longer be treated as self-validating mission targets. Tonnes CO₂e abated, tonnes CO₂ removed, hectares restored, megawatts installed, or units of efficiency gained may be materially real and still fail to indicate civilizational progress. A society can meet many such targets while continuing to destroy the ecological, social, institutional, and material foundations of its own viable future.</p>
+          <p>The central mission is therefore to expand civilizational optionality: the durable, shared capacity to generate and choose among viable, just, regenerative futures under constraint. But this optionality is now moving through a viability hourglass. The apparent optionality of the fossil-industrial era is contracting as climate, ecological, material, social, and political pressures converge. The task is to prevent this narrowing from becoming collapse compression, where choices are reduced to triage, coercion, sacrifice, and emergency extraction.</p>
+          <p>Meta-targets are required because they test whether action holds open and re-expands the viability hourglass. They ask whether targets reduce systemic fragility, build resilience faster than hazards grow, preserve future option space, reduce cascade coupling, generate regenerative surplus, avoid displaced harm, accelerate institutional learning, strengthen social cooperation, protect what cannot be recovered, and align action across scales.</p>
+          <p>A target only becomes mission-valid when it contributes to this wider movement away from self-termination and toward expanded viable optionality.</p>
+        </div>
+      </section>
+
+      <section class="section" id="conclusion">
+        <div class="section-label">17 · Conclusion</div>
+        <div class="section-content">
+          <h2>Conclusion</h2>
+          <p>The age of biophysical volatility requires a new target architecture.</p>
+          <p>First-order targets remain essential. The world still needs emissions reduction targets, clean energy targets, water targets, food targets, biodiversity targets, health targets, housing targets, adaptation targets, material targets, and justice targets. But these targets must be governed by meta-targets that determine whether they are genuinely expanding civilizational optionality or merely producing narrow success.</p>
+          <p>The central mission is not sustainability, if sustainability means preserving the existing system. It is not resilience, if resilience means returning to a state that generated the crisis. It is not survival, if survival is achieved through exclusion, coercion, and sacrifice zones.</p>
+          <p>The mission is to expand civilizational optionality by holding open and re-widening the viability hourglass.</p>
+          <p>This requires systemic antifragile viability: the designed capacity to convert unavoidable disruption into learning, redesign, cooperation, regeneration, and expanded future capacity, while protecting people and irreplaceable living systems from catastrophic harm.</p>
+          <p>The final test of any target is therefore not only whether it was achieved. The final test is whether it widened or narrowed the future.</p>
+          <div class="quote-block"><p>The mission is to expand civilizational optionality under conditions of escalating biophysical volatility by holding open and re-widening the viability hourglass: reducing systemic fragility, regenerating ecological and social foundations, strengthening cooperation, avoiding irreversible loss, and converting disruption into learning, redesign, and expanded adaptive capacity.</p></div>
+        </div>
+      </section>
+
+      <section class="reading-list" id="sources">
+        <h2>Sources and evidence base</h2>
+        <ol class="source-list">
+          <li id="fn1"><span class="footnote-index">01</span> IPCC, AR6 Working Group II, Summary for Policymakers headline statements. Climate risks becoming more complex, compounding, and cascading across sectors and regions. <a href="https://www.ipcc.ch/report/ar6/wg2/resources/spm-headline-statements/">ipcc.ch</a></li>
+          <li id="fn2"><span class="footnote-index">02</span> UNEP, <em>Emissions Gap Report 2025</em>. 35% and 55% emissions reductions by 2035 relative to 2019 for 2°C and 1.5°C pathways; current policies around 2.8°C. <a href="https://www.unep.org/resources/emissions-gap-report-2025">unep.org</a></li>
+          <li id="fn3"><span class="footnote-index">03</span> University of Oxford summary of the 2024 <em>State of Carbon Dioxide Removal</em> report. 7–9 billion tonnes CO₂ per year by mid-century for a 1.5°C-consistent pathway; emissions reduction remains primary. <a href="https://www.ox.ac.uk/news/2024-06-05-new-report-states-7-9-billion-tonnes-co2-must-be-sustainably-removed-year-hit">ox.ac.uk</a></li>
+          <li id="fn4"><span class="footnote-index">04</span> IPCC, AR6 Synthesis Report full volume. Land-based mitigation and CDR can create biodiversity, water, and food-security risks when poorly deployed or scaled. <a href="https://www.ipcc.ch/report/ar6/syr/downloads/report/IPCC_AR6_SYR_FullVolume.pdf">ipcc.ch</a></li>
+          <li id="fn5"><span class="footnote-index">05</span> U.S. Energy Information Administration, carbon-to-carbon-dioxide molecular-weight conversion. <a href="https://www.eia.gov/environment/emissions/co2_vol_mass.php">eia.gov</a></li>
+          <li id="fn6"><span class="footnote-index">06</span> IEA, <em>Global Critical Minerals Outlook 2025</em>, executive summary. Copper project pipelines point to potential 30% supply shortfall by 2035; concentration and shocks remain risks. <a href="https://www.iea.org/reports/global-critical-minerals-outlook-2025/executive-summary">iea.org</a></li>
+          <li id="fn7"><span class="footnote-index">07</span> Planetary Health Check 2025. Seven of nine planetary boundaries assessed as breached, with ocean acidification added in 2025. <a href="https://www.planetaryhealthcheck.org/">planetaryhealthcheck.org</a></li>
+          <li id="fn8"><span class="footnote-index">08</span> Earth Commission, safe and just Earth-system boundaries. Seven of eight globally quantified safe and just boundaries crossed; regional boundaries transgressed across 52% of global land area, affecting 86% of the global population. <a href="https://www.nature.com/articles/s41586-023-06083-8">nature.com</a></li>
+          <li id="fn9"><span class="footnote-index">09</span> Folke et al., social-ecological systems framing of resilience, adaptability, and transformability. <a href="https://www.nature.com/articles/s44168-024-00193-3">nature.com</a></li>
+          <li id="fn10"><span class="footnote-index">10</span> Mazzucato, mission-oriented innovation policy: direction-setting, market-shaping, and coordination across actors and sectors. <a href="https://academic.oup.com/icc/article/27/5/803/5127692">academic.oup.com</a></li>
+          <li><span class="footnote-index">11</span> xCO diagrammatic grammar: rectangles as atomic unit, hatching as weight, crisp line discipline, node types, and sparse annotation logic. <a href="https://xco-style-guide-woad.vercel.app/diagrams">xco-style-guide-woad.vercel.app</a></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="final-line">Keep the future from closing — then make it wider.</p>
+      <p class="small">Self-contained HTML concept paper. Visual identity uses the Dusk tritone palette only: #192640, #F27F3D, #FFFFFF. Typography references Inter, DM Mono, and Crimson Pro with system fallbacks; no font files or external image assets are embedded.</p>
+    </footer>
+  </div>
+</body>
+</html>

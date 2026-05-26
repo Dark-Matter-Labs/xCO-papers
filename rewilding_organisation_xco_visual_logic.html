@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Indy Johar // Dm / xCO" />
+  <meta name="description" content="The Rewilding Organisation — a concept paper for the ferocious need of the necessary." />
+  <meta name="theme-color" content="#192640" />
+  <title>The Rewilding Organisation — Indy Johar // Dm / xCO</title>
+  <style>
+    :root {
+      --shadow: #192640;
+      --mid: #F27F3D;
+      --highlight: #FFFFFF;
+      --max: 1180px;
+      --phi-major: 61.8fr;
+      --phi-minor: 38.2fr;
+      --space-3: 3px;
+      --space-5: 5px;
+      --space-8: 8px;
+      --space-13: 13px;
+      --space-21: 21px;
+      --space-34: 34px;
+      --space-55: 55px;
+      --space-89: 89px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--highlight);
+      color: var(--shadow);
+    }
+
+    body {
+      margin: 0;
+      background: var(--highlight);
+      color: var(--shadow);
+      font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
+      font-size: 21px;
+      line-height: 1.62;
+      letter-spacing: 0;
+      text-rendering: geometricPrecision;
+    }
+
+    ::selection {
+      background: var(--mid);
+      color: var(--highlight);
+    }
+
+    a { color: inherit; text-decoration-thickness: 1.5px; text-underline-offset: 0.18em; }
+
+    .page {
+      width: min(var(--max), calc(100% - 42px));
+      margin: 0 auto;
+    }
+
+    .cover {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: var(--phi-major) var(--phi-minor);
+      column-gap: var(--space-55);
+      align-items: stretch;
+      padding: var(--space-55) 0 var(--space-34);
+      border-bottom: 1.5px solid var(--shadow);
+    }
+
+    .cover-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100vh - 144px);
+    }
+
+    .kicker,
+    .mono,
+    .caption,
+    .diagram-label,
+    .meta,
+    .toc,
+    .tag,
+    .running-head,
+    .footer {
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      letter-spacing: 0.02em;
+      font-weight: 400;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      max-width: 38ch;
+      margin-bottom: var(--space-34);
+    }
+
+    .title {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      font-size: clamp(64px, 10vw, 144px);
+      margin: 0 0 var(--space-34);
+    }
+
+    .subtitle {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(25px, 3vw, 43px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      max-width: 18ch;
+      margin: 0;
+    }
+
+    .author-row {
+      display: grid;
+      grid-template-columns: var(--phi-minor) var(--phi-major);
+      gap: var(--space-21);
+      border-top: 1.5px solid var(--shadow);
+      padding-top: var(--space-21);
+      margin-top: var(--space-55);
+    }
+
+    .author-name {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: calc(100vh - 144px);
+      border-left: 1.5px solid var(--shadow);
+      padding-left: var(--space-34);
+    }
+
+    .hero-diagram {
+      width: 100%;
+      min-height: 480px;
+      border: 1.5px solid var(--shadow);
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-diagram svg { display: block; width: 100%; height: auto; }
+
+    .toc {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      border-top: 1.5px solid var(--shadow);
+      padding-top: var(--space-21);
+      margin-top: var(--space-34);
+    }
+
+    .toc a {
+      text-decoration: none;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: var(--space-13);
+      border-bottom: 0.75px solid var(--shadow);
+      padding-bottom: var(--space-8);
+    }
+
+    .toc a span:first-child { color: var(--mid); }
+
+    .section {
+      padding: var(--space-89) 0;
+      border-bottom: 1.5px solid var(--shadow);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: var(--phi-minor) var(--phi-major);
+      gap: var(--space-55);
+      align-items: start;
+    }
+
+    .section-index {
+      position: sticky;
+      top: var(--space-34);
+      min-height: 280px;
+      border-top: 1.5px solid var(--shadow);
+      padding-top: var(--space-21);
+    }
+
+    .section-index .number {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 89px;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      margin: 0 0 var(--space-21);
+    }
+
+    .section-index .small-title {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 26px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-21);
+      max-width: 13ch;
+    }
+
+    .section-index .meta { max-width: 32ch; }
+
+    h1, h2, h3 {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      color: var(--shadow);
+      margin: 0;
+    }
+
+    h2 {
+      font-size: clamp(42px, 5vw, 72px);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      margin-bottom: var(--space-34);
+      max-width: 13ch;
+    }
+
+    h3 {
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin: var(--space-55) 0 var(--space-13);
+      max-width: 17ch;
+    }
+
+    p {
+      margin: 0 0 var(--space-21);
+      max-width: 68ch;
+    }
+
+    .lead {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(27px, 3vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      max-width: 21ch;
+      margin-bottom: var(--space-55);
+    }
+
+    .pull {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(32px, 4.8vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 14ch;
+      margin: var(--space-55) 0;
+      padding: var(--space-34) 0 0;
+      border-top: 2.5px solid var(--mid);
+    }
+
+    .concept-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-21);
+      margin: var(--space-34) 0 var(--space-55);
+    }
+
+    .concept-card {
+      border: 1.5px solid var(--shadow);
+      min-height: 180px;
+      padding: var(--space-21);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--highlight);
+    }
+
+    .concept-card .label {
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--mid);
+      margin-bottom: var(--space-21);
+    }
+
+    .concept-card .statement {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 28px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    .dark-band {
+      background: var(--shadow);
+      color: var(--highlight);
+      margin: var(--space-89) 0;
+      padding: var(--space-55);
+      display: grid;
+      grid-template-columns: var(--phi-major) var(--phi-minor);
+      gap: var(--space-55);
+    }
+
+    .dark-band h2, .dark-band h3, .dark-band p { color: var(--highlight); }
+    .dark-band .accent { color: var(--mid); }
+    .dark-band .rule { border-top-color: var(--highlight); }
+
+    .rule {
+      border-top: 1.5px solid var(--shadow);
+      padding-top: var(--space-21);
+    }
+
+    .axis-block {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: var(--space-34) 0 var(--space-55);
+      border: 1.5px solid var(--shadow);
+    }
+
+    .axis-block > div {
+      padding: var(--space-21);
+      border-right: 1.5px solid var(--shadow);
+      min-height: 210px;
+    }
+
+    .axis-block > div:last-child { border-right: 0; }
+
+    .axis-block .axis-title {
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--mid);
+      margin-bottom: var(--space-34);
+    }
+
+    .axis-block .axis-copy {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+    }
+
+    .diagram-wrap {
+      margin: var(--space-55) 0;
+      border: 1.5px solid var(--shadow);
+      padding: var(--space-21);
+      background: var(--highlight);
+    }
+
+    .diagram-title {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-21);
+      border-bottom: 1.5px solid var(--shadow);
+      padding-bottom: var(--space-13);
+      margin-bottom: var(--space-21);
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .diagram-wrap svg { width: 100%; height: auto; display: block; }
+
+    .caption {
+      border-top: 1.5px solid var(--shadow);
+      padding-top: var(--space-13);
+      margin-top: var(--space-13);
+      max-width: 80ch;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      margin: var(--space-34) 0;
+    }
+
+    .tag {
+      border: 1.5px solid var(--shadow);
+      padding: var(--space-5) var(--space-8);
+      background: var(--highlight);
+      color: var(--shadow);
+    }
+
+    .tag.mid {
+      border-color: var(--mid);
+      color: var(--mid);
+    }
+
+    .tritone-rule {
+      height: 13px;
+      background: linear-gradient(90deg, var(--shadow) 0 38.2%, var(--mid) 38.2% 61.8%, var(--highlight) 61.8% 100%);
+      border: 1.5px solid var(--shadow);
+      margin: var(--space-34) 0;
+    }
+
+    .hatch {
+      background-image: repeating-linear-gradient(135deg, var(--shadow) 0, var(--shadow) 1.5px, var(--highlight) 1.5px, var(--highlight) 8px);
+      min-height: 34px;
+      border: 1.5px solid var(--shadow);
+    }
+
+    .footer {
+      padding: var(--space-55) 0 var(--space-89);
+      display: grid;
+      grid-template-columns: var(--phi-major) var(--phi-minor);
+      gap: var(--space-55);
+    }
+
+    .footer .mark {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 55px;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+    }
+
+    .print-note {
+      border: 1.5px dashed var(--shadow);
+      padding: var(--space-21);
+      margin-top: var(--space-34);
+    }
+
+    .svg-label {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+    }
+
+    .svg-small {
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .svg-body {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .svg-serif {
+      font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+
+
+    .logic-plate {
+      margin: var(--space-55) 0;
+      border: 1.5px solid var(--shadow);
+      background: var(--highlight);
+    }
+
+    .logic-plate .diagram-title {
+      margin: 0;
+      padding: var(--space-13) var(--space-21);
+    }
+
+    .logic-plate svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .logic-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1.5px solid var(--shadow);
+    }
+
+    .logic-strip > div {
+      min-height: 170px;
+      border-right: 1.5px solid var(--shadow);
+      padding: var(--space-21);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .logic-strip > div:last-child { border-right: 0; }
+
+    .logic-strip .index {
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 13px;
+      color: var(--mid);
+      margin-bottom: var(--space-21);
+    }
+
+    .logic-strip .claim {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      font-size: 22px;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+    }
+
+    .visual-note {
+      display: grid;
+      grid-template-columns: var(--phi-minor) var(--phi-major);
+      gap: var(--space-34);
+      border-top: 1.5px solid var(--shadow);
+      padding: var(--space-21);
+    }
+
+    .edge-label {
+      font-family: "DM Mono", "Courier New", monospace;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 900px) {
+      body { font-size: 19px; }
+      .cover, .section-grid, .dark-band, .footer, .author-row { grid-template-columns: 1fr; }
+      .side-panel { border-left: 0; padding-left: 0; min-height: auto; }
+      .cover-copy { min-height: auto; }
+      .section-index { position: static; min-height: auto; }
+      .concept-list, .axis-block, .logic-strip, .visual-note { grid-template-columns: 1fr; }
+      .axis-block > div { border-right: 0; border-bottom: 1.5px solid var(--shadow); }
+      .axis-block > div:last-child, .logic-strip > div:last-child { border-bottom: 0; }
+      .logic-strip > div { border-right: 0; border-bottom: 1.5px solid var(--shadow); }
+      .dark-band { padding: var(--space-34); }
+    }
+
+    @media print {
+      html, body { background: var(--highlight); color: var(--shadow); }
+      .cover { min-height: auto; page-break-after: always; }
+      .section { page-break-inside: avoid; }
+      .section-index { position: static; }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="cover page" id="top">
+    <div class="cover-copy">
+      <div>
+        <div class="kicker">Concept paper // xCO dusk register // rewilding twist // visual logic edition // v0.4</div>
+        <h1 class="title">The Rewilding Organisation</h1>
+        <p class="subtitle">A manifesto for the ferocious need of the necessary.</p>
+      </div>
+      <div class="author-row">
+        <div class="meta">Author</div>
+        <div>
+          <div class="author-name">Indy Johar</div>
+          <div class="meta">as part of Dm / xCO</div>
+        </div>
+      </div>
+    </div>
+    <aside class="side-panel" aria-label="Concept map">
+      <div class="hero-diagram" role="img" aria-label="Abstract diagram: containment, breach, ferocious need, and necessary making">
+        <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <pattern id="heroContainHatch" patternUnits="userSpaceOnUse" width="8" height="8">
+              <path d="M0 8 L8 0" stroke="#192640" stroke-width="0.75" />
+            </pattern>
+            <pattern id="heroWildHatch" patternUnits="userSpaceOnUse" width="13" height="13">
+              <path d="M0 13 L13 0" stroke="#F27F3D" stroke-width="1.5" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="520" height="520" fill="#FFFFFF" />
+
+          <text x="34" y="42" class="svg-small" fill="#192640">CORE ILLUSTRATION / FROM CONTAINMENT TO NECESSARY MAKING</text>
+
+          <rect x="34" y="78" width="178" height="250" fill="url(#heroContainHatch)" stroke="#192640" stroke-width="1.5" />
+          <rect x="58" y="104" width="130" height="198" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+          <rect x="82" y="130" width="82" height="146" fill="url(#heroContainHatch)" stroke="#192640" stroke-width="1.5" />
+          <text x="58" y="356" class="svg-label" fill="#192640">contain</text>
+          <text x="58" y="377" class="svg-label" fill="#192640">predict</text>
+          <text x="58" y="398" class="svg-label" fill="#192640">manage</text>
+
+          <rect x="222" y="78" width="74" height="250" fill="#192640" />
+          <path d="M232 302 L282 78" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="8 5" />
+          <path d="M250 302 L292 132" stroke="#F27F3D" stroke-width="2.5" />
+          <text x="232" y="356" class="svg-label" fill="#192640">breach</text>
+          <text x="232" y="377" class="svg-label" fill="#192640">of the</text>
+          <text x="232" y="398" class="svg-label" fill="#192640">probable</text>
+
+          <path d="M64 442 H136 V420 H202 V386 H276 V354 H340 V320 H444" fill="none" stroke="#F27F3D" stroke-width="8" stroke-linejoin="miter" />
+          <path d="M428 302 L458 320 L428 338" fill="none" stroke="#F27F3D" stroke-width="8" stroke-linejoin="miter" />
+          <text x="34" y="472" class="svg-small" fill="#192640">FEROCIOUS NEED VECTOR: need → construction → shared reality</text>
+
+          <rect x="308" y="78" width="156" height="250" fill="#FFFFFF" stroke="#F27F3D" stroke-width="2.5" />
+          <rect x="330" y="104" width="112" height="48" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+          <rect x="330" y="176" width="112" height="48" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+          <rect x="330" y="248" width="112" height="48" fill="url(#heroWildHatch)" stroke="#192640" stroke-width="1.5" />
+          <text x="348" y="134" class="svg-body" fill="#192640">hearth</text>
+          <text x="350" y="205" class="svg-body" fill="#FFFFFF">forge</text>
+          <text x="344" y="277" class="svg-body" fill="#192640">threshold</text>
+          <text x="308" y="356" class="svg-label" fill="#192640">necessary</text>
+          <text x="308" y="377" class="svg-label" fill="#192640">making</text>
+
+          <rect x="358" y="28" width="108" height="28" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+          <text x="370" y="47" class="svg-small" fill="#FFFFFF">ABSENCE WITH FORCE</text>
+        </svg>
+      </div>
+      <nav class="toc" aria-label="Table of contents">
+        <a href="#visual-logic"><span>00</span><span>Visual logic</span></a>
+        <a href="#psychology"><span>01</span><span>Psychology of containment</span></a>
+        <a href="#necessary"><span>02</span><span>Ferocious need</span></a>
+        <a href="#sources"><span>03</span><span>Sources, not resources</span></a>
+        <a href="#disciplines"><span>04</span><span>Doubt, care, governance</span></a>
+        <a href="#machine"><span>05</span><span>Human-machine aliveness</span></a>
+        <a href="#habitat"><span>06</span><span>Hearth, forge, threshold</span></a>
+        <a href="#manifesto"><span>07</span><span>Closing manifesto</span></a>
+      </nav>
+    </aside>
+  </header>
+
+  <main>
+    <section class="section page" id="abstract">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">00</div>
+          <p class="small-title">Core claim</p>
+          <p class="meta">Declarative about the question. Tentative about the form. The working remains visible.</p>
+        </aside>
+        <article>
+          <p class="lead">The old organisation manages the possible. The rewilding organisation makes the necessary possible.</p>
+          <p>The root is psychological before it is structural. The modern organisation is built from the anxiety of management: containment, predictability, certainty, legibility, control. It makes the human smaller so the future appears safer. The rewilding organisation begins from the opposite condition: the ferocious need for the necessary, held by doubt, care, computation, governance, and making.</p>
+          <div class="tritone-rule" aria-hidden="true"></div>
+          <div class="concept-list">
+            <div class="concept-card">
+              <div class="label">PSYCHIC PREMISE</div>
+              <div class="statement">Management contains life to preserve the probable.</div>
+            </div>
+            <div class="concept-card">
+              <div class="label">REWILDING PREMISE</div>
+              <div class="statement">Rewilding releases the ferocious need for the necessary.</div>
+            </div>
+            <div class="concept-card">
+              <div class="label">ORGANISATIONAL TASK</div>
+              <div class="statement">Not optimisation of the already-real. Origination of the not-yet-real.</div>
+            </div>
+            <div class="concept-card">
+              <div class="label">PROOF</div>
+              <div class="statement">Reality made different: clarified, built, refused, repaired, made possible.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="visual-logic">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">00</div>
+          <p class="small-title">Visual logic</p>
+          <p class="meta">The illustration is not ornament. It is the argument rendered as structure: containment, breach, absence, force, habitat, form.</p>
+        </aside>
+        <article>
+          <h2>The rewilding logic is a passage from containment to origination.</h2>
+          <p>This visual structure treats the organisation as a psychological and institutional field. The left side is the containment psyche: management as predictability, legibility, risk reduction, and the preservation of the probable. The centre is the charged absence: the necessary before it has category, proof, or permission. The right side is not pastoral wildness, but disciplined habitat: hearth, forge, threshold, governance, computation, and ferocious belonging.</p>
+          <div class="logic-plate">
+            <div class="diagram-title"><span>MASTER PLATE / THE REWILDING LOGIC</span><span>containment → necessary force → governed origination</span></div>
+            <svg viewBox="0 0 1180 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Master visual logic of the rewilding organisation">
+              <defs>
+                <pattern id="plateDense" patternUnits="userSpaceOnUse" width="8" height="8">
+                  <path d="M0 8 L8 0" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+                <pattern id="plateMid" patternUnits="userSpaceOnUse" width="13" height="13">
+                  <path d="M0 13 L13 0" stroke="#F27F3D" stroke-width="1.5" />
+                </pattern>
+                <pattern id="plateGrid" patternUnits="userSpaceOnUse" width="34" height="34">
+                  <path d="M34 0 H0 V34" fill="none" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+              </defs>
+              <rect width="1180" height="760" fill="#FFFFFF" />
+
+              <text x="42" y="44" class="svg-small" fill="#192640">FIELD READING / MANAGEMENT CONTAINS LIFE TO PRESERVE THE PROBABLE</text>
+              <text x="742" y="44" class="svg-small" fill="#192640">REWILDING HOLDS FORCE TO MAKE THE NECESSARY CONSTRUCTIBLE</text>
+
+              <rect x="42" y="86" width="358" height="462" fill="url(#plateDense)" stroke="#192640" stroke-width="1.5" />
+              <rect x="78" y="122" width="286" height="390" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <rect x="112" y="156" width="218" height="322" fill="url(#plateDense)" stroke="#192640" stroke-width="1.5" />
+              <rect x="146" y="190" width="150" height="254" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="78" y="590" class="svg-label" fill="#192640">CONTAINMENT PSYCHE</text>
+              <text x="78" y="620" class="svg-body" fill="#192640">predictability / certainty / legibility / control</text>
+              <text x="78" y="650" class="svg-body" fill="#192640">the human rendered as manageable unit</text>
+              <line x1="64" y1="676" x2="364" y2="676" stroke="#192640" stroke-width="1.5" />
+              <text x="78" y="706" class="svg-small" fill="#192640">OLD MOVE: optimise the already-real</text>
+
+              <rect x="438" y="86" width="304" height="462" fill="#192640" />
+              <rect x="474" y="122" width="232" height="390" fill="url(#plateGrid)" stroke="#FFFFFF" stroke-width="1.5" />
+              <rect x="528" y="202" width="124" height="124" fill="#FFFFFF" stroke="#F27F3D" stroke-width="3" />
+              <rect x="552" y="226" width="76" height="76" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="506" y="364" class="svg-label" fill="#FFFFFF">ABSENCE</text>
+              <text x="506" y="386" class="svg-label" fill="#FFFFFF">WITH FORCE</text>
+              <text x="506" y="420" class="svg-body" fill="#FFFFFF">not yet category</text>
+              <text x="506" y="442" class="svg-body" fill="#FFFFFF">not yet market</text>
+              <text x="506" y="464" class="svg-body" fill="#FFFFFF">not yet proof</text>
+              <path d="M236 604 H394 V566 H486 V520 H590 V476 H712 V430 H850" fill="none" stroke="#F27F3D" stroke-width="10" stroke-linejoin="miter" />
+              <path d="M822 405 L884 430 L822 455" fill="none" stroke="#F27F3D" stroke-width="10" stroke-linejoin="miter" />
+              <text x="446" y="598" class="svg-small" fill="#FFFFFF">FEROCIOUS NEED VECTOR</text>
+              <text x="446" y="624" class="svg-small" fill="#FFFFFF">need becoming construction</text>
+
+              <rect x="780" y="86" width="358" height="462" fill="#FFFFFF" stroke="#F27F3D" stroke-width="2.5" />
+              <rect x="812" y="122" width="286" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="832" y="164" class="svg-label" fill="#192640">HEARTH</text>
+              <text x="914" y="164" class="svg-body" fill="#192640">trust / recovery / truth</text>
+              <rect x="812" y="226" width="286" height="70" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="832" y="268" class="svg-label" fill="#FFFFFF">FORGE</text>
+              <text x="914" y="268" class="svg-body" fill="#FFFFFF">practice / prototype / institution</text>
+              <rect x="812" y="330" width="286" height="70" fill="url(#plateMid)" stroke="#192640" stroke-width="1.5" />
+              <text x="832" y="372" class="svg-label" fill="#192640">THRESHOLD</text>
+              <text x="914" y="372" class="svg-body" fill="#192640">unknown / feedback / edge</text>
+              <rect x="812" y="434" width="286" height="70" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" stroke-dasharray="13 8" />
+              <text x="832" y="476" class="svg-label" fill="#192640">GOVERNANCE</text>
+              <text x="940" y="476" class="svg-body" fill="#192640">care / doubt / repair</text>
+              <text x="812" y="590" class="svg-label" fill="#192640">ORIGINATION FIELD</text>
+              <text x="812" y="620" class="svg-body" fill="#192640">civic / relational / imaginative infrastructure</text>
+              <text x="812" y="650" class="svg-body" fill="#192640">necessary making held by systemic responsibility</text>
+              <line x1="812" y1="676" x2="1098" y2="676" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="812" y="706" class="svg-small" fill="#192640">NEW MOVE: originate the not-yet-real</text>
+
+              <path d="M400 316 H438" stroke="#192640" stroke-width="1.5" />
+              <path d="M742 316 H780" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="408" y="284" class="svg-small" fill="#192640">breach</text>
+              <text x="748" y="284" class="svg-small" fill="#192640">form</text>
+            </svg>
+            <div class="logic-strip">
+              <div><span class="index">01 / PSYCHE</span><span class="claim">Management contains aliveness to preserve the probable.</span></div>
+              <div><span class="index">02 / FORCE</span><span class="claim">The necessary appears first as absence with force.</span></div>
+              <div><span class="index">03 / ENERGY</span><span class="claim">Ferocity is need becoming construction.</span></div>
+              <div><span class="index">04 / DISCIPLINE</span><span class="claim">Doubt and care prevent creation from becoming violence.</span></div>
+              <div><span class="index">05 / PROOF</span><span class="claim">Performance is reality made different.</span></div>
+            </div>
+            <div class="visual-note">
+              <p class="meta">Rewilding twist</p>
+              <p class="caption">The drawing refuses pastoral wildness. The wild appears as pressure in the system: a hard geometric corridor that breaches containment, crosses the dark unknown, and is held by habitat, governance, and making.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="psychology">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">01</div>
+          <p class="small-title">The containment psyche</p>
+          <p class="meta">The old organisation is not only an economic apparatus. It is a psychological defence against aliveness.</p>
+        </aside>
+        <article>
+          <h2>The organisation begins as a fear of ungoverned life.</h2>
+          <p>The modern organisation is not simply an economic structure. It is a psychological structure. Beneath its language of management, professionalism, governance, performance, efficiency, and risk sits a deeper emotional project: the containment of human aliveness. It wants the human to be predictable, legible, measurable, comparable, and controllable. It wants passion without disruption, commitment without excess, imagination without danger, care without cost, intelligence without refusal, and uncertainty without the terror of the unknown.</p>
+          <p>It calls this maturity. It calls this management. But much of management is the institutionalisation of anxiety: the attempt to make life safe by making it smaller. It converts need into objectives, fire into engagement, imagination into process, care into policy, judgment into alignment, and the unknown into risk.</p>
+          <div class="diagram-wrap">
+            <div class="diagram-title"><span>DIAGRAM 01 / PSYCHOLOGICAL CONVERSION</span><span>flow / sequence</span></div>
+            <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing how management converts aliveness into controllable categories">
+              <defs>
+                <pattern id="hatchA" patternUnits="userSpaceOnUse" width="8" height="8">
+                  <path d="M0 8 L8 0" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+              </defs>
+              <rect x="0" y="0" width="980" height="360" fill="#FFFFFF" />
+              <text x="24" y="30" class="svg-small" fill="#192640">SCALE / PSYCHE → SYSTEM</text>
+              <line x1="24" y1="48" x2="956" y2="48" stroke="#192640" stroke-width="1.5" />
+              <rect x="40" y="94" width="210" height="124" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="62" y="139" class="svg-label" fill="#FFFFFF">ungoverned</text>
+              <text x="62" y="162" class="svg-label" fill="#FFFFFF">aliveness</text>
+              <text x="62" y="194" class="svg-small" fill="#FFFFFF">need / refusal / grief / imagination</text>
+              <line x1="250" y1="156" x2="356" y2="156" stroke="#192640" stroke-width="1.5" />
+              <path d="M344 144 L364 156 L344 168" fill="none" stroke="#192640" stroke-width="1.5" />
+              <rect x="366" y="94" width="226" height="124" fill="url(#hatchA)" stroke="#192640" stroke-width="1.5" />
+              <text x="389" y="139" class="svg-label" fill="#192640">containment</text>
+              <text x="389" y="162" class="svg-label" fill="#192640">regime</text>
+              <text x="389" y="194" class="svg-small" fill="#192640">measurement / certainty / compliance</text>
+              <line x1="592" y1="156" x2="698" y2="156" stroke="#192640" stroke-width="1.5" stroke-dasharray="8 5" />
+              <path d="M686 144 L706 156 L686 168" fill="none" stroke="#192640" stroke-width="1.5" />
+              <rect x="708" y="94" width="232" height="124" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="732" y="139" class="svg-label" fill="#192640">manageable</text>
+              <text x="732" y="162" class="svg-label" fill="#192640">human unit</text>
+              <text x="732" y="194" class="svg-small" fill="#192640">legible / comparable / replaceable</text>
+              <line x1="40" y1="278" x2="940" y2="278" stroke="#192640" stroke-width="0.75" stroke-dasharray="5 5" />
+              <text x="40" y="310" class="svg-small" fill="#192640">// [inference] the old organisation is a psychic defence first, an operating model second.</text>
+            </svg>
+            <p class="caption">The rewilding twist is not softness. It is the refusal to let human fire be domesticated into the formats that make management feel safe.</p>
+          </div>
+          <p>This is why the modern organisation has so often reduced the human to a unit of labour. A unit can be allocated. A unit can be measured. A unit can be substituted. A unit can be managed. But a source exceeds the plan. A source may sense what the dashboard cannot yet show. A source may refuse dead work. A source may become seized by something that the current system cannot price, approve, or recognise. A source may demand that reality change.</p>
+          <p>Machines have now exposed the poverty of this arrangement. Machines are better at machinic work than humans ever were: repetition, recall, synthesis, administration, simulation, patterning, plausible output. The failure is not that humans have become obsolete. The failure is that the organisation misunderstood the human, and trained people to become bad robots just as the actual robots arrived.</p>
+          <p class="pull">The question is no longer how to make humans more efficient inside systems designed to suppress their humanity. The question is whether we can build organisations worthy of the human capacity to originate worlds.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="necessary">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">02</div>
+          <p class="small-title">The ferocious need</p>
+          <p class="meta">Not desire as preference. Need as obligation. Ferocity as the energy required to cross from absence into form.</p>
+        </aside>
+        <article>
+          <h2>The necessary arrives as an absence with force.</h2>
+          <p>A rewilding organisation does not exist to contain human aliveness. It exists to host it, intensify it, discipline it, and turn it toward what must be made. Its root is not desire in the soft sense of preference, lifestyle, or appetite. Its root is the ferocious need for the necessary: the force that appears when the world as given becomes intolerable, when an absence becomes impossible to ignore, when the not-yet-real begins to demand construction.</p>
+          <p>The old organisation manages the possible. The rewilding organisation moves toward the necessary. The possible is what the present already knows how to permit. The probable is what the present knows how to predict. But the necessary often begins outside both. It begins before there is a market, before there is proof, before there is institutional permission, before there is a category, before there is a clear path.</p>
+          <div class="axis-block" aria-label="Possible, probable, necessary comparison">
+            <div>
+              <div class="axis-title">POSSIBLE</div>
+              <div class="axis-copy">What the present already knows how to permit.</div>
+            </div>
+            <div>
+              <div class="axis-title">PROBABLE</div>
+              <div class="axis-copy">What the past projects forward with managerial confidence.</div>
+            </div>
+            <div>
+              <div class="axis-title">NECESSARY</div>
+              <div class="axis-copy">What must become possible because absence has become intolerable.</div>
+            </div>
+          </div>
+          <p>To build from the necessary is not to assemble the known into a better arrangement. It is not optimisation. It is not innovation as the rearrangement of available parts. It is origination: making from the not-yet, from the place where there is no authorised object, no accepted model, no validated precedent, no current permission structure. It is not making from literal nothing. It is making from nothing the existing order knows how to recognise.</p>
+          <div class="diagram-wrap">
+            <div class="diagram-title"><span>DIAGRAM 02 / FROM PROBABLE TO NECESSARY</span><span>matrix / field</span></div>
+            <svg viewBox="0 0 980 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Field diagram showing the probable and necessary">
+              <defs>
+                <pattern id="hatchB" patternUnits="userSpaceOnUse" width="13" height="13">
+                  <path d="M0 13 L13 0" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+                <pattern id="emberB" patternUnits="userSpaceOnUse" width="13" height="13">
+                  <path d="M0 13 L13 0" stroke="#F27F3D" stroke-width="1.5" />
+                </pattern>
+              </defs>
+              <rect width="980" height="520" fill="#FFFFFF" />
+              <text x="34" y="35" class="svg-small" fill="#192640">FIELD / EXISTING RECOGNITION × NECESSARY FORCE</text>
+              <line x1="92" y1="448" x2="902" y2="448" stroke="#192640" stroke-width="1.5" />
+              <line x1="92" y1="448" x2="92" y2="78" stroke="#192640" stroke-width="1.5" />
+              <text x="90" y="485" class="svg-small" fill="#192640">unrecognised</text>
+              <text x="790" y="485" class="svg-small" fill="#192640">recognised by present order</text>
+              <text x="22" y="426" class="svg-small" fill="#192640" transform="rotate(-90 22 426)">low necessary force</text>
+              <text x="22" y="180" class="svg-small" fill="#192640" transform="rotate(-90 22 180)">high necessary force</text>
+              <rect x="596" y="102" width="260" height="150" fill="url(#hatchB)" stroke="#192640" stroke-width="1.5" />
+              <text x="620" y="160" class="svg-label" fill="#192640">the probable</text>
+              <text x="620" y="184" class="svg-body" fill="#192640">recognised, fundable, legible</text>
+              <rect x="172" y="126" width="250" height="160" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="198" y="188" class="svg-label" fill="#FFFFFF">necessary</text>
+              <text x="198" y="212" class="svg-label" fill="#FFFFFF">absence</text>
+              <text x="198" y="246" class="svg-small" fill="#FFFFFF">unpriced / unnamed / binding</text>
+              <rect x="172" y="318" width="250" height="80" fill="url(#emberB)" stroke="#192640" stroke-width="1.5" />
+              <text x="198" y="365" class="svg-label" fill="#192640">latent field</text>
+              <path d="M422 208 C520 208 560 178 596 178" fill="none" stroke="#F27F3D" stroke-width="2.5" />
+              <path d="M582 166 L602 178 L582 190" fill="none" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="458" y="150" class="svg-small" fill="#192640">commitment changes the field</text>
+              <text x="114" y="72" class="svg-small" fill="#192640">// [speculation] some proof is generated only after commitment begins.</text>
+            </svg>
+            <p class="caption">The probable is useful material. It is not sovereign. A rewilding organisation treats probability as something to work with, not something to obey.</p>
+          </div>
+          <p>This is the deeper meaning of ferocity. Ferocity is not aggression, domination, speed, noise, or heroic certainty. It is the energy required to stay faithful to what must be made before the world knows how to call it possible. It is need becoming construction. It is passion disciplined into form. It is the refusal to let the absence remain absent.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="sources">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">03</div>
+          <p class="small-title">Sources, not resources</p>
+          <p class="meta">This is not a semantic correction. It is an institutional, ethical, and economic change.</p>
+        </aside>
+        <article>
+          <h2>The rewilded human is the real asset.</h2>
+          <p>Humans cannot be understood as resources. Humans are sources. A resource can be extracted, depleted, optimised, owned, and replaced. A source must be cultivated, renewed, related to, and protected. Humans are sources of judgment, longing, grief, refusal, care, courage, taste, relation, imagination, and world-making.</p>
+          <p>They are not merely operators of systems or executors of strategies imagined elsewhere. They are sensing organs of reality. They can feel what has not yet become measurable. They can detect the fracture before the dashboard reports it. They can hold contradiction, grieve what is dying, imagine what does not yet exist, and take responsibility for the becoming of the world.</p>
+          <p>Most organisations are not suffering from a lack of talent. They are suffering from a domestication problem. They hire humans with fire and slowly train that fire out of them. They teach people to mute their instincts, flatten their voices, professionalise their grief, translate intuition into bullet points, turn necessity into deliverables, and call exhaustion high performance.</p>
+          <p class="pull">No meaningful future is built by people who are internally absent.</p>
+          <p>No living economy is built by exhausted professionals performing enthusiasm. No civic repair is built by people whose fire has been domesticated into slide decks. No new world is built by bad robots. A future worth inhabiting is made by people awake enough to feel the necessary, disciplined enough to build toward it, and brave enough to tell the truth about what is standing in the way.</p>
+          <div class="diagram-wrap">
+            <div class="diagram-title"><span>DIAGRAM 03 / RESOURCE VERSUS SOURCE</span><span>stack / contrast</span></div>
+            <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram comparing resource and source">
+              <defs>
+                <pattern id="denseC" patternUnits="userSpaceOnUse" width="6" height="6">
+                  <path d="M0 6 L6 0" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+                <pattern id="openC" patternUnits="userSpaceOnUse" width="21" height="21">
+                  <path d="M0 21 L21 0" stroke="#F27F3D" stroke-width="1.5" />
+                </pattern>
+              </defs>
+              <rect width="980" height="420" fill="#FFFFFF" />
+              <text x="34" y="38" class="svg-small" fill="#192640">NODE TYPE / RESOURCE = CONSTRAINED // SOURCE = GENERATIVE FIELD</text>
+              <rect x="72" y="96" width="360" height="230" fill="url(#denseC)" stroke="#192640" stroke-width="1.5" />
+              <rect x="110" y="134" width="284" height="154" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="138" y="186" class="svg-label" fill="#192640">resource</text>
+              <text x="138" y="218" class="svg-body" fill="#192640">allocated / measured / replaced</text>
+              <path d="M432 211 H548" stroke="#192640" stroke-width="1.5" />
+              <path d="M536 199 L556 211 L536 223" fill="none" stroke="#192640" stroke-width="1.5" />
+              <rect x="556" y="96" width="360" height="230" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" stroke-dasharray="13 8" />
+              <rect x="594" y="134" width="284" height="154" fill="url(#openC)" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="622" y="186" class="svg-label" fill="#192640">source</text>
+              <text x="622" y="218" class="svg-body" fill="#192640">cultivated / renewed / world-making</text>
+              <line x1="622" y1="252" x2="704" y2="252" stroke="#F27F3D" stroke-width="2.5" />
+              <line x1="622" y1="267" x2="755" y2="267" stroke="#F27F3D" stroke-width="2.5" />
+              <line x1="622" y1="282" x2="803" y2="282" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="72" y="374" class="svg-small" fill="#192640">// [inference] shifting from resource to source changes labour, ownership, reward, and governance.</text>
+            </svg>
+            <p class="caption">The language of human resources is not neutral. It is the grammar of extraction. Sources require habitat, not extraction plans.</p>
+          </div>
+          <p>The rewilded human is valuable because they can conjure futures. They can ask not only what is efficient, but what is worth doing. They can sense when an organisation is confusing movement with meaning, compliance with alignment, busyness with contribution, and exhaustion with commitment. They can refuse dead work. They can name the thing everyone knows and no one is saying. They can reintroduce aliveness into systems that have mistaken numbness for professionalism.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="disciplines">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">04</div>
+          <p class="small-title">Disciplines of force</p>
+          <p class="meta">Necessity must be held. Ferocity without doubt and care becomes violence or theatre.</p>
+        </aside>
+        <article>
+          <h2>The necessary cannot simply be declared.</h2>
+          <p>Every tyrant, zealot, founder, saviour, and extractive system can claim necessity. This is why the necessary cannot simply be announced. It must be discerned, composed, tested, revised, and made through relation. It must pass through doubt, care, consequence, affected life, material constraint, computation, experiment, and repair.</p>
+          <p>Doubt is not the opposite of commitment. Doubt is how commitment stays intelligent. A rewilding organisation must be able to say, with force, “This must become true,” while also saying, with humility, “We do not yet fully know how.” This is the discipline of intendedness and tentativeness. Intendedness gives direction. Tentativeness keeps the path open to correction.</p>
+          <p>Care is not softness, politeness, or the avoidance of discomfort. Care is the discipline that prevents creation from becoming violence. Every act of origination risks extraction. Every strong vision risks domination. Every urgent project risks consuming the people, places, relationships, and futures through which it is made. Ferocious care asks what the work is doing to the people doing it, to those affected by it, to land, watersheds, trust, attention, and future capacity.</p>
+          <div class="dark-band">
+            <div>
+              <h2>The discipline is not less responsibility. It is more responsibility.</h2>
+            </div>
+            <div class="rule">
+              <p>Not only tasks, but energy. Not only outputs, but consequences. Not only strategy, but meaning. Not only individual success, but the worlds the work makes more likely.</p>
+              <p class="meta accent">// care is the ethics of making under uncertainty.</p>
+            </div>
+          </div>
+          <p>The rewilding organisation cannot be single-goal driven. Single-goal organisations become violent because they simplify reality until harm disappears from view. Profit alone will sacrifice life. Speed alone will sacrifice care. Efficiency alone will sacrifice imagination. Growth alone will sacrifice future capacity. Even impact alone can sacrifice dignity.</p>
+          <p>A rewilding organisation must be systemically multi-optimising: holding delivery, dignity, ecology, trust, beauty, justice, attention, cost, time, resilience, and future capacity in the same field of responsibility. This does not mean everything can be maximised at once. It means no single metric is allowed to become sovereign over life.</p>
+          <div class="diagram-wrap">
+            <div class="diagram-title"><span>DIAGRAM 04 / RESPONSIBLE UNCERTAINTY</span><span>multi-solve signature</span></div>
+            <svg viewBox="0 0 980 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of systemic multi-optimisation and governance">
+              <rect width="980" height="520" fill="#FFFFFF" />
+              <text x="34" y="36" class="svg-small" fill="#192640">FIELD PRECONDITION / NO SINGLE SOVEREIGN METRIC</text>
+              <rect x="104" y="104" width="250" height="250" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" stroke-dasharray="13 8" />
+              <text x="132" y="160" class="svg-label" fill="#192640">doubt</text>
+              <text x="132" y="188" class="svg-body" fill="#192640">keeps commitment intelligent</text>
+              <line x1="132" y1="260" x2="235" y2="260" stroke="#F27F3D" stroke-width="2.5" />
+              <line x1="132" y1="278" x2="280" y2="278" stroke="#F27F3D" stroke-width="2.5" />
+              <rect x="390" y="104" width="250" height="250" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="418" y="160" class="svg-label" fill="#FFFFFF">care</text>
+              <text x="418" y="188" class="svg-body" fill="#FFFFFF">prevents creation becoming violence</text>
+              <line x1="418" y1="260" x2="520" y2="260" stroke="#FFFFFF" stroke-width="2.5" />
+              <line x1="418" y1="278" x2="560" y2="278" stroke="#FFFFFF" stroke-width="2.5" />
+              <line x1="418" y1="296" x2="594" y2="296" stroke="#FFFFFF" stroke-width="2.5" />
+              <rect x="676" y="104" width="250" height="250" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="704" y="160" class="svg-label" fill="#192640">governance</text>
+              <text x="704" y="188" class="svg-body" fill="#192640">makes ferocity trustworthy</text>
+              <line x1="704" y1="260" x2="790" y2="260" stroke="#F27F3D" stroke-width="2.5" />
+              <line x1="704" y1="278" x2="840" y2="278" stroke="#F27F3D" stroke-width="2.5" />
+              <line x1="704" y1="296" x2="882" y2="296" stroke="#F27F3D" stroke-width="2.5" />
+              <line x1="354" y1="229" x2="390" y2="229" stroke="#192640" stroke-width="1.5" />
+              <line x1="640" y1="229" x2="676" y2="229" stroke="#192640" stroke-width="1.5" />
+              <text x="104" y="420" class="svg-small" fill="#192640">questions: who is affected? who decides? who benefits? who bears cost? what must be protected?</text>
+              <text x="104" y="454" class="svg-small" fill="#192640">// [inference] governance is the architecture of responsible uncertainty, not a compliance afterthought.</text>
+            </svg>
+            <p class="caption">Governance asks who is affected, who decides, who benefits, who bears the cost, what can be risked, what must be protected, how harm will be seen, and how repair will happen.</p>
+          </div>
+          <p>This also means the political economy of the organisation cannot remain untouched. It is not enough to invite aliveness into an ownership model designed for extraction. If humans are sources, then questions of value, surplus, risk, voice, stewardship, and reward must be inside the frame. Who owns the upside? Who carries the downside? Who has the right to shape the work? Who can refuse? Who can exit? Who governs what is made?</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="machine">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">05</div>
+          <p class="small-title">Human-machine aliveness</p>
+          <p class="meta">Not automation as reduction. Computation as expanded possibility and state-space search.</p>
+        </aside>
+        <article>
+          <h2>AI is not a servant to remove dull work. That frame is too small.</h2>
+          <p>In a rewilding organisation, computation becomes part of a human-machine field of expanded aliveness. It widens the searchable, the imaginable, the simulatable, the combinable, the constructible. It allows the ferocious need for the necessary to meet machine-scale recombination. It allows care to meet systemic modelling, doubt to meet scenario space, imagination to meet mathematical search, and making to test more possibilities than unaided cognition could hold.</p>
+          <p>The task is not to optimise the known. It is to expand the field in which the necessary can become real. The old organisation uses computation to govern the probable: to forecast, rank, allocate, surveil, and manage what already exists. The rewilding organisation uses computation to break the monopoly of the probable. It uses human-machine intelligence to search beyond the inherited imagination of the present.</p>
+          <p>It is not a question of whether humans decide and machines assist. That frame is too thin. The more powerful reality is relational: human need, collective intelligence, machine computation, material feedback, and systemic care forming a new field of origination.</p>
+          <div class="diagram-wrap">
+            <div class="diagram-title"><span>DIAGRAM 05 / EXPANDED ALIVENESS FIELD</span><span>state-space expansion</span></div>
+            <svg viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of human-machine expanded aliveness">
+              <defs>
+                <pattern id="fieldGrid" patternUnits="userSpaceOnUse" width="34" height="34">
+                  <path d="M34 0 H0 V34" fill="none" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+              </defs>
+              <rect width="980" height="560" fill="#FFFFFF" />
+              <rect x="70" y="72" width="840" height="396" fill="url(#fieldGrid)" stroke="#192640" stroke-width="1.5" stroke-dasharray="13 8" />
+              <text x="70" y="42" class="svg-small" fill="#192640">COMPUTATION / NOT AUTOMATION // STATE-SPACE EXPANSION</text>
+              <rect x="116" y="152" width="190" height="108" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="138" y="196" class="svg-label" fill="#FFFFFF">ferocious</text>
+              <text x="138" y="219" class="svg-label" fill="#FFFFFF">need</text>
+              <rect x="400" y="124" width="190" height="108" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <text x="422" y="168" class="svg-label" fill="#192640">machine-scale</text>
+              <text x="422" y="191" class="svg-label" fill="#192640">recombination</text>
+              <rect x="682" y="152" width="190" height="108" fill="#FFFFFF" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="704" y="196" class="svg-label" fill="#192640">scenario</text>
+              <text x="704" y="219" class="svg-label" fill="#192640">space</text>
+              <rect x="260" y="326" width="220" height="108" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" stroke-dasharray="8 5" />
+              <text x="282" y="370" class="svg-label" fill="#192640">systemic</text>
+              <text x="282" y="393" class="svg-label" fill="#192640">care</text>
+              <rect x="546" y="326" width="220" height="108" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="568" y="370" class="svg-label" fill="#FFFFFF">constructible</text>
+              <text x="568" y="393" class="svg-label" fill="#FFFFFF">necessary</text>
+              <path d="M306 206 C356 178 376 178 400 178" fill="none" stroke="#192640" stroke-width="1.5" />
+              <path d="M590 178 C640 178 650 206 682 206" fill="none" stroke="#192640" stroke-width="1.5" />
+              <path d="M211 260 C228 328 246 363 260 380" fill="none" stroke="#192640" stroke-width="1.5" stroke-dasharray="8 5" />
+              <path d="M480 380 C502 380 524 380 546 380" fill="none" stroke="#F27F3D" stroke-width="2.5" />
+              <path d="M766 260 C748 318 734 350 766 380" fill="none" stroke="#F27F3D" stroke-width="2.5" stroke-dasharray="8 5" />
+              <text x="70" y="512" class="svg-small" fill="#192640">// [inference] computation expands what can be searched; care governs what should be made.</text>
+            </svg>
+            <p class="caption">Computation is powerful when it expands the range, precision, and consequence of what human fire can make. It must also be governed: what does it amplify, obscure, extract, foreclose, and who bears the cost?</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="habitat">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">06</div>
+          <p class="small-title">Habitat for fire</p>
+          <p class="meta">Rewilding is habitat restoration, not the liberation of isolated individuals.</p>
+        </aside>
+        <article>
+          <h2>It is not enough to tell people to bring their fire.</h2>
+          <p>In living systems, wildness depends on habitat. The rewilding organisation must therefore restore the habitat of human aliveness: time, trust, attention, agency, relation, meaningful stakes, contact with consequence, the freedom to refuse dead work, and the capacity to make. The institution must become a place where fire can live, be held, be tested, and take form.</p>
+          <p>This is why the rewilding organisation needs the hearth, the forge, and the threshold. The hearth protects the human conditions of the work: trust, recovery, truth-telling, grief, attention, relation, and the capacity to remain present in difficulty. The forge turns need into form: prototypes, practices, tools, institutions, infrastructures, agreements, repairs, and consequences. The threshold is where the organisation meets the unknown without pretending to have mastered it.</p>
+          <div class="diagram-wrap">
+            <div class="diagram-title"><span>DIAGRAM 06 / HEARTH — FORGE — THRESHOLD</span><span>structural capacities</span></div>
+            <svg viewBox="0 0 980 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of hearth, forge, threshold organisational capacities">
+              <defs>
+                <pattern id="hatchF" patternUnits="userSpaceOnUse" width="8" height="8">
+                  <path d="M0 8 L8 0" stroke="#192640" stroke-width="0.75" />
+                </pattern>
+                <pattern id="hatchM" patternUnits="userSpaceOnUse" width="13" height="13">
+                  <path d="M0 13 L13 0" stroke="#F27F3D" stroke-width="1.5" />
+                </pattern>
+              </defs>
+              <rect width="980" height="500" fill="#FFFFFF" />
+              <text x="34" y="38" class="svg-small" fill="#192640">ARCHITECTURE / HABITAT FOR NECESSARY MAKING</text>
+              <rect x="70" y="104" width="250" height="250" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" stroke-dasharray="13 8" />
+              <text x="100" y="158" class="svg-label" fill="#192640">hearth</text>
+              <text x="100" y="190" class="svg-body" fill="#192640">trust / recovery / truth</text>
+              <rect x="100" y="250" width="160" height="46" fill="url(#hatchF)" stroke="#192640" stroke-width="1.5" />
+              <line x1="320" y1="229" x2="374" y2="229" stroke="#192640" stroke-width="1.5" />
+              <path d="M362 217 L382 229 L362 241" fill="none" stroke="#192640" stroke-width="1.5" />
+              <rect x="382" y="104" width="250" height="250" fill="#F27F3D" stroke="#192640" stroke-width="1.5" />
+              <text x="412" y="158" class="svg-label" fill="#FFFFFF">forge</text>
+              <text x="412" y="190" class="svg-body" fill="#FFFFFF">practice / prototype / institution</text>
+              <rect x="412" y="250" width="160" height="46" fill="#FFFFFF" stroke="#192640" stroke-width="1.5" />
+              <line x1="632" y1="229" x2="686" y2="229" stroke="#192640" stroke-width="1.5" />
+              <path d="M674 217 L694 229 L674 241" fill="none" stroke="#192640" stroke-width="1.5" />
+              <rect x="694" y="104" width="250" height="250" fill="url(#hatchM)" stroke="#192640" stroke-width="1.5" />
+              <rect x="724" y="134" width="190" height="190" fill="#FFFFFF" stroke="#F27F3D" stroke-width="2.5" />
+              <text x="754" y="198" class="svg-label" fill="#192640">threshold</text>
+              <text x="754" y="230" class="svg-body" fill="#192640">unknown / feedback / edge</text>
+              <text x="70" y="432" class="svg-small" fill="#192640">without hearth: fire burns people // without forge: fire remains expression // without threshold: fire collapses back into the known</text>
+            </svg>
+            <p class="caption">These are not aesthetic metaphors. They are structural requirements for an institution that wants to originate rather than merely optimise.</p>
+          </div>
+          <p>Leadership in such an organisation is firekeeping. Firekeeping is the stewardship of origination under conditions of partial knowing. It asks where the fire is bright, where it is being smothered, where it is becoming destructive, where it has gone underground, where it needs rhythm, where it needs structure, where it needs care, and where it needs to be challenged.</p>
+          <p>Firekeeping is not romantic. Human fire can illuminate, but it can also distort. Need can become obsession. Passion can become domination. Urgency can become extraction. Belonging can become capture. Care can become control. Doubt can become evasion. Leadership must therefore hold fire with rhythm, governance, repair, and consequence.</p>
+          <p>The social form of this institution is ferocious belonging. Not belonging as comfort, politeness, sameness, or managed inclusion. Not alignment as the burial of doubt. Ferocious belonging is the collective capacity to carry the necessary together. It is communion without capture: strong enough to hold shared commitment, porous enough to remain accountable, mature enough to allow dissent without exile.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section page" id="manifesto">
+      <div class="section-grid">
+        <aside class="section-index">
+          <div class="number">07</div>
+          <p class="small-title">The manifesto</p>
+          <p class="meta">The old organisation asks humans to become predictable. The rewilding organisation restores humans as sources of origination.</p>
+        </aside>
+        <article>
+          <h2>Real performance is reality made different.</h2>
+          <p>Performance cannot mean the appearance of productivity. It cannot mean busyness, polish, compliance, endurance, or alignment theatre. Real performance is reality made different. Something becomes clearer. Something false is refused. Something wounded is repaired. Something beautiful becomes possible. Something that did not exist before enters the world.</p>
+          <p>The rewilding organisation is therefore not a more humane machine. It is not a better-managed version of the old order. It is a generative institution for turning necessary absence into shared reality. It exists because the world we need is not already waiting inside the probable. It exists because some futures must be made before they can be proven. It exists because the human is not merely an operator of systems, but a source of worlds.</p>
+          <div class="dark-band">
+            <div>
+              <h2>The old organisation is built from the psychology of containment.</h2>
+            </div>
+            <div class="rule">
+              <p>The rewilding organisation is built from the ferocious need for the necessary.</p>
+              <p class="meta accent">// not labour, but source // not containment, but contact</p>
+            </div>
+          </div>
+          <p>The old organisation manages the possible. The rewilding organisation makes the necessary possible. The old organisation asks humans to become predictable. The rewilding organisation restores humans as sources of origination. It treats aliveness as infrastructure, computation as expanded possibility, care as the ethics of making, doubt as the discipline of truth, and belonging as the collective capacity to carry the impossible together.</p>
+          <p class="pull">Not optimisation, but origination. Not the probable as master, but the necessary as obligation.</p>
+          <p>Not single-goal extraction, but systemic responsibility. Not performance theatre, but contribution. Not belonging as comfort, but communion without capture. Not the machine, but the civic, relational, imaginative infrastructure through which the world that must exist can be conjured into form.</p>
+          <div class="tag-row" aria-label="Key concept tags">
+            <span class="tag mid">ferocious need</span>
+            <span class="tag">necessary absence</span>
+            <span class="tag">sources not resources</span>
+            <span class="tag mid">origination</span>
+            <span class="tag">doubt as discipline</span>
+            <span class="tag">care as ethics</span>
+            <span class="tag">expanded aliveness</span>
+            <span class="tag mid">communion without capture</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page footer">
+    <div>
+      <div class="mark">Dm / xCO</div>
+      <div class="tritone-rule" aria-hidden="true"></div>
+    </div>
+    <div>
+      <p class="meta">The Rewilding Organisation — concept paper. Authored by Indy Johar as part of Dm / xCO. Dusk preset: #192640 / #F27F3D / #FFFFFF.</p>
+      <p class="meta">Visual grammar: hard rectangles, hatching, sparse annotations, visible working, φ-proportions, no decorative colour, no photographic assets. Rewilding twist: wildness rendered as pressure, breach, habitat, and necessary making — not pastoral ornament.</p>
+      <p class="print-note meta">For print: use actual size or fit to A4. This document is self-contained HTML with inline SVG diagrams and embedded CSS. Fonts are referenced by family name and fall back to local system fonts.</p>
+    </div>
+  </footer>
+</body>
+</html>

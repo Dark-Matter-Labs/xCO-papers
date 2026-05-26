@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#192640">
+<title>XCO — Expanding Civilization Optionality</title>
+<style>
+:root{
+  --s:#192640;
+  --m:#F27F3D;
+  --h:#FFFFFF;
+  --rule:1.5px;
+  --hair:.75px;
+  --max:1500px;
+  --display:Inter,"Helvetica Neue",Arial,sans-serif;
+  --mono:"DM Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --body:"Crimson Pro",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+html{background:var(--s);color:var(--h);scroll-behavior:smooth}
+body{margin:0;background:var(--s);color:var(--h);font-family:var(--body);text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-color:var(--m);text-decoration-thickness:var(--hair);text-underline-offset:.28em}
+::selection{background:var(--m);color:var(--h)}
+.deck{width:min(calc(100vw - 36px),var(--max));margin:0 auto;padding:20px 0 80px}
+.cover-meta,.topline,.toc,.footline{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;line-height:1.35}
+.cover-meta{display:grid;grid-template-columns:1fr auto;gap:18px;border-top:var(--rule) solid var(--h);padding-top:12px;margin-bottom:20px;color:var(--h)}
+.signal{display:inline-grid;grid-auto-flow:column;gap:5px}.signal i{display:block;width:11px;height:11px;border:var(--rule) solid var(--h)}.signal i:nth-child(2){background:var(--m);border-color:var(--m)}.signal i:nth-child(3){background:var(--h)}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 34px;border-top:var(--hair) solid var(--h);border-bottom:var(--hair) solid var(--h);padding:12px 0;color:var(--h)}
+.toc a{padding:7px 9px;border:var(--hair) solid var(--h);text-decoration:none}.toc a:hover{background:var(--h);color:var(--s)}
+.slide{position:relative;aspect-ratio:16/9;width:100%;background:var(--s);color:var(--h);border:var(--rule) solid var(--h);margin:0 0 26px;overflow:hidden;padding:54px 64px 46px;display:grid;grid-template-rows:auto 1fr auto;gap:24px;page-break-after:always}
+.slide.inverse{background:var(--h);color:var(--s);border-color:var(--s)}
+.slide.inverse .topline,.slide.inverse .footline{border-color:var(--s);color:var(--s)}
+.topline{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border-top:var(--rule) solid currentColor;padding-top:10px;color:inherit}
+.topline .brand{color:var(--m);font-weight:400}.topline .rule{height:0;border-top:var(--hair) solid currentColor}.topline .num{color:inherit}
+.title-row{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:end}
+.slide-title{font-family:var(--display);font-size:clamp(36px,4.4vw,78px);font-weight:500;line-height:.97;letter-spacing:-.045em;margin:0;max-width:12ch;text-transform:uppercase}
+.slide-title.long{font-size:clamp(32px,3.8vw,66px);max-width:16ch}.slide-title.wide{max-width:18ch}.slide-title.mini{font-size:clamp(28px,3.2vw,52px);max-width:18ch}
+.kicker{font-family:var(--mono);font-size:12px;color:var(--m);letter-spacing:.05em;text-transform:uppercase;margin:0 0 12px;line-height:1.4}
+.subtitle{font-family:var(--body);font-size:clamp(19px,1.55vw,28px);line-height:1.24;margin:12px 0 0;max-width:36ch;color:inherit}.subtitle.mono{font-family:var(--mono);font-size:15px;line-height:1.45;letter-spacing:.02em;text-transform:none}
+.body{font-family:var(--body);font-size:clamp(17px,1.12vw,21px);line-height:1.38;color:inherit}.body p{margin:0 0 12px}.body strong{font-family:var(--display);font-weight:500}.body.small{font-size:15.5px;line-height:1.34}.body.large{font-size:clamp(23px,2vw,34px);line-height:1.24}
+.mono{font-family:var(--mono);font-size:13px;line-height:1.48;letter-spacing:.03em;text-transform:none}.label{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--m);line-height:1.4}.annotation{font-family:var(--mono);font-size:12px;line-height:1.45;font-style:italic;color:var(--m);text-transform:none;letter-spacing:.01em}
+.content{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center;min-height:0}.content.wide-left{grid-template-columns:1.18fr .82fr}.content.wide-right{grid-template-columns:.82fr 1.18fr}.content.single{grid-template-columns:1fr}.content.three{grid-template-columns:repeat(3,1fr);gap:22px}.content.top{align-items:start}.content.bottom{align-items:end}
+.card{border:var(--rule) solid currentColor;padding:18px 18px 16px;background:transparent;color:inherit}.card.hatched{background:repeating-linear-gradient(135deg,var(--m) 0 var(--hair),var(--s) var(--hair) 9px)}.inverse .card.hatched{background:repeating-linear-gradient(135deg,var(--m) 0 var(--hair),var(--h) var(--hair) 9px)}.card.risk{background:var(--m);color:var(--h);border-color:var(--m)}.card.field{border-style:dashed}.card h3{font-family:var(--display);font-size:26px;line-height:1.05;letter-spacing:-.03em;margin:0 0 10px;font-weight:500}.card p{font-size:16.5px;line-height:1.35;margin:0}.card .label{margin-bottom:10px}.card.big h3{font-size:34px}.card.big p{font-size:18px}
+.stack{display:grid;gap:12px}.stack.tight{gap:8px}.row{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}.num-badge{width:42px;height:42px;border:var(--rule) solid currentColor;display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--m)}.inverse .num-badge{color:var(--m)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.pill{display:inline-block;border:var(--rule) solid var(--m);color:var(--m);font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;padding:6px 9px;margin:4px 4px 0 0;line-height:1.3}.pill.fill{background:var(--m);color:var(--h)}
+.ticks{display:grid;gap:4px;width:38px;margin-top:8px}.ticks i{display:block;height:3px;background:var(--m)}
+.footline{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;border-top:var(--hair) solid currentColor;padding-top:10px;color:inherit}.footline .statement{color:var(--m);font-size:13px}.footline .rule{height:0;border-top:var(--hair) solid currentColor}.footline .tag{color:inherit}
+.diagram{width:100%;min-height:260px}.diagram svg{display:block;width:100%;height:auto}.svg-line{stroke:currentColor;stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke}.svg-hair{stroke:currentColor;stroke-width:.75;fill:none;vector-effect:non-scaling-stroke}.svg-dash{stroke-dasharray:8 8}.svg-mid{stroke:var(--m);stroke-width:1.5;fill:none;vector-effect:non-scaling-stroke}.svg-fill-m{fill:var(--m);stroke:var(--m);stroke-width:1.5;vector-effect:non-scaling-stroke}.svg-fill-h{fill:var(--h);stroke:currentColor;stroke-width:1.5;vector-effect:non-scaling-stroke}.inverse .svg-fill-h{fill:var(--h)}.svg-fill-s{fill:var(--s);stroke:currentColor;stroke-width:1.5;vector-effect:non-scaling-stroke}.inverse .svg-fill-s{fill:var(--s)}.svg-none{fill:none;stroke:currentColor;stroke-width:1.5;vector-effect:non-scaling-stroke}.svg-text{font-family:var(--mono);font-size:13px;fill:currentColor;letter-spacing:.03em}.svg-head{font-family:var(--display);font-size:22px;fill:currentColor;letter-spacing:-.03em}.svg-body{font-family:var(--body);font-size:20px;fill:currentColor}.svg-orange{fill:var(--m)}.svg-white{fill:var(--h)}.svg-shadow{fill:var(--s)}
+.table{border:var(--rule) solid currentColor;font-family:var(--mono);font-size:12px;line-height:1.3}.trow{display:grid;grid-template-columns:1fr 1.1fr 1fr;border-bottom:var(--hair) solid currentColor}.trow:last-child{border-bottom:0}.trow div{padding:10px;border-right:var(--hair) solid currentColor}.trow div:last-child{border-right:0}.trow.head{background:var(--m);color:var(--h);border-color:var(--m);text-transform:uppercase;letter-spacing:.04em}
+.scale{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin:8px 0}.scale span{font-family:var(--mono);font-size:12px;color:var(--m);font-style:italic}.scale i{display:block;height:0;border-top:var(--hair) solid currentColor}
+.source-list{font-family:var(--mono);font-size:12px;line-height:1.45}.source-list div{border-top:var(--hair) solid currentColor;padding:9px 0}.source-list b{color:var(--m);font-weight:400}
+@media(max-width:980px){.deck{width:min(calc(100vw - 18px),var(--max));padding-top:9px}.slide{aspect-ratio:auto;min-height:780px;padding:34px 28px}.content,.content.wide-left,.content.wide-right,.title-row{grid-template-columns:1fr}.content.three,.grid3,.grid4,.grid5{grid-template-columns:1fr 1fr}.slide-title{font-size:52px}.slide-title.long{font-size:46px}.toc{display:none}}
+@media(max-width:620px){.content.three,.grid2,.grid3,.grid4,.grid5{grid-template-columns:1fr}.slide{min-height:840px;padding:28px 22px}.slide-title,.slide-title.long{font-size:40px}.subtitle{font-size:20px}.topline{grid-template-columns:auto 1fr auto}.table .trow{grid-template-columns:1fr}.trow div{border-right:0;border-bottom:var(--hair) solid currentColor}.trow div:last-child{border-bottom:0}}
+@media print{@page{size:16in 9in;margin:0}html,body{background:var(--s)}.deck{width:100%;padding:0}.cover-meta,.toc{display:none}.slide{margin:0;border:0;width:100vw;height:100vh;page-break-after:always;break-after:page;aspect-ratio:auto}.slide:last-child{page-break-after:auto}}
+</style>
+</head>
+<body>
+<div class="deck">
+  <div class="cover-meta"><div>XCO / Expanding Civilization Optionality / embedded HTML slide-style paper</div><div class="signal"><i></i><i></i><i></i></div></div>
+  <nav class="toc" aria-label="slide navigation">
+    <a href="#s01">01 opening</a><a href="#s02">02 option-space</a><a href="#s06">06 regimes</a><a href="#s11">11 verb</a><a href="#s14">14 cascade</a><a href="#s18">18 move</a><a href="#s23">23 valuation</a><a href="#s26">26 Santiago</a><a href="#s31">31 invitation</a><a href="#s32">sources</a>
+  </nav>
+
+  <section class="slide" id="s01">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">01</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">expanding civilization optionality</p>
+        <h1 class="slide-title wide">XCO</h1>
+        <p class="subtitle">Acting where the future is becoming less possible.</p>
+        <div class="body large" style="margin-top:24px;max-width:32ch">We are facing a planetary-scale collapse of option-space: a narrowing of the viable futures available to societies under coupled biophysical, technological, resource, institutional, and social risk.</div>
+      </div>
+      <div class="diagram" aria-label="compressed option-space diagram">
+        <svg viewBox="0 0 620 420">
+          <defs><marker id="a1" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#F27F3D"/></marker></defs>
+          <rect x="42" y="72" width="210" height="96" class="svg-none"/>
+          <text x="70" y="120" class="svg-text svg-orange">option-space</text>
+          <path d="M54 210 C145 156, 242 170, 322 220" class="svg-hair"/>
+          <path d="M54 244 C164 235, 248 238, 322 224" class="svg-hair"/>
+          <path d="M54 278 C142 302, 234 276, 322 228" class="svg-hair"/>
+          <rect x="315" y="184" width="80" height="98" fill="none" stroke="#F27F3D" stroke-width="1.5"/>
+          <line x1="395" y1="233" x2="548" y2="233" class="svg-mid" marker-end="url(#a1)"/>
+          <rect x="460" y="178" width="118" height="112" class="svg-none svg-dash"/>
+          <text x="478" y="226" class="svg-text">open</text>
+          <text x="478" y="246" class="svg-text">futures</text>
+          <text x="44" y="354" class="svg-text svg-orange">XCO exists to reopen field possibility before pathways close.</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">investing in the conditions that allow futures to exist</div><div class="rule"></div><div class="tag">frontier · fortress · field</div></div>
+  </section>
+
+  <section class="slide" id="s02">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">02</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">option-space collapse</p>
+        <h2 class="slide-title long">The primary scarcity is viable futures.</h2>
+        <p class="subtitle">Civilization’s option-space is contracting through climate destabilization, ecological threshold risk, energy and water stress, AI / AGI-driven resource competition, institutional fragility, insurance and credit retreat, supply-chain insecurity, cognitive disorder, labour insecurity, and social contract fracture.</p>
+      </div>
+      <div class="stack">
+        <div class="card risk"><h3>escape</h3><p>future preserved for those able to leave the constraint.</p></div>
+        <div class="card risk"><h3>enclosure</h3><p>future defended for fragments inside hardened boundaries.</p></div>
+        <div class="card risk"><h3>breakdown</h3><p>future collapses into cascading loss and reduced adaptive capacity.</p></div>
+        <div class="card field"><h3>field renewal</h3><p>future reopened by regenerating the conditions of possibility.</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">the danger is not only loss — it is the loss of possible futures</div><div class="rule"></div><div class="tag">02 / collapse</div></div>
+  </section>
+
+  <section class="slide inverse" id="s03">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">03</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">what xCO expands</p>
+        <h2 class="slide-title long">Civilization optionality is the field of future choice.</h2>
+        <p class="subtitle">Civilization optionality is the number, quality, resilience, accessibility, and reversibility of viable future pathways available to societies, communities, institutions, and economies.</p>
+      </div>
+      <div class="grid5">
+        <div class="card"><div class="label">number</div><p>more pathways remain possible</p></div>
+        <div class="card"><div class="label">quality</div><p>pathways support flourishing, not only survival</p></div>
+        <div class="card"><div class="label">resilience</div><p>pathways survive shocks</p></div>
+        <div class="card"><div class="label">accessibility</div><p>options are not reserved for narrow actors</p></div>
+        <div class="card"><div class="label">reversibility</div><p>systems retain the ability to change course</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">we are not only preserving assets — we are preserving future choice</div><div class="rule"></div><div class="tag">03 / object</div></div>
+  </section>
+
+  <section class="slide" id="s04">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">04</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">planetary entanglement</p>
+        <h2 class="slide-title long">No field is isolated anymore.</h2>
+        <p class="subtitle">Heat links to energy. Energy links to AI. AI links to water, cooling, land, chips, labour, security, and legitimacy. Water links to food, migration, health, finance, and governance.</p>
+        <p class="annotation">// ordinary sector logic cannot see the whole problem</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <defs><marker id="a4" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF"/></marker></defs>
+          <g class="svg-hair">
+            <line x1="310" y1="210" x2="160" y2="80"/><line x1="310" y1="210" x2="480" y2="84"/><line x1="310" y1="210" x2="108" y2="210"/><line x1="310" y1="210" x2="520" y2="210"/><line x1="310" y1="210" x2="180" y2="340"/><line x1="310" y1="210" x2="470" y2="340"/><line x1="160" y1="80" x2="108" y2="210"/><line x1="480" y1="84" x2="520" y2="210"/><line x1="108" y1="210" x2="180" y2="340"/><line x1="520" y1="210" x2="470" y2="340"/>
+          </g>
+          <rect x="238" y="170" width="164" height="84" class="svg-none svg-dash"/><text x="268" y="206" class="svg-text">field</text><text x="268" y="226" class="svg-text">optionality</text>
+          <rect x="108" y="52" width="116" height="52" class="svg-fill-m"/><text x="130" y="85" class="svg-text svg-white">heat</text>
+          <rect x="428" y="56" width="116" height="52" class="svg-none"/><text x="452" y="89" class="svg-text">energy</text>
+          <rect x="48" y="184" width="116" height="52" class="svg-none"/><text x="70" y="217" class="svg-text">water</text>
+          <rect x="468" y="184" width="116" height="52" class="svg-fill-m"/><text x="497" y="217" class="svg-text svg-white">compute</text>
+          <rect x="126" y="314" width="140" height="52" class="svg-none svg-dash"/><text x="148" y="347" class="svg-text">legitimacy</text>
+          <rect x="414" y="314" width="116" height="52" class="svg-none"/><text x="438" y="347" class="svg-text">care</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">entanglement makes optionality a field-level problem</div><div class="rule"></div><div class="tag">04 / entangled</div></div>
+  </section>
+
+  <section class="slide" id="s05">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">05</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">irreversibility</p>
+        <h2 class="slide-title long">Some pathways, once lost, may not be recoverable.</h2>
+        <p class="subtitle">Cascade risk matters because it can spend down adaptive capacity faster than societies, ecosystems, and institutions can rebuild it.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <defs><marker id="a5" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#F27F3D"/></marker></defs>
+          <circle cx="310" cy="210" r="142" class="svg-mid"/>
+          <path d="M310 68 C420 72, 512 170, 476 290" class="svg-mid" marker-end="url(#a5)"/>
+          <path d="M476 290 C410 396, 246 398, 154 296" class="svg-mid" marker-end="url(#a5)"/>
+          <path d="M154 296 C88 190, 164 76, 310 68" class="svg-mid" marker-end="url(#a5)"/>
+          <rect x="238" y="34" width="160" height="48" class="svg-none"/><text x="262" y="64" class="svg-text">shock</text>
+          <rect x="444" y="178" width="132" height="64" class="svg-none"/><text x="468" y="204" class="svg-text">damage</text><text x="468" y="224" class="svg-text">debt</text>
+          <rect x="210" y="340" width="208" height="58" class="svg-none"/><text x="232" y="366" class="svg-text">reduced capacity</text><text x="232" y="386" class="svg-text">worse next shock</text>
+          <rect x="92" y="178" width="138" height="64" class="svg-fill-m"/><text x="116" y="205" class="svg-text svg-white">narrower</text><text x="116" y="225" class="svg-text svg-white">option-space</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">late response does not only cost more — it closes futures</div><div class="rule"></div><div class="tag">05 / recursive</div></div>
+  </section>
+
+  <section class="slide" id="s06">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">06</div></div>
+    <div>
+      <p class="kicker">three regimes of optionality</p>
+      <h2 class="slide-title wide">Civilization is reallocating into three optionality regimes.</h2>
+    </div>
+    <div class="content three">
+      <div class="card"><div class="label">frontier / boundary</div><h3>Extend beyond constraint.</h3><p>How do we expand the domain in which civilization can operate?</p><div class="ticks"><i></i></div></div>
+      <div class="card"><div class="label">fortress / actor</div><h3>Retain agency under constraint.</h3><p>How do specific actors survive, defend and manoeuvre when conditions deteriorate?</p><div class="ticks"><i></i><i></i></div></div>
+      <div class="card field"><div class="label">field / precondition</div><h3>Prevent constraint from collapsing the system.</h3><p>How do we keep the system generative enough that multiple futures remain possible?</p><div class="ticks"><i></i><i></i><i></i></div></div>
+    </div>
+    <div class="footline"><div class="statement">not stages — co-present responses operating at boundary, actor, and field</div><div class="rule"></div><div class="tag">06 / regimes</div></div>
+  </section>
+
+  <section class="slide inverse" id="s07">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">07</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">frontier optionality</p>
+        <h2 class="slide-title long">Frontier expands the boundary of the possible.</h2>
+        <p class="subtitle">It seeks to preserve optionality by expanding the domain within which civilization can operate: new habitats, new infrastructures, new operating environments, non-terrestrial redundancy, and world-level extension.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <defs><marker id="a7" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#F27F3D"/></marker></defs>
+          <path d="M80 20 C230 110, 230 300, 80 400" class="svg-mid"/>
+          <path d="M420 20 C570 110, 570 300, 420 400" class="svg-mid"/>
+          <line x1="120" y1="210" x2="520" y2="210" class="svg-mid" marker-end="url(#a7)"/>
+          <text x="78" y="80" class="svg-text svg-orange">constraint</text>
+          <text x="410" y="80" class="svg-text svg-orange">extended boundary</text>
+          <rect x="240" y="250" width="150" height="64" class="svg-none"/><text x="262" y="278" class="svg-text">question:</text><text x="262" y="298" class="svg-text">extend beyond?</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">frontier expands the edge, often before it expands distribution</div><div class="rule"></div><div class="tag">07 / frontier</div></div>
+  </section>
+
+  <section class="slide inverse" id="s08">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">08</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">fortress optionality</p>
+        <h2 class="slide-title long">Fortress preserves bounded agency under constraint.</h2>
+        <p class="subtitle">It secures the capacity of specific actors to act when conditions deteriorate: defense, cyber, hardened infrastructure, secured supply chains, redundancy, energy sovereignty, and institutional readiness.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <ellipse cx="310" cy="210" rx="220" ry="150" class="svg-mid"/>
+          <g class="svg-mid"><path d="M245 180 l-28 -28 M245 180 l-28 28 M245 180 h-55 M245 180 v-55 M245 180 v55"/><path d="M356 150 l30 -30 M356 150 l30 30 M356 150 h55 M356 150 v-55 M356 150 v55"/><path d="M332 270 l36 0 M332 270 l28 -28 M332 270 l28 28 M332 270 v-55 M332 270 v55"/></g>
+          <circle cx="245" cy="180" r="9" class="svg-fill-m"/><circle cx="356" cy="150" r="9" class="svg-fill-m"/><circle cx="332" cy="270" r="9" class="svg-fill-m"/>
+          <text x="72" y="370" class="svg-text svg-orange">protects positions inside a narrowing field</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">fortress protects position — it does not necessarily expand the field</div><div class="rule"></div><div class="tag">08 / fortress</div></div>
+  </section>
+
+  <section class="slide" id="s09">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">09</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">field optionality</p>
+        <h2 class="slide-title long">Field regenerates the conditions of possibility.</h2>
+        <p class="subtitle">It does not seek to leave the system or merely defend within it. It works on the ecological, infrastructural, cognitive, and institutional conditions that make collective continuity possible.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <ellipse cx="310" cy="210" rx="238" ry="154" class="svg-none svg-dash"/>
+          <g class="svg-hair"><line x1="310" y1="210" x2="180" y2="116"/><line x1="310" y1="210" x2="455" y2="120"/><line x1="310" y1="210" x2="170" y2="300"/><line x1="310" y1="210" x2="450" y2="310"/><line x1="180" y1="116" x2="455" y2="120"/><line x1="170" y1="300" x2="450" y2="310"/></g>
+          <circle cx="310" cy="210" r="12" class="svg-fill-h"/><circle cx="180" cy="116" r="10" class="svg-fill-m"/><circle cx="455" cy="120" r="10" class="svg-fill-h"/><circle cx="170" cy="300" r="10" class="svg-fill-h"/><circle cx="450" cy="310" r="10" class="svg-fill-m"/>
+          <text x="236" y="382" class="svg-text svg-orange">watersheds · food · energy · cities · cognition · legitimacy</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">field is where futures remain possible</div><div class="rule"></div><div class="tag">09 / field</div></div>
+  </section>
+
+  <section class="slide" id="s10">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">10</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">priority to the field</p>
+        <h2 class="slide-title long">Field is not a peer. It is the precondition.</h2>
+        <p class="subtitle">Frontier and Fortress both have roles. But without functioning watersheds, food systems, energy systems, cities, distributed productive capacity, cognitive resilience, and legitimate decision-making, Frontier loses its base and Fortress becomes a contest over decline.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <rect x="88" y="76" width="160" height="76" class="svg-none"/><text x="126" y="119" class="svg-text">Frontier</text>
+          <rect x="370" y="76" width="160" height="76" class="svg-none"/><text x="412" y="119" class="svg-text">Fortress</text>
+          <line x1="168" y1="152" x2="236" y2="240" class="svg-hair"/><line x1="450" y1="152" x2="390" y2="240" class="svg-hair"/>
+          <rect x="72" y="240" width="500" height="110" class="svg-none svg-dash"/>
+          <text x="220" y="288" class="svg-head">Field Optionality</text>
+          <text x="134" y="320" class="svg-text">water · food · energy · cities · cognition · legitimacy</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">a civilization that fails to invest in its continuity preserves less than survival</div><div class="rule"></div><div class="tag">10 / precondition</div></div>
+  </section>
+
+  <section class="slide inverse" id="s11">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">11</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">xCO as verb</p>
+        <h2 class="slide-title long">To XCO a field is to expand the futures it can still hold.</h2>
+        <p class="subtitle">XCO is not only a name. It is an operator: a way of acting on fields where future possibility is collapsing.</p>
+      </div>
+      <div class="process-ladder stack">
+        <div class="row"><div class="num-badge">01</div><div class="card"><h3>See</h3><p>where future pathways are being lost.</p></div></div>
+        <div class="row"><div class="num-badge">02</div><div class="card"><h3>Interrupt</h3><p>cascade conversions that close those pathways.</p></div></div>
+        <div class="row"><div class="num-badge">03</div><div class="card"><h3>Stabilize</h3><p>field conditions that keep the system generative.</p></div></div>
+        <div class="row"><div class="num-badge">04</div><div class="card"><h3>Build</h3><p>reusable capability that compounds over time.</p></div></div>
+        <div class="row"><div class="num-badge">05</div><div class="card"><h3>Value</h3><p>the optionality returned to the field.</p></div></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">XCO does not buy optionality — XCO expands it</div><div class="rule"></div><div class="tag">11 / verb</div></div>
+  </section>
+
+  <section class="slide" id="s12">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">12</div></div>
+    <div class="content wide-left top">
+      <div>
+        <p class="kicker">language architecture</p>
+        <h2 class="slide-title long">The language must keep the mission larger than the vehicle.</h2>
+        <p class="subtitle">The vehicle is an instrument. The identity is the movement, operator, and field practice.</p>
+      </div>
+      <div class="table">
+        <div class="trow head"><div>term</div><div>use</div><div>function</div></div>
+        <div class="trow"><div>XCO / xCO</div><div>mark, operator, field practice</div><div>identity</div></div>
+        <div class="trow"><div>Expanding Civilization Optionality</div><div>mission phrase</div><div>movement</div></div>
+        <div class="trow"><div>Option-space collapse</div><div>problem condition</div><div>risk frame</div></div>
+        <div class="trow"><div>XCO Field</div><div>where future possibility is collapsing</div><div>domain</div></div>
+        <div class="trow"><div>XCO Move</div><div>intervention that expands option-space</div><div>action</div></div>
+        <div class="trow"><div>Optionality Returns</div><div>futures preserved and expanded</div><div>value function</div></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">movement → operator → field → move → return logic → vehicle</div><div class="rule"></div><div class="tag">12 / terms</div></div>
+  </section>
+
+  <section class="slide" id="s13">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">13</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">optionality returns</p>
+        <h2 class="slide-title long">The return is measured in futures made more possible.</h2>
+        <p class="subtitle">Optionality Return is the value created when an intervention increases the number, quality, accessibility, resilience, or reversibility of viable future pathways.</p>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>pathway expansion</h3><p>new futures become viable</p></div>
+        <div class="card"><h3>collapse avoidance</h3><p>irreversible states become less likely</p></div>
+        <div class="card"><h3>adaptive capacity</h3><p>systems can respond and reorganize</p></div>
+        <div class="card"><h3>capability creation</h3><p>tools, institutions, operators and protocols remain</p></div>
+        <div class="card"><h3>legitimacy</h3><p>trust, voice and fairness are strengthened</p></div>
+        <div class="card"><h3>financial continuity</h3><p>capital persists as one medium, not the protagonist</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">we value how the future changes</div><div class="rule"></div><div class="tag">13 / returns</div></div>
+  </section>
+
+  <section class="slide" id="s14">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">14</div></div>
+    <div class="content single">
+      <div>
+        <p class="kicker">cascades close option-space</p>
+        <h2 class="slide-title wide">Optionality collapses through conversion pathways.</h2>
+        <p class="subtitle">Hazard alone does not determine the future. Planetary stress becomes dangerous when it passes through dependency networks, unequal vulnerability, legitimacy failure, and coercive opportunity.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 1200 260">
+          <defs><marker id="a14" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF"/></marker></defs>
+          <rect x="40" y="82" width="164" height="76" class="svg-fill-m"/><text x="64" y="116" class="svg-text svg-white">planetary</text><text x="64" y="136" class="svg-text svg-white">stress</text>
+          <text x="224" y="128" class="svg-head">+</text>
+          <rect x="260" y="82" width="164" height="76" class="svg-none svg-dash"/><text x="282" y="116" class="svg-text">dependency</text><text x="282" y="136" class="svg-text">networks</text>
+          <text x="444" y="128" class="svg-head">+</text>
+          <rect x="480" y="82" width="164" height="76" class="svg-none svg-dash"/><text x="502" y="116" class="svg-text">unequal</text><text x="502" y="136" class="svg-text">vulnerability</text>
+          <text x="664" y="128" class="svg-head">+</text>
+          <rect x="700" y="82" width="164" height="76" class="svg-none svg-dash"/><text x="724" y="116" class="svg-text">legitimacy</text><text x="724" y="136" class="svg-text">failure</text>
+          <text x="884" y="128" class="svg-head">+</text>
+          <rect x="920" y="82" width="164" height="76" class="svg-none svg-dash"/><text x="944" y="116" class="svg-text">coercive</text><text x="944" y="136" class="svg-text">opportunity</text>
+          <line x1="1084" y1="120" x2="1144" y2="120" class="svg-line" marker-end="url(#a14)"/>
+          <rect x="1040" y="178" width="150" height="52" class="svg-fill-m"/><text x="1060" y="211" class="svg-text svg-white">recursive risk</text>
+          <text x="40" y="216" class="svg-text svg-orange">risk becomes political through conversion</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">conditional risk architecture, not deterministic prophecy</div><div class="rule"></div><div class="tag">14 / formula</div></div>
+  </section>
+
+  <section class="slide" id="s15">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">15</div></div>
+    <div>
+      <p class="kicker">the causal spine</p>
+      <h2 class="slide-title wide">The cascade is a sequence of conversions.</h2>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 1280 360">
+        <defs><marker id="a15" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF"/></marker></defs>
+        <g>
+          <rect x="40" y="116" width="120" height="70" class="svg-fill-m"/><text x="60" y="145" class="svg-text svg-white">1 tipping</text><text x="60" y="165" class="svg-text svg-white">risk</text>
+          <line x1="160" y1="151" x2="194" y2="151" class="svg-line" marker-end="url(#a15)"/>
+          <rect x="198" y="116" width="120" height="70" class="svg-none"/><text x="216" y="145" class="svg-text">2 earth</text><text x="216" y="165" class="svg-text">systems</text>
+          <line x1="318" y1="151" x2="352" y2="151" class="svg-line" marker-end="url(#a15)"/>
+          <rect x="356" y="116" width="120" height="70" class="svg-none"/><text x="374" y="145" class="svg-text">3 human</text><text x="374" y="165" class="svg-text">stress</text>
+          <line x1="476" y1="151" x2="510" y2="151" class="svg-line" marker-end="url(#a15)"/>
+          <rect x="514" y="116" width="120" height="70" class="svg-none svg-dash"/><text x="532" y="145" class="svg-text">4 social</text><text x="532" y="165" class="svg-text">vulnerability</text>
+          <line x1="634" y1="151" x2="668" y2="151" class="svg-line" marker-end="url(#a15)"/>
+          <rect x="672" y="116" width="120" height="70" class="svg-none svg-dash"/><text x="690" y="145" class="svg-text">5 social</text><text x="690" y="165" class="svg-text">stress</text>
+          <line x1="792" y1="151" x2="826" y2="151" class="svg-line" marker-end="url(#a15)"/>
+          <rect x="830" y="116" width="120" height="70" class="svg-fill-m"/><text x="846" y="145" class="svg-text svg-white">6 violent</text><text x="846" y="165" class="svg-text svg-white">opportunity</text>
+          <line x1="950" y1="151" x2="984" y2="151" class="svg-line" marker-end="url(#a15)"/>
+          <rect x="988" y="116" width="120" height="70" class="svg-none svg-dash"/><text x="1006" y="145" class="svg-text">7 political</text><text x="1006" y="165" class="svg-text">fork</text>
+          <path d="M1048 186 C1048 230, 1112 230, 1112 260" class="svg-mid"/>
+          <path d="M1048 186 C1048 220, 980 220, 980 260" class="svg-mid"/>
+          <rect x="1076" y="260" width="150" height="54" class="svg-fill-m"/><text x="1096" y="293" class="svg-text svg-white">8/9 recursive</text>
+          <rect x="884" y="260" width="150" height="54" class="svg-none"/><text x="902" y="293" class="svg-text">adaptive renewal</text>
+        </g>
+        <text x="40" y="330" class="svg-text svg-orange">each arrow is a conversion point where intervention is possible</text>
+      </svg>
+    </div>
+    <div class="footline"><div class="statement">stage 7 is a fork, not a deterministic line</div><div class="rule"></div><div class="tag">15 / spine</div></div>
+  </section>
+
+  <section class="slide" id="s16">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">16</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">core conversion</p>
+        <h2 class="slide-title long">The investable moment is before hazard becomes abandonment.</h2>
+        <p class="subtitle">Abandonment is when people, places, or systems experience risk without credible protection, voice, service continuity, insurance, credit, care, or recovery pathway.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <defs><marker id="a16" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#F27F3D"/></marker></defs>
+          <rect x="42" y="168" width="150" height="74" class="svg-fill-m"/><text x="76" y="211" class="svg-text svg-white">hazard</text>
+          <line x1="192" y1="205" x2="274" y2="205" class="svg-mid" marker-end="url(#a16)"/>
+          <rect x="282" y="108" width="56" height="210" class="svg-none"/><text transform="translate(304 285) rotate(-90)" class="svg-text">services</text>
+          <rect x="352" y="108" width="56" height="210" class="svg-none"/><text transform="translate(374 292) rotate(-90)" class="svg-text">protection</text>
+          <rect x="422" y="108" width="56" height="210" class="svg-none"/><text transform="translate(444 267) rotate(-90)" class="svg-text">voice</text>
+          <line x1="478" y1="205" x2="536" y2="205" class="svg-mid" marker-end="url(#a16)"/>
+          <rect x="498" y="168" width="112" height="74" class="svg-none svg-dash"/><text x="514" y="211" class="svg-text">abandonment</text>
+          <text x="130" y="362" class="svg-text svg-orange">field capability keeps protection working</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">intervene before lived exclusion becomes political rupture</div><div class="rule"></div><div class="tag">16 / abandonment</div></div>
+  </section>
+
+  <section class="slide" id="s17">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">17</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">the political fork</p>
+        <h2 class="slide-title long">Cascade pressure does not determine the future. Institutions do.</h2>
+        <p class="subtitle">The same conditions can be converted into coercive consolidation or inclusive adaptive renewal depending on institutional design, civic capacity, rights protection and credible adaptive policy.</p>
+      </div>
+      <div class="stack">
+        <div class="card risk"><h3>coercive consolidation</h3><p>emergency rule · exclusion · repression · militarization · surveillance</p></div>
+        <div class="diagram" style="min-height:60px"><svg viewBox="0 0 620 70"><defs><marker id="a17" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#F27F3D"/></marker></defs><line x1="42" y1="35" x2="578" y2="35" class="svg-mid" marker-end="url(#a17)"/><text x="220" y="28" class="svg-text svg-orange">same pressure</text></svg></div>
+        <div class="card field"><h3>adaptive renewal</h3><p>rights · social protection · institutional repair · fair allocation · cooperation</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">same pressure — different institutions — different futures</div><div class="rule"></div><div class="tag">17 / fork</div></div>
+  </section>
+
+  <section class="slide inverse" id="s18">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">18</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">xCO move</p>
+        <h2 class="slide-title long">An XCO Move keeps multiple futures open.</h2>
+        <p class="subtitle">An XCO Move is a field-level intervention that interrupts a cascade conversion, stabilizes a critical field, generates reusable capability, and expands option-space.</p>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>Interrupt</h3><p>a conversion.</p></div>
+        <div class="card"><h3>Stabilize</h3><p>a critical field.</p></div>
+        <div class="card"><h3>Generate</h3><p>reusable capability.</p></div>
+        <div class="card"><h3>Expand</h3><p>future pathways.</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">not a project — a future-preserving capability</div><div class="rule"></div><div class="tag">18 / move</div></div>
+  </section>
+
+  <section class="slide inverse" id="s19">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">19</div></div>
+    <div class="content wide-left top">
+      <div>
+        <p class="kicker">xCO fields</p>
+        <h2 class="slide-title long">XCO acts in fields, not sectors.</h2>
+        <p class="subtitle">A sector is a market category. An XCO Field is a capability domain where future viability is at stake.</p>
+      </div>
+      <div class="table">
+        <div class="trow head"><div>field lens</div><div>question</div><div>output</div></div>
+        <div class="trow"><div>field stabilized</div><div>what domain of viability is at stake?</div><div>water, heat, cognition, care, production...</div></div>
+        <div class="trow"><div>conversion interrupted</div><div>what downstream collapse is prevented?</div><div>hazard → abandonment, stress → grievance...</div></div>
+        <div class="trow"><div>capability created</div><div>what remains after the intervention?</div><div>institutions, operators, protocols, skills...</div></div>
+        <div class="trow"><div>optionality returns</div><div>which futures become more possible?</div><div>pathways, resilience, reversibility, legitimacy</div></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">markets follow fields that become legible</div><div class="rule"></div><div class="tag">19 / field</div></div>
+  </section>
+
+  <section class="slide" id="s20">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">20</div></div>
+    <div>
+      <p class="kicker">example xCO fields</p>
+      <h2 class="slide-title wide">Option-preserving capability domains.</h2>
+    </div>
+    <div class="grid4">
+      <div class="card field"><h3>thermal commons</h3><p>hot-city habitability · cooling · care · peak load</p><div class="ticks"><i></i><i></i><i></i></div></div>
+      <div class="card field"><h3>water continuity</h3><p>aquifer recharge · baseflow · watershed governance</p><div class="ticks"><i></i><i></i><i></i></div></div>
+      <div class="card field"><h3>bioregional production</h3><p>food · local manufacturing · repair · logistics</p><div class="ticks"><i></i><i></i></div></div>
+      <div class="card field"><h3>cognitive resilience</h3><p>reasoning · trust · AI-era legitimacy</p><div class="ticks"><i></i><i></i><i></i></div></div>
+      <div class="card field"><h3>fire + smoke continuity</h3><p>landscape buffers · shelters · detection · rehearsal</p><div class="ticks"><i></i><i></i></div></div>
+      <div class="card field"><h3>distributed energy</h3><p>resilient cooling · microgrids · non-fossil backup</p><div class="ticks"><i></i><i></i><i></i></div></div>
+      <div class="card field"><h3>human capability</h3><p>care · post-labour meaning · agency · civic contribution</p><div class="ticks"><i></i><i></i></div></div>
+      <div class="card field"><h3>spatial governance</h3><p>land stewardship · migration · rights · ecological duty</p><div class="ticks"><i></i><i></i><i></i></div></div>
+    </div>
+    <div class="footline"><div class="statement">each XCO Field should keep more futures viable than it consumes</div><div class="rule"></div><div class="tag">20 / domains</div></div>
+  </section>
+
+  <section class="slide" id="s21">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">21</div></div>
+    <div class="content single">
+      <div>
+        <p class="kicker">capability-throughput</p>
+        <h2 class="slide-title wide">Protection is not enough. Capability must compound.</h2>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 1200 360">
+          <defs><marker id="a21" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#FFFFFF"/></marker></defs>
+          <rect x="42" y="118" width="188" height="80" class="svg-fill-m"/><text x="70" y="150" class="svg-text svg-white">systemic</text><text x="70" y="170" class="svg-text svg-white">pressure</text><text x="242" y="166" class="svg-head">+</text>
+          <rect x="286" y="118" width="188" height="80" class="svg-none"/><text x="312" y="150" class="svg-text">stabilizer</text><text x="312" y="170" class="svg-text">bundle</text><text x="486" y="166" class="svg-head">+</text>
+          <rect x="530" y="118" width="188" height="80" class="svg-none"/><text x="556" y="150" class="svg-text">enabling</text><text x="556" y="170" class="svg-text">stack</text><text x="730" y="166" class="svg-head">+</text>
+          <rect x="774" y="118" width="188" height="80" class="svg-none"/><text x="800" y="150" class="svg-text">capability</text><text x="800" y="170" class="svg-text">stock</text><text x="974" y="166" class="svg-head">=</text>
+          <rect x="1030" y="98" width="140" height="120" class="svg-none svg-dash"/><text x="1052" y="146" class="svg-text">open</text><text x="1052" y="166" class="svg-text">futures</text>
+          <text x="42" y="262" class="svg-text svg-orange">pressure: heat · water stress · volatility</text>
+          <text x="286" y="262" class="svg-text svg-orange">bundle: cooling · recharge · care</text>
+          <text x="530" y="262" class="svg-text svg-orange">stack: data · governance · finance</text>
+          <text x="774" y="262" class="svg-text svg-orange">stock: skills · tools · institutions</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">a valid XCO Move leaves capability behind</div><div class="rule"></div><div class="tag">21 / throughput</div></div>
+  </section>
+
+  <section class="slide" id="s22">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">22</div></div>
+    <div class="content wide-left top">
+      <div>
+        <p class="kicker">negative throughput</p>
+        <h2 class="slide-title long">Not every protective intervention expands optionality.</h2>
+        <p class="subtitle">A valid XCO Move must reduce risk without deepening dependency, exclusion, extraction, coercion, surveillance, ecological damage, or future lock-in.</p>
+      </div>
+      <div class="table">
+        <div class="trow head"><div>protective move</div><div>immediate benefit</div><div>future narrowing risk</div></div>
+        <div class="trow"><div>fossil cooling</div><div>reduces heat exposure</div><div>emissions · grid stress · inequality</div></div>
+        <div class="trow"><div>hard seawalls</div><div>reduce local flood risk</div><div>ecological loss · lock-in · false security</div></div>
+        <div class="trow"><div>militarized borders</div><div>manage migration pressure</div><div>rights erosion · instability · coercive dependence</div></div>
+        <div class="trow"><div>surveillance crisis management</div><div>reduces visible disorder</div><div>trust collapse · coercion · political fracture</div></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">protection that narrows the future is not XCO</div><div class="rule"></div><div class="tag">22 / screen</div></div>
+  </section>
+
+  <section class="slide inverse" id="s23">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">23</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">valuing optionality</p>
+        <h2 class="slide-title long">Value is the probability shift in future states.</h2>
+        <p class="subtitle">Field-level investing gives XCO a disciplined way to value how interventions change what futures become more or less likely.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <polyline points="52,330 120,300 190,260 270,210 350,170 430,150 548,140" class="svg-hair"/>
+          <polyline points="52,330 120,318 190,300 270,260 350,210 430,160 548,86" class="svg-mid"/>
+          <line x1="52" y1="330" x2="560" y2="330" class="svg-hair"/><line x1="52" y1="330" x2="52" y2="60" class="svg-hair"/>
+          <rect x="88" y="252" width="154" height="54" class="svg-fill-m"/><text x="108" y="286" class="svg-text svg-white">collapse states</text>
+          <rect x="380" y="82" width="172" height="58" class="svg-none svg-dash"/><text x="406" y="116" class="svg-text">adaptive states</text>
+          <text x="56" y="380" class="svg-text svg-orange">XCO values how the future changes</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">high-value futures more likely; catastrophic futures less likely</div><div class="rule"></div><div class="tag">23 / value</div></div>
+  </section>
+
+  <section class="slide inverse" id="s24">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">24</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">method, not mission</p>
+        <h2 class="slide-title long">Field-level investing is the method. XCO is the mission.</h2>
+        <p class="subtitle">The object of investment shifts from asset, to interaction, to structured outcomes, and finally to field capacity.</p>
+      </div>
+      <div class="stack">
+        <div class="card"><div class="label">01</div><h3>Asset investing</h3><p>prices the object.</p></div>
+        <div class="card"><div class="label">02</div><h3>Portfolio investing</h3><p>prices interactions.</p></div>
+        <div class="card"><div class="label">03</div><h3>Systems investing</h3><p>prices structured outcomes.</p></div>
+        <div class="card field"><div class="label">04</div><h3>Field-level investing</h3><p>prices field capacity and probability shift.</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">pricing the field, not only the asset</div><div class="rule"></div><div class="tag">24 / method</div></div>
+  </section>
+
+  <section class="slide" id="s25">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">25</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">legitimacy</p>
+        <h2 class="slide-title long">Optionality must be expanded, not enclosed.</h2>
+        <p class="subtitle">If XCO creates public or field-level value, it must not automatically privatize that value. Claims must be legitimate, proportionate, transparent, and tied to verified contribution.</p>
+      </div>
+      <div class="stack">
+        <div class="card"><h3>Who gained options?</h3><p>and who lost them?</p></div>
+        <div class="card"><h3>Did the move expand the field?</h3><p>or enclose a shared condition?</p></div>
+        <div class="card"><h3>Is any claim proportionate?</h3><p>to contribution, risk, maintenance and governance duties?</p></div>
+        <div class="card"><h3>Can the public contest it?</h3><p>legibility is part of legitimacy.</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">optionality capture must not become optionality enclosure</div><div class="rule"></div><div class="tag">25 / legitimacy</div></div>
+  </section>
+
+  <section class="slide" id="s26">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">26</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">Santiago as XCO proof field</p>
+        <h2 class="slide-title long">Santiago is a bounded proof of XCO.</h2>
+        <p class="subtitle">A city-region can manage a physical cascade before it becomes service failure, fiscal stress, insurance retreat, displacement, distrust, and reduced adaptive capacity.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <rect x="198" y="150" width="230" height="108" class="svg-none svg-dash"/><text x="234" y="194" class="svg-text">Santiago</text><text x="234" y="214" class="svg-text">XCO Field</text><text x="234" y="238" class="svg-text svg-orange">place-continuity</text>
+          <g class="svg-hair"><line x1="313" y1="150" x2="313" y2="78"/><line x1="198" y1="204" x2="96" y2="136"/><line x1="198" y1="232" x2="100" y2="304"/><line x1="428" y1="188" x2="528" y2="134"/><line x1="428" y1="232" x2="528" y2="304"/></g>
+          <rect x="250" y="36" width="136" height="58" class="svg-fill-m"/><text x="276" y="70" class="svg-text svg-white">heat</text>
+          <rect x="44" y="104" width="136" height="58" class="svg-none"/><text x="76" y="138" class="svg-text">fire</text>
+          <rect x="44" y="282" width="156" height="58" class="svg-none"/><text x="68" y="316" class="svg-text">glacier-water</text>
+          <rect x="468" y="104" width="136" height="58" class="svg-none"/><text x="492" y="138" class="svg-text">energy peak</text>
+          <rect x="468" y="282" width="136" height="58" class="svg-none"/><text x="498" y="316" class="svg-text">civic trust</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">the object is not one project — the object is place-continuity</div><div class="rule"></div><div class="tag">26 / Santiago</div></div>
+  </section>
+
+  <section class="slide" id="s27">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">27</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">what Santiago proves</p>
+        <h2 class="slide-title long">Santiago proves the architecture, not the asset list.</h2>
+        <p class="subtitle">What travels is not the exact portfolio of trees, roofs, sensors, tariffs, microgrids, aquifer basins, or glacier interventions. What travels is the grammar.</p>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 620 420">
+          <defs><marker id="a27" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#F27F3D"/></marker></defs>
+          <path d="M310 58 C476 58, 552 180, 512 300 C460 384, 266 386, 126 300 C64 200, 116 70, 310 58" class="svg-mid" marker-end="url(#a27)"/>
+          <rect x="236" y="30" width="126" height="54" class="svg-none"/><text x="260" y="64" class="svg-text">sense</text>
+          <rect x="438" y="124" width="126" height="54" class="svg-none"/><text x="462" y="158" class="svg-text">pool</text>
+          <rect x="438" y="292" width="126" height="54" class="svg-none"/><text x="462" y="326" class="svg-text">verify</text>
+          <rect x="236" y="352" width="126" height="54" class="svg-none"/><text x="260" y="386" class="svg-text">learn</text>
+          <rect x="66" y="292" width="126" height="54" class="svg-none"/><text x="90" y="326" class="svg-text">maintain</text>
+          <rect x="66" y="124" width="126" height="54" class="svg-none"/><text x="90" y="158" class="svg-text">allocate</text>
+          <rect x="234" y="176" width="168" height="74" class="svg-none svg-dash"/><text x="258" y="208" class="svg-text">diffuse</text><text x="258" y="228" class="svg-text">architecture</text>
+        </svg>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">proof in place — diffusion by architecture</div><div class="rule"></div><div class="tag">27 / proof</div></div>
+  </section>
+
+  <section class="slide" id="s28">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">28</div></div>
+    <div>
+      <p class="kicker">Santiago portfolio stack</p>
+      <h2 class="slide-title wide">Seven portfolios, one field.</h2>
+    </div>
+    <div class="grid4">
+      <div class="card"><h3>A. cryosphere</h3><p>snowpack · glacier function · albedo pollution · wetlands · hazard warning</p></div>
+      <div class="card"><h3>B. aquifer</h3><p>managed recharge · leakage reduction · baseflow · flow rules</p></div>
+      <div class="card"><h3>C. thermal commons</h3><p>shade · cool surfaces · passive retrofit · cooling refuges</p></div>
+      <div class="card"><h3>D. fire + smoke</h3><p>buffers · fuel management · shelters · detection · rehearsal</p></div>
+      <div class="card"><h3>E. energy</h3><p>lower peak load · resilient power · microgrids · non-fossil backup</p></div>
+      <div class="card"><h3>F. civic autonomy</h3><p>self-audits · participatory funds · care hubs · repair loops</p></div>
+      <div class="card"><h3>G. sensing</h3><p>public logs · monitoring · passports · open metrics</p></div>
+      <div class="card field"><h3>one field</h3><p>each portfolio declares conversion interrupted and capability left behind</p></div>
+    </div>
+    <div class="footline"><div class="statement">a heat programme that increases peak risk is not a success</div><div class="rule"></div><div class="tag">28 / stack</div></div>
+  </section>
+
+  <section class="slide" id="s29">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">29</div></div>
+    <div class="content wide-left top">
+      <div>
+        <p class="kicker">governance and anti-failure</p>
+        <h2 class="slide-title long">A risk facility that cannot be trusted becomes another extraction layer.</h2>
+        <p class="subtitle">Every XCO Move must pass an anti-failure test.</p>
+      </div>
+      <div class="grid2">
+        <div class="card"><h3>does it deepen inequality?</h3><p>or expand access to options?</p></div>
+        <div class="card"><h3>does it create dependency?</h3><p>or build local capability?</p></div>
+        <div class="card"><h3>does it enclose shared value?</h3><p>or govern claims proportionately?</p></div>
+        <div class="card"><h3>does it extract data?</h3><p>or create reciprocal public knowledge?</p></div>
+        <div class="card"><h3>does it lock in ecology?</h3><p>or preserve adaptive pathways?</p></div>
+        <div class="card"><h3>does it overclaim certainty?</h3><p>or make uncertainty governable?</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">a future-preserving intervention must not narrow the future elsewhere</div><div class="rule"></div><div class="tag">29 / governance</div></div>
+  </section>
+
+  <section class="slide inverse" id="s30">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">30</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">roadmap</p>
+        <h2 class="slide-title long">The first step is design and proof, not full-scale deployment claim.</h2>
+        <p class="subtitle">Start by proving how optionality can be seen, valued, expanded, and governed.</p>
+      </div>
+      <div class="stack">
+        <div class="card"><div class="label">0–12 months</div><h3>risk + option-space maps</h3><p>XCO Fields taxonomy, Optionality Returns methodology, proof-field design.</p></div>
+        <div class="card"><div class="label">year 1–2</div><h3>first demonstrators</h3><p>Santiago and first proof fields; governance and negative-throughput standard.</p></div>
+        <div class="card"><div class="label">year 2–5</div><h3>facility launch</h3><p>capital pool, outcome contracts, capability engines, field stewards.</p></div>
+        <div class="card"><div class="label">year 5–10</div><h3>diffusion</h3><p>copy the architecture, not the asset list.</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">prove the grammar before claiming scale</div><div class="rule"></div><div class="tag">30 / roadmap</div></div>
+  </section>
+
+  <section class="slide" id="s31">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">31</div></div>
+    <div class="content wide-left">
+      <div>
+        <p class="kicker">the invitation</p>
+        <h2 class="slide-title wide">Help XCO the fields where future choice is collapsing.</h2>
+        <p class="subtitle">XCO is not asking partners only to back a financial vehicle. It is inviting them into the creation of a new value category: Optionality Returns.</p>
+      </div>
+      <div class="stack">
+        <div class="card field big"><h3>Support first XCO Fields.</h3><p>where future possibility is already under cascade pressure.</p></div>
+        <div class="card field big"><h3>Build the methodology.</h3><p>for valuing option-space returned to a field.</p></div>
+        <div class="card field big"><h3>Prove in place.</h3><p>then diffuse by architecture.</p></div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">it preserves the possibility of choice itself</div><div class="rule"></div><div class="tag">xCO</div></div>
+  </section>
+
+  <section class="slide inverse" id="s32">
+    <div class="topline"><div class="brand">xCO</div><div class="rule"></div><div class="num">S</div></div>
+    <div class="content wide-left top">
+      <div>
+        <p class="kicker">source anchors</p>
+        <h2 class="slide-title long">The argument is assembled from four source logics.</h2>
+        <p class="subtitle">The deck uses the source materials as scaffolding, not decoration.</p>
+      </div>
+      <div class="source-list">
+        <div><b>Three Regimes of Optionality.</b> Frontier, Fortress, and Field are co-present responses to future contraction; Field is the condition from which possibility itself emerges.</div>
+        <div><b>Cascading violence risk map.</b> Biophysical shocks become dangerous through dependency networks, unequal vulnerability, legitimacy failure, and coercive opportunity.</div>
+        <div><b>MacroQuBit / field-level investing.</b> Valuation method for probability shifts, field capacity, option value, resilience, adaptive capacity, and future-value enablement.</div>
+        <div><b>Santiago Continuity Facility.</b> Proof field for place-continuity under heat, fire, glacier-water, aquifer, energy, smoke, finance and civic trust risk.</div>
+        <div><b>xCO Diagrammatic Grammar.</b> Rectangles as atomic units; risk, option and field nodes; hatching; scale rules; multi-solve ticks; marked uncertainty.</div>
+      </div>
+    </div>
+    <div class="footline"><div class="statement">the brand is the diagrams; the mission is expanding option-space</div><div class="rule"></div><div class="tag">sources</div></div>
+  </section>
+</div>
+</body>
+</html>
