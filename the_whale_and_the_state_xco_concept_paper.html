@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Whale and the State — Concept Paper</title>
+  <style>
+    :root {
+      --shadow: #192640;
+      --midtone: #F27F3D;
+      --highlight: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--shadow);
+      color: var(--shadow);
+    }
+
+    body {
+      margin: 0;
+      background: var(--shadow);
+      color: var(--shadow);
+      font-family: "Crimson Pro", Georgia, serif;
+      font-size: 19px;
+      line-height: 1.56;
+    }
+
+    a { color: var(--midtone); text-decoration: none; border-bottom: 1.5px solid var(--midtone); }
+    a:hover { color: var(--shadow); background: var(--midtone); border-bottom-color: var(--midtone); }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      background: var(--highlight);
+      min-height: 100vh;
+    }
+
+    .hero {
+      min-height: 92vh;
+      background: var(--shadow);
+      color: var(--highlight);
+      display: grid;
+      grid-template-columns: minmax(34px, 1fr) minmax(0, 1040px) minmax(34px, 1fr);
+      align-items: center;
+      border-bottom: 14px solid var(--midtone);
+    }
+
+    .hero-inner {
+      grid-column: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 72px;
+      align-items: center;
+      padding: 72px 0;
+    }
+
+    .eyebrow,
+    .label,
+    .diagram-caption,
+    .toc-label,
+    .kicker,
+    .source-list,
+    .marginal,
+    .node-label,
+    .meta,
+    .small-caps {
+      font-family: "DM Mono", "SFMono-Regular", Consolas, monospace;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .eyebrow {
+      color: var(--midtone);
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+    }
+
+    h1, h2, h3, h4, .display {
+      font-family: Inter, Arial, sans-serif;
+      font-weight: 450;
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(58px, 9vw, 132px);
+      max-width: 910px;
+      margin-bottom: 32px;
+    }
+
+    .subtitle {
+      font-family: Inter, Arial, sans-serif;
+      font-size: clamp(22px, 3.2vw, 42px);
+      line-height: 1.11;
+      letter-spacing: -0.035em;
+      color: var(--highlight);
+      max-width: 780px;
+      margin-bottom: 34px;
+    }
+
+    .deck {
+      font-size: 22px;
+      line-height: 1.42;
+      max-width: 700px;
+      color: var(--highlight);
+      margin: 0;
+    }
+
+    .hero-mark {
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--highlight);
+      min-height: 520px;
+      position: relative;
+    }
+
+    .hero-mark::before {
+      content: "";
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 26px;
+      bottom: 26px;
+      border: 0.75px dashed var(--midtone);
+    }
+
+    .hero-mark .axis {
+      width: 70%;
+      height: 70%;
+      border-left: 1.5px solid var(--highlight);
+      border-bottom: 1.5px solid var(--highlight);
+      position: relative;
+    }
+
+    .hero-mark .axis::before {
+      content: "";
+      position: absolute;
+      right: -1.5px;
+      bottom: 42%;
+      width: 72%;
+      height: 1.5px;
+      background: var(--midtone);
+    }
+
+    .hero-mark .axis::after {
+      content: "";
+      position: absolute;
+      left: 42%;
+      bottom: -1.5px;
+      width: 1.5px;
+      height: 72%;
+      background: var(--midtone);
+    }
+
+    .hero-meta {
+      position: absolute;
+      left: 26px;
+      bottom: 22px;
+      right: 26px;
+      color: var(--highlight);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .hero-meta span { color: var(--midtone); }
+
+    .section {
+      display: grid;
+      grid-template-columns: minmax(34px, 1fr) minmax(0, 880px) minmax(34px, 1fr);
+      padding: 82px 0 74px;
+      border-bottom: 1.5px solid var(--shadow);
+      background: var(--highlight);
+    }
+
+    .section.dark {
+      background: var(--shadow);
+      color: var(--highlight);
+      border-bottom-color: var(--highlight);
+    }
+
+    .section.dark a:hover { color: var(--highlight); background: var(--midtone); }
+
+    .content { grid-column: 2; }
+
+    .wide {
+      grid-column: 2;
+      width: 100%;
+    }
+
+    .section-number {
+      font-family: "DM Mono", "SFMono-Regular", Consolas, monospace;
+      color: var(--midtone);
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(35px, 5vw, 67px);
+      margin-bottom: 35px;
+      color: inherit;
+    }
+
+    h3 {
+      font-size: clamp(25px, 3.2vw, 38px);
+      margin-top: 48px;
+      margin-bottom: 18px;
+      color: inherit;
+    }
+
+    p {
+      margin: 0 0 22px;
+    }
+
+    .lead {
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+      margin-bottom: 34px;
+    }
+
+    .pull {
+      margin: 50px 0;
+      padding: 30px 34px;
+      border-left: 12px solid var(--midtone);
+      background: var(--shadow);
+      color: var(--highlight);
+      font-family: Inter, Arial, sans-serif;
+      font-size: clamp(25px, 3vw, 38px);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .pull.light {
+      background: var(--highlight);
+      color: var(--shadow);
+      border: 1.5px solid var(--shadow);
+      border-left: 12px solid var(--midtone);
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 44px;
+      margin-top: 42px;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.2;
+    }
+
+    .toc a {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1.5px solid var(--shadow);
+      color: var(--shadow);
+    }
+
+    .toc a:hover {
+      background: var(--midtone);
+      color: var(--shadow);
+    }
+
+    .toc span:first-child {
+      font-family: "DM Mono", "SFMono-Regular", Consolas, monospace;
+      color: var(--midtone);
+    }
+
+    .toc a:hover span:first-child { color: var(--shadow); }
+
+    .diagram {
+      margin: 54px 0 38px;
+      border: 1.5px solid var(--shadow);
+      background: var(--highlight);
+      padding: 18px;
+    }
+
+    .dark .diagram {
+      border-color: var(--highlight);
+      background: var(--shadow);
+    }
+
+    .diagram svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .diagram-caption {
+      font-size: 12px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      margin-top: 16px;
+      color: var(--midtone);
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin: 34px 0;
+    }
+
+    .card {
+      border: 1.5px solid var(--shadow);
+      padding: 26px;
+      background: var(--highlight);
+    }
+
+    .dark .card {
+      border-color: var(--highlight);
+      background: var(--shadow);
+      color: var(--highlight);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 28px;
+      letter-spacing: -0.035em;
+    }
+
+    .card .label {
+      color: var(--midtone);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .instrument-stack {
+      margin-top: 34px;
+      border-top: 1.5px solid var(--shadow);
+    }
+
+    .instrument-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 28px;
+      border-bottom: 1.5px solid var(--shadow);
+      padding: 20px 0;
+    }
+
+    .instrument-row .name {
+      font-family: Inter, Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+
+    .instrument-row .desc {
+      margin: 0;
+    }
+
+    .constitutional-voice {
+      border: 1.5px solid var(--shadow);
+      padding: 34px;
+      margin: 44px 0 20px;
+    }
+
+    .constitutional-voice p {
+      font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .source-list {
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .source-list li {
+      margin-bottom: 12px;
+    }
+
+    ol.source-list {
+      padding-left: 20px;
+    }
+
+    sup {
+      font-family: "DM Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 11px;
+      color: var(--midtone);
+      line-height: 0;
+    }
+
+    .print-note {
+      font-family: "DM Mono", "SFMono-Regular", Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--midtone);
+      margin-top: 34px;
+    }
+
+    .xco-line { stroke: var(--shadow); stroke-width: 1.5; fill: none; }
+    .xco-line-thin { stroke: var(--shadow); stroke-width: .75; fill: none; }
+    .xco-line-dash { stroke: var(--shadow); stroke-width: .75; stroke-dasharray: 7 7; fill: none; }
+    .xco-fill-ink { fill: var(--shadow); }
+    .xco-fill-paper { fill: var(--highlight); }
+    .xco-fill-ember { fill: var(--midtone); }
+    .xco-stroke-ink { stroke: var(--shadow); stroke-width: 1.5; }
+    .xco-stroke-paper { stroke: var(--highlight); stroke-width: 1.5; }
+    .xco-stroke-ember { stroke: var(--midtone); stroke-width: 1.5; }
+    .xco-stroke-ember-thin { stroke: var(--midtone); stroke-width: .75; }
+    .xco-text-ink { fill: var(--shadow); font-family: "DM Mono", Consolas, monospace; font-size: 13px; }
+    .xco-text-paper { fill: var(--highlight); font-family: "DM Mono", Consolas, monospace; font-size: 13px; }
+    .xco-text-ember { fill: var(--midtone); font-family: "DM Mono", Consolas, monospace; font-size: 12px; font-style: italic; }
+    .xco-text-title { fill: var(--shadow); font-family: Inter, Arial, sans-serif; font-size: 24px; font-weight: 450; letter-spacing: -1px; }
+    .xco-text-title-paper { fill: var(--highlight); font-family: Inter, Arial, sans-serif; font-size: 24px; font-weight: 450; letter-spacing: -1px; }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 42px; }
+      .hero-mark { min-height: 340px; }
+      .toc { grid-template-columns: 1fr; }
+      .grid-two { grid-template-columns: 1fr; }
+      .instrument-row { grid-template-columns: 1fr; gap: 8px; }
+      body { font-size: 18px; }
+    }
+
+    @media print {
+      html, body, .page, .section { background: var(--highlight); color: var(--shadow); }
+      .hero, .section.dark { background: var(--highlight); color: var(--shadow); border-bottom-color: var(--shadow); }
+      .hero-mark { display: none; }
+      .hero { min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; padding: 54px 0; }
+      a { color: var(--shadow); border-bottom: 0; }
+      .section { break-inside: avoid; padding: 48px 0; }
+      .diagram { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">Concept paper · transnational ecological trust · restoration-backed monetary infrastructure</div>
+          <h1>The Whale and the State</h1>
+          <div class="subtitle">An invitation to reimagine law, money, and sovereignty through the whale-world</div>
+          <p class="deck">A concept paper for transnational ecological trust, sentient legal participation, and restoration-backed monetary infrastructure.</p>
+          <p class="print-note">XCO Dusk preset · #192640 / #F27F3D / #FFFFFF · embedded HTML paper</p>
+        </div>
+        <div class="hero-mark" aria-hidden="true">
+          <div class="axis"></div>
+          <div class="hero-meta"><span>FIELD:</span> whale-world / law / liquidity / sovereignty<br><span>METHOD:</span> recognition → trust → hearing → restoration</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="toc">
+      <div class="content">
+        <div class="section-number">Index</div>
+        <h2>Structure of the invitation</h2>
+        <p class="lead">The concept is built as a layered architecture: recognition, trust, relation, sentience, digital memory, ecological diplomacy, restoration accounting, and monetary infrastructure.</p>
+        <nav class="toc" aria-label="Table of contents">
+          <a href="#opening"><span>01</span><span>Opening invitation</span></a>
+          <a href="#constitutional-question"><span>02</span><span>Why the whale-world asks a constitutional question</span></a>
+          <a href="#recognition"><span>03</span><span>From protection to recognition</span></a>
+          <a href="#regime"><span>04</span><span>From nation-state to nation-regime</span></a>
+          <a href="#twenty-eight"><span>05</span><span>The ecological translation of the 28th regime</span></a>
+          <a href="#trust"><span>06</span><span>The Transnational Whale Trust</span></a>
+          <a href="#territory"><span>07</span><span>Territory as relation</span></a>
+          <a href="#sentience"><span>08</span><span>Sentient ecological jurisprudence</span></a>
+          <a href="#speaking"><span>09</span><span>Speaking with whales</span></a>
+          <a href="#participation"><span>10</span><span>Participation beyond human speech</span></a>
+          <a href="#translation"><span>11</span><span>The Trust as a court of translation</span></a>
+          <a href="#digital"><span>12</span><span>Digital autonomy as fiduciary memory</span></a>
+          <a href="#learning"><span>13</span><span>The learning constitution</span></a>
+          <a href="#governance"><span>14</span><span>Governance as plural guardianship</span></a>
+          <a href="#diplomacy"><span>15</span><span>Ecological diplomacy</span></a>
+          <a href="#balance-sheet"><span>16</span><span>The restoration balance sheet</span></a>
+          <a href="#bank"><span>17</span><span>The Whale Reserve and Development Bank</span></a>
+          <a href="#sedrs"><span>18</span><span>Sovereign Ecological Drawing Rights</span></a>
+          <a href="#future-claims"><span>19</span><span>Future ecological claims</span></a>
+          <a href="#coins"><span>20</span><span>Settlement coins and restoration notes</span></a>
+          <a href="#repair"><span>21</span><span>Money as a claim on repair</span></a>
+          <a href="#claims"><span>22</span><span>Claims, interruption, and legal presence</span></a>
+          <a href="#anticapture"><span>23</span><span>Anti-capture and constitutional humility</span></a>
+          <a href="#path"><span>24</span><span>A possible path into the world</span></a>
+          <a href="#constitutional-language"><span>25</span><span>Constitutional language as invitation</span></a>
+          <a href="#philosophy"><span>26</span><span>The philosophical invitation</span></a>
+          <a href="#whale-state"><span>27</span><span>The whale and the state</span></a>
+          <a href="#final"><span>28</span><span>Final invitation</span></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="section dark" id="opening">
+      <div class="content">
+        <div class="section-number">01 · Opening invitation</div>
+        <h2>Let us begin with a displacement of imagination.</h2>
+        <p class="lead">The next great constitutional experiment need not begin with a new human people declaring independence. It need not begin with a border drawn across land, a flag raised above a capital, a parliament convened, or a military formed to defend a territory.</p>
+        <p>It might begin elsewhere. It might begin in the ocean. It might begin with migration, song, suffering, memory, and the long movement of beings whose lives cross every border we have invented.</p>
+        <p>It might begin with whales.</p>
+        <p>This paper proposes the <strong>Whale Nation Recognition Regime</strong>: not a state in the ordinary sense, not a fantasy country for animals, not a parody of sovereignty, and not a sentimental extension of human constitutional forms to nonhuman life. It proposes something more precise and more radical: a transnational ecological recognition regime through which whales and the oceanic relations necessary to their flourishing may acquire legal standing, fiduciary representation, digital memory, participatory presence, diplomatic voice, and restoration-backed financial capacity.</p>
+        <p>The proposition is not that whales should imitate the state. It is that the state, law, finance, and governance might learn from the whale-world.</p>
+        <p>Whales reveal that the inherited containers of modern authority are too small for the living systems upon which they depend. A whale may be born in one jurisdiction, feed in another, migrate across the high seas, pass through shipping corridors governed by several authorities, be injured by a vessel registered elsewhere, be entangled by gear from a distant fleet, be disturbed by sonar, be starved by climate effects produced by economies far from the sea, and be mourned by communities that possess no decisive authority over the systems that harmed it. Its life is continuous, while law is fragmented. Its world is relational, while the state is territorial. Its suffering is embodied, while institutions often treat it as an externality.</p>
+        <p>The Whale Nation Recognition Regime invites us to build a new kind of institution for this mismatch: a <strong>Transnational Whale Trust</strong>, supported by a <strong>Whale Reserve and Development Bank</strong>, animated by digital fiduciary infrastructure, grounded in recognition by states and other legal orders, and capable of converting ecological obligation into present institutional power.</p>
+        <div class="pull">The whale is the first landscape. The deeper subject is the reconstitution of governance around living systems that no state owns, but many states affect.</div>
+      </div>
+    </section>
+
+    <section class="section" id="constitutional-question">
+      <div class="content">
+        <div class="section-number">02 · Constitutional question</div>
+        <h2>Why the whale-world asks a constitutional question</h2>
+        <p>The whale-world asks a constitutional question because it exposes a failure in the basic architecture of modern governance.</p>
+        <p>Modern law is organized around persons, property, states, corporations, territories, contracts, rights, duties, and procedures. It is very capable of recognizing a company that has no body, no nervous system, no mortality, and no ecological function. It can create foundations, trusts, municipalities, international organizations, special-purpose vehicles, and legal persons of many kinds. It can give standing to abstract entities and continuity to paper institutions. Yet it struggles to recognize the legal presence of a living being whose existence is inseparable from oceanic systems that help make planetary life possible.</p>
+        <p>The whale is not merely an animal inside an environment. It is a moving relation. It exists through migration corridors, acoustic territories, feeding grounds, calving waters, prey systems, nutrient flows, social bonds, whale-fall ecologies, climate conditions, and cultural memory. To harm a whale is often to harm more than a body. It may be to interrupt a route, fracture a social system, drown a communication field, deplete a food web, or degrade a relation that no single jurisdiction sees in full.</p>
+        <p>This is why conservation alone is insufficient. Conservation may protect, regulate, limit, count, or restore. But it often keeps the whale in the position of an object within someone else’s jurisdiction. It asks how states may better manage whales, rather than asking how whales and their life-support systems might become legally present to the institutions that affect them.</p>
+        <p>The Whale Nation begins from a different premise. It asks what legal form could hold together the relations through which whale life exists. It asks what kind of institution could speak in law without claiming to possess the whale. It asks how suffering might become evidence, how migration might become jurisdiction, how song might become a legal concern, how restoration might become finance, and how recognition might become a new form of ecological power.</p>
+        <p>The whale-world therefore does not merely ask for protection. It asks for a new theory of representation.</p>
+
+        <figure class="diagram" aria-label="Recognition regime architecture diagram">
+          <svg viewBox="0 0 960 520" role="img">
+            <defs>
+              <pattern id="hatch1" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M0 10 L10 0" class="xco-stroke-ember-thin"/>
+              </pattern>
+              <pattern id="hatch2" width="7" height="7" patternUnits="userSpaceOnUse">
+                <path d="M0 7 L7 0" class="xco-stroke-ink"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="960" height="520" class="xco-fill-paper"/>
+            <text x="40" y="50" class="xco-text-title">Recognition regime architecture</text>
+            <line x1="40" y1="86" x2="920" y2="86" class="xco-line"/>
+            <text x="40" y="106" class="xco-text-ember">macro</text>
+            <line x1="40" y1="160" x2="920" y2="160" class="xco-line-dash"/>
+            <text x="40" y="180" class="xco-text-ember">legal</text>
+            <line x1="40" y1="270" x2="920" y2="270" class="xco-line-dash"/>
+            <text x="40" y="290" class="xco-text-ember">institutional</text>
+            <line x1="40" y1="392" x2="920" y2="392" class="xco-line-dash"/>
+            <text x="40" y="412" class="xco-text-ember">monetary</text>
+
+            <rect x="92" y="118" width="190" height="62" class="xco-fill-ember xco-stroke-ink"/>
+            <text x="115" y="144" class="xco-text-paper">risk node</text>
+            <text x="115" y="163" class="xco-text-paper">fragmented law</text>
+
+            <rect x="370" y="118" width="230" height="62" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="390" y="144" class="xco-text-ink">recognition</text>
+            <text x="390" y="163" class="xco-text-ink">legal presence</text>
+
+            <rect x="690" y="118" width="200" height="62" fill="url(#hatch1)" class="xco-stroke-ink"/>
+            <text x="710" y="144" class="xco-text-ink">field node</text>
+            <text x="710" y="163" class="xco-text-ink">whale-world</text>
+
+            <path d="M282 149 L370 149" class="xco-line"/>
+            <path d="M600 149 L690 149" class="xco-line"/>
+
+            <rect x="160" y="222" width="230" height="86" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="184" y="252" class="xco-text-ink">Transnational</text>
+            <text x="184" y="273" class="xco-text-ink">Whale Trust</text>
+            <line x1="184" y1="288" x2="230" y2="288" class="xco-line"/>
+            <line x1="184" y1="297" x2="245" y2="297" class="xco-line"/>
+            <line x1="184" y1="306" x2="218" y2="306" class="xco-line"/>
+
+            <rect x="452" y="222" width="210" height="86" fill="url(#hatch2)" class="xco-stroke-ink"/>
+            <text x="476" y="252" class="xco-text-ink">digital</text>
+            <text x="476" y="273" class="xco-text-ink">fiduciary memory</text>
+            <line x1="476" y1="288" x2="522" y2="288" class="xco-line"/>
+            <line x1="476" y1="297" x2="540" y2="297" class="xco-line"/>
+
+            <rect x="720" y="222" width="170" height="86" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="742" y="252" class="xco-text-ink">ecological</text>
+            <text x="742" y="273" class="xco-text-ink">diplomacy</text>
+            <line x1="742" y1="288" x2="788" y2="288" class="xco-line"/>
+            <line x1="742" y1="297" x2="806" y2="297" class="xco-line"/>
+
+            <path d="M390 265 L452 265" class="xco-line"/>
+            <path d="M662 265 L720 265" class="xco-line"/>
+            <path d="M485 180 L485 222" class="xco-line"/>
+
+            <rect x="100" y="424" width="230" height="54" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="120" y="456" class="xco-text-ink">SEDRs</text>
+            <rect x="380" y="424" width="250" height="54" class="xco-fill-ember xco-stroke-ink"/>
+            <text x="402" y="456" class="xco-text-paper">Reserve + Development Bank</text>
+            <rect x="690" y="424" width="210" height="54" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="712" y="456" class="xco-text-ink">restoration liquidity</text>
+            <path d="M330 451 L380 451" class="xco-line"/>
+            <path d="M630 451 L690 451" class="xco-line"/>
+            <text x="40" y="495" class="xco-text-ember">[inference] recognition produces standing; standing can be converted into duties, claims, finance, and repair.</text>
+          </svg>
+          <figcaption class="diagram-caption">Diagram 01 · xCO grammar: rectangles as atomic units, one risk node, option nodes, hatching, scale rules, marginal uncertainty.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="recognition">
+      <div class="content">
+        <div class="section-number">03 · Recognition</div>
+        <h2>From protection to recognition</h2>
+        <p>The first movement of the concept is from protection to recognition.</p>
+        <p>Protection is necessary. Whales need protection from ship strikes, entanglement, noise, pollution, habitat disruption, prey collapse, climate stress, and direct killing. But protection can remain paternalistic and fragmented. It may treat whales as beneficiaries of human discretion rather than as subjects whose life gives rise to obligations.</p>
+        <p>Recognition changes the legal grammar.</p>
+        <p>Recognition does not simply say that whales are valuable. It says that whales and their life-support systems may become legally present. It says there may be an institution authorized to appear before courts, ports, regulators, treaty bodies, insurers, development banks, and states on behalf of whale relations. It says that the whale-world may acquire standing.</p>
+        <p>This is not without precedent in legal imagination. Law constantly creates subjects by recognition. Corporations exist because law recognizes them. Trusts operate because law recognizes the separation of assets, duties, and beneficiaries. International organizations act because states recognize their personality and functions. Rivers and ecosystems have, in some jurisdictions, been recognized as legal persons or rights-bearing entities; New Zealand’s Te Awa Tupua Act, for example, recognizes Te Awa Tupua as a legal person with the rights, powers, duties, and liabilities of a legal person.<sup><a href="#source-1">1</a></sup> The legal person is not simply discovered in nature. It is instituted.</p>
+        <p>The Whale Nation asks that this legal technology be turned toward oceanic life.</p>
+        <p>A first state might recognize the Transnational Whale Trust as a legal person or fiduciary institution. A second state might recognize the same Trust. An Indigenous nation might recognize it through its own legal order. A port authority might recognize its standards for whale-safe routing. A court might recognize its standing in litigation. A development bank might recognize its restoration balance sheet. An insurer might recognize its risk models. A treaty body might recognize its evidence and consultative role.</p>
+        <p>Recognition need not arrive all at once. It can accumulate. Each act adds legal density. Each acknowledgment makes the whale-world more legible to the institutions that affect it. Over time, the Whale Nation becomes not a metaphor, but a practical legal subject composed through repeated recognition.</p>
+        <div class="pull light">Recognition is the bootloader of the regime. It is the point at which ethical concern becomes institutional capacity.</div>
+      </div>
+    </section>
+
+    <section class="section" id="regime">
+      <div class="content">
+        <div class="section-number">04 · Nation-regime</div>
+        <h2>From nation-state to nation-regime</h2>
+        <p>The word “nation” is deliberately provocative, but it must be carefully disciplined.</p>
+        <p>The proposal is not to create a whale nation-state. Whales are not a human people seeking territorial independence. They are not seceding from existing states. They do not require a capital, a parliament, an army, a passport system, or a seat among states on the same terms as existing sovereigns.</p>
+        <p>The proposal is to imagine a <strong>nation-regime</strong>.</p>
+        <p>A regime is a structured legal order that organizes recognition, conduct, rights, duties, procedures, standards, evidence, authority, participation, and practice. Much of the world is already governed by regimes that are not states: trade regimes, maritime regimes, human rights regimes, climate regimes, financial regimes, data regimes, corporate regimes, and environmental regimes. These regimes shape behavior, allocate responsibility, establish procedures, create expectations, and generate forms of authority across borders.</p>
+        <p>The Whale Nation belongs to this family, but redirects the form toward ecological relation. It is not a regime for goods, capital, navigation, data, or human rights alone. It is a regime for whales as sentient ecological subjects, and for the living systems through which their flourishing becomes possible.</p>
+        <p>The word “nation” gives the project constitutional force. It says that whales are not merely objects of policy. It says that belonging, obligation, continuity, memory, and standing may be organized around more-than-human life. It gives language to a polity without dominion.</p>
+        <p>The word “regime” gives the project legal precision. It prevents the proposal from being judged against the wrong standard. The Whale Nation is not a failed state. It is a different constitutional species.</p>
+        <p>It is a nation without statehood, a polity without territorial monopoly, a jurisdiction of relation.</p>
+      </div>
+    </section>
+
+    <section class="section dark" id="twenty-eight">
+      <div class="content">
+        <div class="section-number">05 · 28th regime</div>
+        <h2>The ecological translation of the 28th regime</h2>
+        <p>One helpful analogy is the idea of a “28th regime”: an optional legal form that sits alongside national legal systems rather than replacing them.</p>
+        <p>The importance of this analogy is not technical detail. It is constitutional imagination. A legal order can create a synthetic form that crosses jurisdictions. It can offer a common legal status without abolishing domestic law. It can reduce fragmentation by allowing actors to operate through a shared framework. The European Commission has used this language in relation to EU Inc., a proposed harmonised corporate legal regime designed to give companies a single EU-wide legal form alongside existing national company forms.<sup><a href="#source-2">2</a></sup></p>
+        <p>The Whale Nation translates this design logic from enterprise to ecology.</p>
+        <p>If law can create optional transnational forms for companies, it can create optional transnational forms for living systems. If legal systems can reduce friction for capital crossing borders, they can reduce friction for ecological obligations crossing borders. If institutional imagination can harmonize markets, it can also harmonize duties of restoration, migratory protection, acoustic integrity, sentient welfare, and ecological repair.</p>
+        <p>In a European setting, one might imagine a <strong>European Ecological Trust Regime</strong>: a legal form through which participating jurisdictions recognize a transnational fiduciary entity capable of representing an ecological subject. The Whale Nation could become the first such entity. It would not erase national authority. It would allow national authority to recognize an additional subject to whom duties are owed.</p>
+        <p>Beyond Europe, the same idea opens toward a wider family of <strong>World Nation</strong> regimes. This would not be a world government or a global sovereign. It would be a portable architecture for ecological subjects that exceed the map: whale corridors, river basins, coral reefs, rainforests, salmon migrations, polar ice systems, atmospheric rivers, pollinator routes, fungal networks, ocean currents.</p>
+        <p>Each would differ because each living system has its own form of relation. But the grammar could be shared: recognition, fiduciary trust, standing, digital memory, legal hearing, restoration finance, ecological diplomacy, and accountability.</p>
+        <p>The Whale Nation would be the first prototype of this family.</p>
+      </div>
+    </section>
+
+    <section class="section" id="trust">
+      <div class="content">
+        <div class="section-number">06 · Trust</div>
+        <h2>The Transnational Whale Trust</h2>
+        <p>At the center of the regime would sit the <strong>Transnational Whale Trust</strong>.</p>
+        <p>The Trust is not imagined as the owner of whales. It is not the proprietor of the ocean. It is not a charity dependent on benevolence. It is not merely an advocacy organization. It is not a corporation with ecological branding. It is a fiduciary institution through which rights, duties, funds, data, claims, standards, participatory processes, and restoration obligations are held for the benefit of whales and the marine relations necessary to their flourishing.</p>
+        <p>The Trust would be the body through which the Whale Nation acts.</p>
+        <p>It would receive funds, but not for private gain. It would hold data, but not as surveillance property. It would bring claims, but not for institutional vanity. It would issue standards, but not as a technocratic empire. It would enter agreements, but only in fidelity to its constitutional purpose. It would receive recognition, but recognition would give it duties as much as powers.</p>
+        <p>The guardians of the Trust would not represent whales as if whales had voted for them. They would hold fiduciary obligations toward the conditions of whale life. Their authority would not arise from electoral majority, but from legal recognition, ecological evidence, Indigenous and coastal participation, sentience-sensitive procedure, transparent finance, and demonstrated fidelity to restoration.</p>
+        <p>The Trust’s legitimacy would therefore be fiduciary rather than possessive. It would be accountable not because whales authorize it in the human political sense, but because it is bound by enforceable duties toward the whale-world.</p>
+        <p>The Trust would not say, simply, “We speak for whales.” That would be too final, too human, too prone to capture. It would say: “We are bound to create the conditions under which whale life, whale distress, whale movement, whale communication, and whale flourishing can become legally audible.”</p>
+        <div class="grid-two">
+          <div class="card">
+            <div class="label">Fiduciary purpose</div>
+            <h3>Obligation, not ownership</h3>
+            <p>The Trust holds duties toward whales and their life-support systems. It does not own whales, habitats, routes, songs, data, or ecological relations.</p>
+          </div>
+          <div class="card">
+            <div class="label">Constitutional posture</div>
+            <h3>Standing, not dominion</h3>
+            <p>The Trust’s power is the capacity to appear, claim, finance, translate, negotiate, and repair. Its authority is relational and fiduciary.</p>
+          </div>
+        </div>
+        <p>The Trust does not possess the whale-world.</p>
+        <p>It answers to it.</p>
+      </div>
+    </section>
+
+    <section class="section" id="territory">
+      <div class="content">
+        <div class="section-number">07 · Territory</div>
+        <h2>Territory as relation</h2>
+        <p>The territory of the Whale Nation would not be a bounded possession.</p>
+        <p>It would be the living field of relations necessary for whale life.</p>
+        <p>This field would include migration routes, feeding grounds, breeding grounds, calving waters, resting places, acoustic habitats, prey systems, nutrient cycles, whale-fall ecologies, currents, temperature patterns, plankton dynamics, social structures, communication fields, and the human systems that affect them. It would include shipping corridors, fishing grounds, port expansions, sonar zones, pollution pathways, seabed extraction, climate impacts, and financial arrangements that make harmful activity possible.</p>
+        <p>This territory is fuzzy, but not meaningless. It is dynamic, but not arbitrary. It is relational, but not vague.</p>
+        <div class="pull light">The old state draws a line and calls it jurisdiction. The Whale Nation maps dependency and calls it obligation.</div>
+        <p>A whale’s territory is not simply where its body is located at a given moment. Its territory is the network of conditions without which its life cannot continue. If a shipping lane predictably kills whales, that lane enters the field of legal concern. If fishing gear predictably entangles whales, that practice becomes part of the field of obligation. If noise interrupts communication, acoustic space becomes juridically significant. If climate change alters prey abundance, the causes and consequences of that alteration enter the regime’s field of claim.</p>
+        <p>This does not abolish existing state territory. It overlays it with another kind of legal relation. A state may still govern its waters, ports, vessels, and regulations. But through recognition, it acknowledges that certain decisions within its jurisdiction affect a transnational ecological subject whose standing must be considered.</p>
+        <p>The Whale Nation does not say: this ocean belongs to us.</p>
+        <p>It says: this relation asks something of us.</p>
+      </div>
+    </section>
+
+    <section class="section dark" id="sentience">
+      <div class="content">
+        <div class="section-number">08 · Sentience</div>
+        <h2>Sentient ecological jurisprudence</h2>
+        <p>The Whale Nation invites law to take sentience seriously.</p>
+        <p>Whales are not merely ecological indicators. They are not only units of biodiversity, carbon-cycling agents, or charismatic symbols. They are sentient, socially complex, communicative beings capable of distress, injury, learning, relation, deprivation, and flourishing. A regime that recognizes whales only as ecological functions would remain incomplete. It would protect the system while failing to hear the subject within it.</p>
+        <p>This opens a field that might be called <strong>sentient ecological jurisprudence</strong>, or, in a broader sense, <strong>neurological law</strong>. This is not neurolaw in the narrow sense of using neuroscience to assess human responsibility, capacity, or culpability. It is a wider jurisprudence in which nervous systems, suffering, distress, communication, and flourishing become legally relevant beyond the human.</p>
+        <p>The invitation draws support from existing legal movement. Article 13 of the Treaty on the Functioning of the European Union recognizes animals as sentient beings and requires full regard to animal welfare requirements in relevant policy areas.<sup><a href="#source-3">3</a></sup> The United Kingdom’s Animal Welfare (Sentience) Act 2022 establishes an Animal Sentience Committee to consider the welfare implications of government policy for animals as sentient beings.<sup><a href="#source-4">4</a></sup> These are not yet whale constitutionalism, but they show that sentience has begun to enter legal architecture.</p>
+        <p>The distinction must be made carefully. A whale may suffer in a bodily and sentient sense. It may experience distress from entanglement, injury, hunger, noise, social disruption, or separation. An ecosystem, by contrast, does not have a single centralized nervous system in the way a whale does. It would be careless to say that an ecosystem feels pain as a whale feels pain.</p>
+        <p>But law can recognize more than one kind of injury.</p>
+        <p>There is literal sentient suffering within ecosystems. There is relational suffering when the conditions of life break down: when prey collapses, when migration is blocked, when communication is drowned, when reproduction fails, when social structures are fractured. And there is juridical ecosystem injury: degradation, fragmentation, contamination, acoustic disruption, loss of resilience, and collapse of the relations necessary for life.</p>
+        <p>The Whale Nation invites law to hold these distinctions without flattening them. It need not pretend that ecosystems are nervous systems. It can recognize both the pain of sentient beings and the legally cognizable injury of the ecological relations that sustain them.</p>
+        <div class="pull">The old law asks whether property has been damaged. The Whale Nation asks whether a living relation has been made to suffer.</div>
+      </div>
+    </section>
+
+    <section class="section" id="speaking">
+      <div class="content">
+        <div class="section-number">09 · Communication</div>
+        <h2>Speaking with whales</h2>
+        <p>The possibility of speaking with whales, even partially, changes the meaning of representation.</p>
+        <p>This paper does not assume that humans can fully translate whale language, receive whale testimony, or converse with whales as if they were human witnesses. That would be premature. But it begins from a more modest and more important recognition: whales communicate, and emerging sciences of listening, machine learning, bioacoustics, behavioral interpretation, and marine observation may deepen the capacity of human institutions to receive whale signals.</p>
+        <p>Project CETI describes itself as applying advanced machine learning and robotics to listen to and translate sperm whale communication.<sup><a href="#source-5">5</a></sup> A 2024 <em>Nature Communications</em> study found contextual and combinatorial structure in sperm whale codas while also noting that much remains unknown about the information-carrying capacity of the system.<sup><a href="#source-6">6</a></sup> These scientific developments do not give law a finished whale language. They give law a reason to stop treating whales as simply silent.</p>
+        <p>This possibility is constitutionally significant.</p>
+        <p>If whales communicate, then representation cannot remain purely paternalistic. Guardians cannot simply speak for whales as silent beneficiaries. A serious Whale Trust would need to become an institution of structured listening. Whale movement, song, stress markers, behavioral changes, social patterns, reproductive disruption, avoidance, silence, mortality events, and acoustic interference would become part of the legal record.</p>
+        <p>These signals would not be treated as mere background data. They would be received as expressions of relation, distress, adaptation, and need.</p>
+        <p>The question would no longer be only: what do humans think whales require?</p>
+        <p>It would become: what are whales communicating, through the best available means, about the conditions under which they are living?</p>
+        <p>This is not yet full interspecies dialogue. It is something more modest and perhaps more transformative: a movement from representation without listening toward representation through listening.</p>
+        <p>The Whale Nation invites law to become less of a speaking machine and more of an organ of hearing.</p>
+      </div>
+    </section>
+
+    <section class="section" id="participation">
+      <div class="content">
+        <div class="section-number">10 · Participation</div>
+        <h2>Participation beyond human speech</h2>
+        <p>Modern legal participation is built around human forms: hearings, consultation periods, witness statements, voting, representation, objection, petition, consent. These forms remain necessary, but they are not enough for a world in which many of those most affected by decisions cannot enter the room in human language.</p>
+        <p>The Whale Nation invites the development of <strong>more-than-human participation protocols</strong>.</p>
+        <p>Before a port expands, the process might receive evidence of whale presence, acoustic impact, migration risk, cumulative noise, strike probability, and effects on prey systems. Before a shipping corridor is authorized, the Trust might submit evidence of whale movement, avoidance, mortality risk, and communication disruption. Before sonar or seismic activity is permitted, the analysis might include sentient distress and acoustic habitat. Before fisheries policy is adopted, bycatch foreseeability, gear transition, and social-ecological impact might be treated as central rather than peripheral.</p>
+        <p>Whale participation does not mean that a whale appears in a chamber. It means that no decision materially affecting whale relations is complete unless the best available means of receiving whale signals, dependencies, welfare, and ecological conditions have entered the process.</p>
+        <p>Participation becomes less about who can master the procedural language of the state, and more about whether the decision-making system has become capable of hearing affected life.</p>
+        <div class="pull light">The old legal order asks who can speak. The Whale Nation asks what must be heard.</div>
+      </div>
+    </section>
+
+    <section class="section" id="translation">
+      <div class="content">
+        <div class="section-number">11 · Translation</div>
+        <h2>The Trust as a court of translation</h2>
+        <p>The Transnational Whale Trust can be imagined as a court of translation.</p>
+        <p>Not a court in the strict judicial sense, but an institution that receives signals from one order of life and translates them into claims another order of law can understand. It translates whale movement into jurisdiction. It translates whale distress into injury. It translates song disruption into acoustic harm. It translates migration into territory. It translates prey collapse into ecological debt. It translates pain into duty. It translates silence into warning.</p>
+        <p>But translation is dangerous if it becomes possession.</p>
+        <p>The Trust should never claim that because it has translated a whale signal into a legal category, it has exhausted the meaning of the whale. A whale’s life exceeds evidence. A whale’s song exceeds transcription. A whale’s suffering exceeds remedy. A whale’s flourishing exceeds institutional metrics.</p>
+        <p>The Trust would therefore practice humble translation. It would not ventriloquize whales. It would not claim final authority over their meaning. It would build a disciplined process through which whale life can become legally audible while remaining more than the law can capture.</p>
+        <p>Representation becomes less like substitution and more like translation under fiduciary constraint.</p>
+        <p>That is a different legal imagination. It does not require the nonhuman subject to speak like a human. It invites law to learn how to listen differently.</p>
+
+        <figure class="diagram" aria-label="Legal hearing stack diagram">
+          <svg viewBox="0 0 960 520" role="img">
+            <defs>
+              <pattern id="hatchLegal" width="9" height="9" patternUnits="userSpaceOnUse">
+                <path d="M0 9 L9 0" class="xco-stroke-ember-thin"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="960" height="520" class="xco-fill-paper"/>
+            <text x="40" y="52" class="xco-text-title">Legal hearing stack</text>
+            <text x="40" y="82" class="xco-text-ember">[inference] participation changes when signals do not arrive as human speech.</text>
+            <rect x="94" y="130" width="210" height="62" class="xco-fill-ember xco-stroke-ink"/>
+            <text x="116" y="156" class="xco-text-paper">risk node</text>
+            <text x="116" y="175" class="xco-text-paper">institutional deafness</text>
+            <path d="M304 161 L390 161" class="xco-line"/>
+
+            <rect x="390" y="120" width="210" height="82" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="412" y="150" class="xco-text-ink">whale signal</text>
+            <text x="412" y="171" class="xco-text-ink">movement / song / stress</text>
+            <line x1="412" y1="186" x2="460" y2="186" class="xco-line"/>
+            <line x1="412" y1="195" x2="486" y2="195" class="xco-line"/>
+
+            <rect x="390" y="236" width="210" height="82" fill="url(#hatchLegal)" class="xco-stroke-ink"/>
+            <text x="412" y="266" class="xco-text-ink">translation</text>
+            <text x="412" y="287" class="xco-text-ink">fiduciary constraint</text>
+            <path d="M495 202 L495 236" class="xco-line"/>
+
+            <rect x="390" y="352" width="210" height="82" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="412" y="382" class="xco-text-ink">legal claim</text>
+            <text x="412" y="403" class="xco-text-ink">injury / duty / remedy</text>
+            <path d="M495 318 L495 352" class="xco-line"/>
+
+            <rect x="690" y="236" width="190" height="82" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="710" y="266" class="xco-text-ink">participation</text>
+            <text x="710" y="287" class="xco-text-ink">not speech alone</text>
+            <path d="M600 277 L690 277" class="xco-line"/>
+            <line x1="710" y1="303" x2="756" y2="303" class="xco-line"/>
+            <line x1="710" y1="312" x2="774" y2="312" class="xco-line"/>
+            <line x1="710" y1="321" x2="744" y2="321" class="xco-line"/>
+
+            <line x1="82" y1="470" x2="900" y2="470" class="xco-line-dash"/>
+            <text x="82" y="493" class="xco-text-ember">scale marker: body → relation → forum → remedy</text>
+          </svg>
+          <figcaption class="diagram-caption">Diagram 02 · Legal hearing: signals enter law through translation under fiduciary constraint, not through human speech alone.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section dark" id="digital">
+      <div class="content">
+        <div class="section-number">12 · Digital memory</div>
+        <h2>Digital autonomy as fiduciary memory</h2>
+        <p>The Whale Trust would need digital infrastructure because the ecology it attends to is mobile, distributed, data-rich, and changing.</p>
+        <p>Digital autonomy, in this context, does not mean that artificial intelligence governs whales. It does not mean replacing judgment, law, Indigenous knowledge, community observation, or scientific interpretation with a model. It means that the Trust has the capacity to sense, remember, learn, verify, map, warn, and trigger institutional attention.</p>
+        <p>A static institution cannot adequately respond to migratory life. A paper constitution cannot track shifting routes, changing prey systems, evolving shipping risks, acoustic harm, ocean warming, illegal fishing, or restoration outcomes. The Trust would need something like a living nervous system.</p>
+        <p>This digital layer might gather data from satellite tracking, acoustic sensors, vessel identification systems, fisheries monitoring, environmental DNA, oceanographic models, climate projections, mortality records, community reporting, Indigenous and local knowledge, port data, insurance claims, legal proceedings, restoration projects, and whale communication research. Its purpose would not be to create a totalizing database of the sea. Its purpose would be to build an accountable institutional memory of relation and harm.</p>
+        <p>The digital system would help maintain a living map of the Whale Nation’s field of obligation. It would show where whales are moving, where calves are vulnerable, where song is being drowned, where ship-strike risk is rising, where entanglement is foreseeable, where prey is collapsing, where restoration is succeeding, where law is failing, and where intervention is most urgent.</p>
+        <p>Yet the invitation is not to enthrone the model. A digital Trust could become technocratic. It could allow experts to overrule communities. It could convert ecological life into dashboards. It could privatize data. It could mistake prediction for wisdom. It could create a new enclosure, this time through information rather than territory.</p>
+        <p>So the digital system would need to remain accountable, auditable, contestable, plural in knowledge, and subordinate to fiduciary duty. Indigenous data sovereignty would need respect. Sensitive ecological information would need protection. Models might recommend, warn, classify, and verify, but they would not rule.</p>
+        <div class="pull">The system may learn, but the model shall not become sovereign.</div>
+      </div>
+    </section>
+
+    <section class="section" id="learning">
+      <div class="content">
+        <div class="section-number">13 · Learning constitution</div>
+        <h2>The learning constitution</h2>
+        <p>The Whale Nation invites us to imagine a constitution that learns.</p>
+        <p>Most constitutions are built around relative stability. They define offices, rights, powers, procedures, and limits. But ecological life is not stable in that way. Migration routes shift. Waters warm. Prey systems reorganize. Ice retreats. Noise expands. Shipping intensifies. Risk moves. Communication patterns may change under stress. What was once peripheral may become central. What was once safe may become dangerous.</p>
+        <p>A constitution for the Whale Nation would therefore combine stable purpose with adaptive application.</p>
+        <p>Its purpose would remain constant: whale flourishing, marine restoration, reduced human-caused mortality, acoustic integrity, migratory continuity, prey abundance, sentient welfare, Indigenous and coastal authority, intergenerational justice, and protection against the commodification of life.</p>
+        <p>But its practical judgments would change as the whale-world changes. If whales move, the Trust’s maps move. If risk changes, standards change. If restoration fails, strategy changes. If science reveals new harm, legal claims evolve. If communities identify impacts that models have missed, the Trust listens and revises. If whale signals indicate distress before population collapse appears in the data, law need not wait until death becomes the only evidence it can understand.</p>
+        <p>This is not improvisation without discipline. It is constitutional adaptation. Major changes in risk classification, investment priority, legal strategy, ecological boundary, or participatory protocol would be reasoned, recorded, reviewable, and open to challenge.</p>
+        <p>The Whale Nation invites a constitutionalism of attention: stable in duty, adaptive in response.</p>
+      </div>
+    </section>
+
+    <section class="section" id="governance">
+      <div class="content">
+        <div class="section-number">14 · Governance</div>
+        <h2>Governance as plural guardianship</h2>
+        <p>The Whale Trust would not be legitimate if it were governed by a single kind of knowledge.</p>
+        <p>It invites plural guardianship.</p>
+        <p>A <strong>Guardian Council</strong> would hold fiduciary responsibility for the Trust’s purpose. It would not own the whale-world or govern it as a parliament. It would hold responsibility for keeping the institution faithful to whale flourishing.</p>
+        <p>An <strong>Indigenous and Coastal Peoples Chamber</strong> would carry constitutional authority, not merely advisory status. Many communities have long-standing relations, laws, stories, ceremonies, economies, responsibilities, and forms of knowledge connected to whales and the sea. A Whale Nation that ignored these relations would repeat the abstraction it seeks to overcome.</p>
+        <p>A <strong>Scientific and Sentience Chamber</strong> would interpret ecological evidence, marine science, animal welfare, bioacoustics, behavioral signals, neurological indicators of distress, population trends, and uncertainty. It would not monopolize truth. It would serve the Trust by making harm, risk, suffering, and recovery more legible.</p>
+        <p>A <strong>Digital Stewardship Office</strong> would govern data, models, cybersecurity, access rights, ecological sensitivity, Indigenous data sovereignty, and auditability.</p>
+        <p>A <strong>Legal Office</strong> would bring claims, intervene in proceedings, seek remedies, negotiate settlements, participate in environmental assessments, and articulate the obligations arising from whale relations.</p>
+        <p>A <strong>Treasury or Whale Reserve and Development Bank</strong> would manage restoration finance, sovereign ecological commitments, bonds, settlement instruments, guarantees, grants, insurance tools, and long-term ecological investment.</p>
+        <p>An <strong>Audit and Integrity Tribunal</strong> would examine conflicts of interest, donor capture, model failure, greenwashing, misuse of funds, false accounting, and breach of fiduciary duty.</p>
+        <div class="pull light">The Trust would be powerful enough to act, but constitutionally structured enough to distrust itself.</div>
+        <p>That is the difference between an institution and a beautiful metaphor.</p>
+      </div>
+    </section>
+
+    <section class="section dark" id="diplomacy">
+      <div class="content">
+        <div class="section-number">15 · Ecological diplomacy</div>
+        <h2>Ecological diplomacy</h2>
+        <p>The Whale Nation invites a new kind of diplomacy.</p>
+        <p>Classical diplomacy takes place among states. It concerns territory, security, trade, resources, migration, conflict, and strategic interest. The Whale Nation does not abolish that world. It enters beside it with a different diplomatic subject: a living system whose claims cross borders, sectors, species, markets, and generations.</p>
+        <p>A port might negotiate with the Trust over vessel speed, routing, monitoring, and acoustic disturbance. A navy might account for sonar use in whale acoustic territories. A fishery might negotiate gear transition and entanglement reduction. An insurer might integrate the Trust’s risk maps into pricing. A development bank might co-finance restoration through the Trust. A debtor state might restructure obligations through a whale restoration compact. A court might require consultation with the Trust before approving offshore development. A treaty process might rely on the Trust’s data and fiduciary analysis.</p>
+        <p>This would not be diplomacy as ceremony. It would be diplomacy as governance infrastructure.</p>
+        <p>It would operate through standards, permits, port rules, contracts, insurance terms, litigation settlements, restoration compacts, data-sharing agreements, financial instruments, and treaty protocols. It would bring the more-than-human world into the ordinary machinery of decision.</p>
+        <p>The BBNJ Agreement, which entered into force in January 2026, creates a strengthened legal environment for marine biodiversity beyond national jurisdiction, including area-based management tools, environmental impact assessments, marine genetic resources, and capacity-building.<sup><a href="#source-7">7</a></sup> The Whale Nation would not be created by that treaty, but it could become a BBNJ-compatible vehicle for data, claims, restoration, and ecological representation.</p>
+        <p>Ecological diplomacy is not diplomacy about nature as scenery or resource.</p>
+        <p>It is diplomacy with legal subjects constituted around living systems.</p>
+        <p>The Whale Nation is the first embassy of that idea.</p>
+      </div>
+    </section>
+
+    <section class="section" id="balance-sheet">
+      <div class="content">
+        <div class="section-number">16 · Accounting</div>
+        <h2>The restoration balance sheet</h2>
+        <p>The Whale Nation invites a different kind of accounting.</p>
+        <p>The inherited economy sees the value of cargo, but not the cost of a shattered acoustic corridor. It sees the revenue of a port, but not the death of a whale as constitutional injury. It sees fisheries output, but not the relational loss caused by entanglement. It sees carbon markets, but not the irreducibility of a living being. It sees risk as a price, but not always as a duty. It sees welfare as sentiment, but not suffering as evidence of violated relation.</p>
+        <p>The Whale Trust would hold a <strong>restoration balance sheet</strong>.</p>
+        <p>Its assets would not be assets in the ownership sense. They would be fiduciary assets: conditions of life under recognized protection. These might include viable populations, safe migration routes, protected calving grounds, feeding abundance, acoustic integrity, reduced ship-strike risk, reduced entanglement, cleaner waters, restored prey systems, legal standing, participatory protocols, and durable restoration finance.</p>
+        <p>Its liabilities would include extinction risk, accumulated mortality, acoustic degradation, bycatch exposure, vessel-strike danger, prey collapse, climate stress, toxic contamination, plastic burden, legal non-compliance, underfunded restoration obligations, and patterns of sentient distress produced by human systems.</p>
+        <p>Such accounting is constitutional because to account is to decide what counts. To place whale relation into accounting is to say that harm to the whale-world is not an externality. It is a debt.</p>
+        <p>The proposal can draw from the growing infrastructure of environmental-economic accounting. The UN System of Environmental-Economic Accounting Ecosystem Accounting was adopted by the UN Statistical Commission in 2021 and provides a statistical framework for ecosystem extent, condition, services, and assets; ecosystem accounts have already informed policy in more than 34 countries.<sup><a href="#source-8">8</a></sup> The Whale Nation would extend the accounting imagination from measurement toward standing, fiduciary duty, and restoration finance.</p>
+        <p>Where harm is foreseeable, duty arises. Where damage accumulates, liability accumulates. Where suffering is knowable, denial becomes harder. Where restoration is possible, obligation becomes concrete. Where recovery occurs, value has been created for the living world, not merely for a balance sheet.</p>
+        <p>The purpose is not to reduce whales to numbers.</p>
+        <p>It is to prevent systems of power from hiding behind the absence of numbers.</p>
+      </div>
+    </section>
+
+    <section class="section" id="bank">
+      <div class="content">
+        <div class="section-number">17 · Reserve and development bank</div>
+        <h2>The Whale Reserve and Development Bank</h2>
+        <p>Recognition without material capacity risks becoming ceremony.</p>
+        <p>A recognized subject with no treasury may be heard, but not effective. A Trust with standing but no resources may name harm, but not repair it. A regime dependent only on charity may become vulnerable to donor preference, institutional fashion, and benevolence without obligation.</p>
+        <p>The Whale Nation therefore invites the creation of a <strong>Whale Reserve and Development Bank</strong>.</p>
+        <p>This institution would be hybrid. It would be a development bank because it finances restoration, transition, monitoring, litigation, whale-safe infrastructure, coastal stewardship, and ecological repair. It would be a reserve facility because it receives sovereign commitments, holds backing assets, manages collateral eligibility, and supports settlement instruments. It would be a monetary prototype because it asks whether recognized ecological futures can be made liquid in the present.</p>
+        <p>It would not begin as a conventional central bank. A central bank normally presupposes legal tender, a banking system, monetary policy authority, a fiscal counterpart, and a defined monetary jurisdiction. The Whale Nation begins elsewhere. It begins with restoration finance and fiduciary liquidity.</p>
+        <p>Its task would be to convert recognition into capital, capital into restoration, and restoration into verified ecological value.</p>
+        <p>The deeper financial imagination is not that whales become assets to be owned. It is that obligations toward whale flourishing become capable of being financed.</p>
+        <p>The Bank is not a machine for extracting yield from life.</p>
+        <p>It is an institution for making duties liquid.</p>
+
+        <figure class="diagram" aria-label="Monetary architecture diagram">
+          <svg viewBox="0 0 960 560" role="img">
+            <defs>
+              <pattern id="hatchMoney" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M0 10 L10 0" class="xco-stroke-ember-thin"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="960" height="560" class="xco-fill-paper"/>
+            <text x="40" y="52" class="xco-text-title">Restoration-backed monetary infrastructure</text>
+            <line x1="40" y1="88" x2="920" y2="88" class="xco-line"/>
+            <text x="40" y="112" class="xco-text-ember">sovereign layer</text>
+            <line x1="40" y1="180" x2="920" y2="180" class="xco-line-dash"/>
+            <text x="40" y="204" class="xco-text-ember">reserve layer</text>
+            <line x1="40" y1="306" x2="920" y2="306" class="xco-line-dash"/>
+            <text x="40" y="330" class="xco-text-ember">instrument layer</text>
+            <line x1="40" y1="440" x2="920" y2="440" class="xco-line-dash"/>
+            <text x="40" y="464" class="xco-text-ember">ecological layer</text>
+
+            <rect x="130" y="118" width="245" height="68" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="154" y="145" class="xco-text-ink">Sovereign Ecological</text>
+            <text x="154" y="166" class="xco-text-ink">Drawing Rights</text>
+            <line x1="154" y1="181" x2="200" y2="181" class="xco-line"/>
+            <line x1="154" y1="190" x2="218" y2="190" class="xco-line"/>
+
+            <rect x="470" y="118" width="245" height="68" class="xco-fill-ember xco-stroke-ink"/>
+            <text x="494" y="145" class="xco-text-paper">recognition capital</text>
+            <text x="494" y="166" class="xco-text-paper">guarantees / commitments</text>
+
+            <rect x="260" y="236" width="350" height="76" fill="url(#hatchMoney)" class="xco-stroke-ink"/>
+            <text x="286" y="266" class="xco-text-ink">Whale Reserve + Development Bank</text>
+            <text x="286" y="289" class="xco-text-ink">liquidity discipline / fiduciary mandate</text>
+
+            <path d="M252 186 L366 236" class="xco-line"/>
+            <path d="M592 186 L504 236" class="xco-line"/>
+
+            <rect x="100" y="358" width="250" height="70" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="124" y="386" class="xco-text-ink">Whale Settlement Coin</text>
+            <text x="124" y="407" class="xco-text-ink">stable / liquid backing</text>
+            <line x1="124" y1="422" x2="170" y2="422" class="xco-line"/>
+            <line x1="124" y1="431" x2="188" y2="431" class="xco-line"/>
+            <line x1="124" y1="440" x2="158" y2="440" class="xco-line"/>
+
+            <rect x="520" y="358" width="270" height="70" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="544" y="386" class="xco-text-ink">Whale Restoration Note</text>
+            <text x="544" y="407" class="xco-text-ink">risk-bearing future claim</text>
+            <line x1="544" y1="422" x2="590" y2="422" class="xco-line"/>
+
+            <path d="M372 312 L244 358" class="xco-line"/>
+            <path d="M505 312 L642 358" class="xco-line"/>
+
+            <rect x="214" y="482" width="540" height="48" class="xco-fill-ember xco-stroke-ink"/>
+            <text x="238" y="512" class="xco-text-paper">verified restoration: carbon / biodiversity / acoustic integrity / blue-food-system resilience</text>
+            <path d="M224 428 L360 482" class="xco-line"/>
+            <path d="M656 428 L610 482" class="xco-line"/>
+            <text x="40" y="548" class="xco-text-ember">[rule] stable instruments settle; restoration instruments carry ecological risk.</text>
+          </svg>
+          <figcaption class="diagram-caption">Diagram 03 · Monetary architecture: ecological uncertainty may be financed, but it must not be disguised as monetary certainty.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="sedrs">
+      <div class="content">
+        <div class="section-number">18 · SEDRs</div>
+        <h2>Sovereign Ecological Drawing Rights</h2>
+        <p>The first capital layer could be called <strong>Sovereign Ecological Drawing Rights</strong>, or <strong>SEDRs</strong>.</p>
+        <p>These would be distinct from IMF Special Drawing Rights. IMF SDRs are an international reserve asset created by the IMF to supplement official reserves; the IMF states that the SDR is not a currency but a potential claim on freely usable currencies of IMF members, and SDR allocations are made to IMF members participating in the SDR Department.<sup><a href="#source-9">9</a></sup> SEDRs would not be IMF SDRs. They would be treaty-created or statute-created instruments issued by recognizing states to the Whale Reserve and Development Bank. They would function as drawing rights against sovereign ecological commitments.</p>
+        <p>Their meaning would be simple but powerful: a state recognizes that verified whale restoration, marine ecosystem recovery, carbon sequestration, acoustic protection, biodiversity improvement, and blue-food-system resilience have value on its ecological balance sheet, and it therefore authorizes the Whale Bank to draw against a defined sovereign commitment.</p>
+        <p>That commitment might take the form of paid-in capital, callable capital, guarantees, reserve-backed credit lines, outcome payments, tax-backed restoration contracts, or future appropriations.</p>
+        <p>The SEDR is the bridge between recognition and liquidity.</p>
+        <p>It says that the whale-world is not a charity case. It is recognized ecological infrastructure whose restoration can justify sovereign balance-sheet support.</p>
+        <p>A state would not merely donate to the Whale Trust. It would acknowledge that the restoration of whale relations improves its own ecological position, climate credibility, biodiversity commitments, blue economy resilience, and intergenerational balance sheet.</p>
+        <p>The act of recognition becomes a financial event.</p>
+      </div>
+    </section>
+
+    <section class="section" id="future-claims">
+      <div class="content">
+        <div class="section-number">19 · Future claims</div>
+        <h2>Future ecological claims</h2>
+        <p>The second financial layer would involve future ecological claims.</p>
+        <p>The Whale Bank might issue instruments backed by future, measurable benefits from whale restoration and marine ecosystem recovery: verified carbon sequestration, enhanced nutrient cycling, healthier food webs, blue-food-system resilience, reduced ship-strike risk, reduced insurance losses, improved biodiversity outcomes, acoustic restoration, and avoided future costs.</p>
+        <p>But this invitation requires discipline.</p>
+        <p>Future ecological benefits are not automatically money. They are uncertain ecological receivables. They require measurement, verification, additionality, permanence assessment, risk buffers, legal assignment, discounting, and protection against double counting. The Integrity Council for the Voluntary Carbon Market’s Core Carbon Principles, for example, emphasize robust governance, tracking, transparency, independent validation and verification, additionality, permanence, robust quantification, sustainable development safeguards, and no double counting.<sup><a href="#source-10">10</a></sup></p>
+        <p>Carbon should not become the whole story. A whale is not a carbon instrument. Whale restoration may contribute to carbon storage and nutrient cycling; NOAA describes whales as helping mitigate climate impacts through carbon storage in their bodies and nutrient transport that benefits ocean food chains.<sup><a href="#source-11">11</a></sup> But the richer claim is that whales are living marine infrastructure. Their flourishing may support biodiversity, oceanic resilience, cultural continuity, food-web integrity, acoustic ecology, and long-term planetary stability.</p>
+        <p>The “protein benefit” is best understood as <strong>blue-food-system resilience</strong>. It should not be reduced to a crude equation in which more whales automatically mean more fish or more protein. It is a wider ecological claim about healthier food webs, more resilient fisheries, and more durable aquatic food systems. FAO’s Blue Transformation framing situates aquatic food systems within food security, nutrition, environmental recovery, and sustainable development.<sup><a href="#source-12">12</a></sup></p>
+        <p>The future collateral stack would therefore be plural: carbon, biodiversity, acoustic restoration, risk reduction, avoided costs, food-system resilience, and social-ecological stewardship.</p>
+        <p>The future can be financed, but it must not be falsified.</p>
+      </div>
+    </section>
+
+    <section class="section dark" id="coins">
+      <div class="content">
+        <div class="section-number">20 · Settlement instruments</div>
+        <h2>Settlement coins and restoration notes</h2>
+        <p>The monetary layer must be handled with particular care.</p>
+        <p>A stable settlement token cannot credibly be backed mainly by speculative future ecological benefits. That would confuse present redemption with future uncertainty. Holders might demand redemption now, while ecological outcomes may arrive years later, underperform, reverse, or be disputed.</p>
+        <p>Regulatory developments point toward the importance of stablecoin backing, redemption, supervision, and transparency. The EU’s Markets in Crypto-Assets Regulation creates uniform rules for crypto-assets, including asset-referenced tokens and e-money tokens, with transparency, disclosure, authorization, and supervision requirements.<sup><a href="#source-13">13</a></sup> The Bank of England’s consultation on systemic sterling-denominated stablecoins addresses backing assets and redemption resilience, including proposals for central bank deposits and short-term UK government debt as backing assets.<sup><a href="#source-14">14</a></sup> The Financial Stability Board’s global stablecoin recommendations emphasize consistent regulation and oversight to address financial stability risks.<sup><a href="#source-15">15</a></sup></p>
+        <p>The Whale Bank would therefore invite a two-instrument architecture.</p>
+        <p>The first instrument would be a <strong>Whale Settlement Coin</strong>. This would be the stable, redeemable settlement instrument. It would be backed by liquid reserves, high-quality sovereign instruments, central bank deposits where available, high-quality bank deposits, and enforceable sovereign guarantees. It would be used for payments, grants, procurement, insurance settlement, restoration disbursement, and cross-border coordination.</p>
+        <p>The second instrument would be a <strong>Whale Restoration Note</strong>, or <strong>Ecological Future Claim Token</strong>. This would be risk-bearing. It would be backed by future ecological receivables: carbon credits, biodiversity outcomes, acoustic restoration, port levies, insurance savings, sovereign ecological payments, blue-food-system benefits, and restoration performance contracts. It might pay out if restoration succeeds, but it would not pretend to be perfectly stable.</p>
+        <div class="grid-two">
+          <div class="card">
+            <div class="label">Stable instrument</div>
+            <h3>Whale Settlement Coin</h3>
+            <p>Used for settlement, disbursement, procurement, grants, insurance settlement, and cross-border coordination. Backing must be liquid and redeemable.</p>
+          </div>
+          <div class="card">
+            <div class="label">Risk-bearing instrument</div>
+            <h3>Whale Restoration Note</h3>
+            <p>Used to finance future ecological outcomes. It carries restoration risk honestly and does not pretend to be monetary certainty.</p>
+          </div>
+        </div>
+        <p>The stablecoin settles.</p>
+        <p>The restoration note carries risk.</p>
+        <p>This distinction is foundational. Ecological uncertainty may be financed, but it should not be disguised as monetary certainty.</p>
+        <p>The Whale Nation’s monetary proposition is therefore not a reckless nature-backed coin. It is a disciplined infrastructure in which stable settlement is backed by liquid assets, while future restoration benefits are financed through instruments that honestly carry ecological risk.</p>
+      </div>
+    </section>
+
+    <section class="section" id="repair">
+      <div class="content">
+        <div class="section-number">21 · Monetary philosophy</div>
+        <h2>Money as a claim on repair</h2>
+        <p>The deeper monetary invitation is profound.</p>
+        <p>The inherited monetary order issues present liquidity against confidence in future production, future taxation, future growth, future labor, future extraction, and future state capacity. Money is, in this sense, a claim on what the future economy will produce.</p>
+        <p>The Whale Nation asks whether money can also become a claim on what the future world will repair.</p>
+        <p>It asks whether present liquidity can be issued not only against future extraction, but against future restoration. It asks whether ecological obligations can be made credible enough to finance now. It asks whether a sovereign balance sheet can recognize not only infrastructure in the form of roads, ports, energy grids, and military assets, but living infrastructure in the form of migration corridors, acoustic habitats, recovering populations, resilient food webs, and restored marine systems.</p>
+        <p>This is an ecological monetary constitution.</p>
+        <p>It does not turn whales into property. It turns duties toward whales into financial capacity.</p>
+        <p>It does not monetize life in order to own it. It monetizes obligation in order to restore it.</p>
+        <p>The Whale Reserve and Development Bank would therefore represent a new hybrid: part development bank, part reserve facility, part ecological accounting institution, part monetary prototype. Its purpose would be to make restoration liquid without making life private.</p>
+      </div>
+    </section>
+
+    <section class="section" id="claims">
+      <div class="content">
+        <div class="section-number">22 · Claims</div>
+        <h2>Claims, interruption, and legal presence</h2>
+        <p>The Whale Trust would need to be capable of making claims.</p>
+        <p>This is what separates symbolic recognition from institutional standing. A symbolic subject may be celebrated, but a claimant can interrupt. A claimant can appear before a court, regulator, port authority, insurer, development bank, treaty body, or public institution and say: a duty exists here; a relation is being harmed here; an obligation has not been discharged here.</p>
+        <p>The Trust might claim that predictable ship strikes are not accidents when they are foreseeable and preventable. It might claim that acoustic violence is injury to the conditions of whale life. It might claim that bycatch is not incidental when it is systemic. It might claim that prey collapse is a direct injury to whale flourishing. It might claim that marine pollution, reckless routing, seismic blasting, sonar, and unlawful fishing are not merely regulatory concerns but breaches of duty toward a recognized ecological subject.</p>
+        <p>It might also claim that suffering matters.</p>
+        <p>Entanglement is not only population pressure. It is prolonged bodily torment. Noise is not only disturbance. It may be injury to communication, navigation, sociality, and neurological welfare. Starvation is not only an ecological indicator. It is sentient deprivation. The death of a calf is not only demographic loss. It is a rupture in social and reproductive continuity.</p>
+        <p>The Trust might claim the right to be consulted in decisions affecting whale territories. It might seek access to relevant data. It might intervene in environmental impact assessments. It might propose protective corridors. It might seek restoration payments. It might certify whale-safe practices. It might participate in marine spatial planning, port regulation, insurance design, and high-seas biodiversity governance.</p>
+        <p>The Trust would not simply ask institutions to care.</p>
+        <p>It would require them to answer.</p>
+
+        <figure class="diagram" aria-label="World Nation replication diagram">
+          <svg viewBox="0 0 960 520" role="img">
+            <defs>
+              <pattern id="hatchWorld" width="8" height="8" patternUnits="userSpaceOnUse">
+                <path d="M0 8 L8 0" class="xco-stroke-ember-thin"/>
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="960" height="520" class="xco-fill-paper"/>
+            <text x="40" y="52" class="xco-text-title">World Nation prototype field</text>
+            <text x="40" y="82" class="xco-text-ember">[inference] whale-world is one prototype in a wider family of ecological recognition regimes.</text>
+            <line x1="60" y1="142" x2="900" y2="142" class="xco-line-dash"/>
+            <text x="60" y="132" class="xco-text-ember">prototype</text>
+            <rect x="110" y="170" width="190" height="70" class="xco-fill-ember xco-stroke-ink"/>
+            <text x="132" y="198" class="xco-text-paper">Whale Nation</text>
+            <text x="132" y="219" class="xco-text-paper">recognition regime</text>
+
+            <path d="M300 205 L390 205" class="xco-line"/>
+            <rect x="390" y="170" width="200" height="70" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="412" y="198" class="xco-text-ink">shared grammar</text>
+            <text x="412" y="219" class="xco-text-ink">trust / standing / memory</text>
+            <line x1="412" y1="234" x2="458" y2="234" class="xco-line"/>
+            <line x1="412" y1="243" x2="476" y2="243" class="xco-line"/>
+            <line x1="412" y1="252" x2="446" y2="252" class="xco-line"/>
+
+            <path d="M590 205 L690 205" class="xco-line"/>
+            <rect x="690" y="170" width="190" height="70" fill="url(#hatchWorld)" class="xco-stroke-ink"/>
+            <text x="712" y="198" class="xco-text-ink">World Nation</text>
+            <text x="712" y="219" class="xco-text-ink">portable legal layer</text>
+
+            <line x1="60" y1="310" x2="900" y2="310" class="xco-line-dash"/>
+            <text x="60" y="300" class="xco-text-ember">replication</text>
+            <rect x="92" y="338" width="150" height="52" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="114" y="370" class="xco-text-ink">rivers</text>
+            <rect x="272" y="338" width="150" height="52" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="294" y="370" class="xco-text-ink">reefs</text>
+            <rect x="452" y="338" width="150" height="52" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="474" y="370" class="xco-text-ink">forests</text>
+            <rect x="632" y="338" width="150" height="52" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="654" y="370" class="xco-text-ink">ice systems</text>
+            <path d="M785 364 L850 364" class="xco-line"/>
+            <rect x="850" y="338" width="48" height="52" class="xco-fill-paper xco-stroke-ink"/>
+            <text x="862" y="370" class="xco-text-ink">…</text>
+            <text x="60" y="462" class="xco-text-ember">scale marker: singular prototype → repeatable governance form</text>
+          </svg>
+          <figcaption class="diagram-caption">Diagram 04 · Replication: the Whale Nation is not the final form; it is a first advanced prototype for World Nation regimes.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section dark" id="anticapture">
+      <div class="content">
+        <div class="section-number">23 · Anti-capture</div>
+        <h2>Anti-capture and constitutional humility</h2>
+        <p>Every powerful invitation carries danger.</p>
+        <p>The Whale Nation could be captured by donors, states, corporations, technologists, carbon markets, conservation branding, or expert institutions. It could become a financial instrument disguised as ecological justice. It could become a dashboard that mistakes monitoring for care. It could become a tokenized spectacle. It could allow states to outsource obligations while continuing harmful practices. It could become a new colonial enclosure over Indigenous waters and coastal relations. It could reduce the whale to carbon, the ocean to data, and restoration to public relations.</p>
+        <p>It could also become a new form of legal ventriloquism. Humans could claim to speak for whales while ignoring the signals whales give. Experts could claim interpretive authority while excluding communities who live with whales. Models could claim precision while erasing uncertainty. Institutions could claim care while refusing to change the systems causing harm.</p>
+        <p>The Whale Nation therefore invites anti-capture principles from the beginning.</p>
+        <p>Carbon may be one ecological dimension, but it cannot become the measure of the whale. A whale is not a carbon instrument. It is a living being in a field of social, acoustic, ecological, cultural, neurological, and planetary relations.</p>
+        <p>Data may support governance, but it cannot become private enclosure. Ecological data should be stewarded as a fiduciary commons, with safeguards for sensitive knowledge and Indigenous data sovereignty.</p>
+        <p>Indigenous and coastal authority must be constitutional, not ornamental. Communities living in relation with whales cannot be invited merely to legitimate decisions made elsewhere. Their laws, knowledge, practices, and obligations must shape the regime itself.</p>
+        <p>Guardians must be answerable for breach of duty. Models must be audited. Funds must be transparent. Conflicts must be disclosed. Failures must be acknowledged. Outcomes must be reviewed. Challenge must be possible.</p>
+        <p>Most importantly, the Whale Nation must preserve humility before whale life.</p>
+        <div class="pull">To represent is not to possess. To monitor is not to know completely. To model is not to master. To protect is not to own. To translate is not to exhaust meaning.</div>
+        <p>The whale exceeds the institution created for it, and the institution must remember that excess as a constitutional principle.</p>
+      </div>
+    </section>
+
+    <section class="section" id="path">
+      <div class="content">
+        <div class="section-number">24 · Pathway</div>
+        <h2>A possible path into the world</h2>
+        <p>The Whale Nation need not arrive all at once.</p>
+        <p>It might begin as a charter, a language, a coalition, an act of recognition, a legal prototype. A founding document might define the Whale Nation Recognition Regime, the Transnational Whale Trust, the territory of relation, sentience-sensitive participation, digital fiduciary infrastructure, anti-capture principles, and the mandate for restoration finance.</p>
+        <p>A first coalition might form among willing states, Indigenous nations, coastal communities, cities, ports, research institutions, courts, philanthropies, development banks, insurers, and civil society actors. The goal would not be universal recognition at the outset. The goal would be to create the first legal fact: the first recognized body with standing to represent whale relations.</p>
+        <p>The Trust might then be constituted through the strongest available legal wrapper: a statutory trust, foundation, treaty body, public-law corporation, association, or sui generis entity. Its form would depend on jurisdiction. Its function would remain constant: to hold obligations, not ownership.</p>
+        <p>The digital layer might begin as a whale-relations observatory: a fiduciary infrastructure for migration, acoustic harm, ship-strike risk, bycatch, prey systems, sentience indicators, community knowledge, legal claims, and restoration outcomes.</p>
+        <p>The financial layer might begin with grants, recognition capital, guarantees, and Sovereign Ecological Drawing Rights. It might then develop restoration bonds, outcome receivables, settlement tokens, and restoration notes under disciplined regulation and fiduciary oversight.</p>
+        <p>The diplomatic layer might emerge through agreements with ports, insurers, shipping companies, fisheries, development banks, treaty bodies, and regulators. Whale-safe corridors, acoustic sanctuaries, gear-transition compacts, restoration settlements, and high-seas participation could become the first practical expressions of the regime.</p>
+        <p>And then, if the prototype holds, the architecture could travel. Rivers, reefs, forests, ice systems, migratory birds, salmon routes, atmospheric rivers, and other planetary commons might develop their own recognition regimes.</p>
+        <p>The Whale Nation would not be the final form.</p>
+        <p>It would be the first invitation.</p>
+      </div>
+    </section>
+
+    <section class="section" id="constitutional-language">
+      <div class="content">
+        <div class="section-number">25 · Constitutional language</div>
+        <h2>Constitutional language as invitation</h2>
+        <p>The constitutional voice of the Whale Nation might speak like this.</p>
+        <div class="constitutional-voice">
+          <p>Let it be imagined that whales and the living systems necessary to their flourishing are not merely objects of conservation, resources of the sea, units of biodiversity, or instruments of human benefit, but ecological subjects whose continuation calls forth duties in law, finance, science, diplomacy, participation, and governance.</p>
+          <p>Let it be imagined that the Whale Nation is constituted not as a territorial state, nor as a substitute for existing sovereignty, but as a transnational ecological recognition regime through which whale relations may be represented, defended, restored, financed, heard, and made legally present.</p>
+          <p>Let it be imagined that the Transnational Whale Trust serves as the fiduciary organ of this regime, holding not ownership but obligation, not dominion but duty, not title over whales but responsibility toward the conditions of whale life.</p>
+          <p>Let it be imagined that whales are sentient, communicative, socially complex beings whose pain, distress, movement, communication, flourishing, and ecological dependencies become legally relevant to decisions affecting their life-support systems.</p>
+          <p>Let it be imagined that ecological systems may suffer legally cognizable injury through degradation, fragmentation, contamination, acoustic disruption, prey collapse, reproductive failure, loss of resilience, and the destruction of relations necessary for life, without falsely describing such systems as possessing human or animal nervous systems.</p>
+          <p>Let it be imagined that the territory of the Whale Nation is the dynamic field of relations necessary for whale flourishing: migratory routes, acoustic habitats, feeding grounds, breeding grounds, calving waters, prey systems, nutrient cycles, death ecologies, climate dependencies, social relations, communication fields, and zones of human activity that materially affect them.</p>
+          <p>Let it be imagined that states, Indigenous nations, courts, ports, treaty bodies, public institutions, financial institutions, municipalities, and competent legal orders may recognize the Whale Nation and the Transnational Whale Trust for purposes of standing, consultation, claims, restoration finance, data governance, participation, and representation of whale relations.</p>
+          <p>Let it be imagined that decisions materially affecting whale relations include the best available means of receiving whale presence, whale communication, whale distress, whale dependencies, and whale conditions of flourishing through scientific, Indigenous, digital, fiduciary, ecological, and legal processes.</p>
+          <p>Let it be imagined that the Trust maintains digital fiduciary infrastructure capable of sensing, recording, learning from, and responding to changes in whale relations, while remaining accountable, contestable, auditable, plural in knowledge, and subordinate to fiduciary duty.</p>
+          <p>Let it be imagined that a Whale Reserve and Development Bank receives sovereign ecological commitments, issues disciplined settlement instruments, finances restoration, and supports risk-bearing restoration securities, while never allowing financial instruments to convey ownership over whales, ecosystems, migratory routes, acoustic habitats, or living relations.</p>
+          <p>Let it be imagined that the authority of the Whale Nation is fiduciary and relational. It claims no dominion over the ocean, no ownership of whales, and no sovereignty as mastery. Its authority arises wherever law recognizes that human action has entered the field of whale obligation.</p>
+          <p>Let it finally be imagined that the Whale Nation does not claim to speak as whales in any final or exhaustive sense. It accepts the duty to build institutions through which whale life, whale suffering, whale communication, and whale flourishing may be received by law.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="philosophy">
+      <div class="content">
+        <div class="section-number">26 · Philosophy</div>
+        <h2>The philosophical invitation</h2>
+        <p>The Whale Nation rests on a reversal.</p>
+        <p>Modern sovereignty has often imagined itself as independence: independence from external power, independence within borders, independence as command. But ecological reality reveals that no state is independent in this way. Every state is hosted by living systems. Every economy depends on oceans, soils, rivers, forests, atmospheres, microbes, insects, currents, pollinators, and nonhuman life. The state is not outside nature. The state is an event within nature.</p>
+        <p>The Whale Nation invites us to constitutionalize this dependency.</p>
+        <p>It suggests that sovereignty is not the absence of relation. Sovereignty is the capacity to uphold the relations upon which life depends. It suggests that territory is not only land under control. Territory is also the network of dependencies that makes continuation possible. It suggests that legal subjects are not only those who speak in courts, vote in elections, own property, or sign contracts. Legal subjects may also be instituted where living systems require representation in order to survive the institutions that affect them.</p>
+        <p>It offers a second reversal.</p>
+        <p>Modern law has often imagined participation as speech. Those who can speak in the right form may be heard. Those who cannot are represented, protected, managed, or ignored. The Whale Nation suggests that law must become more than an arena for speech. It must become an organ of listening.</p>
+        <p>It must learn to hear distress that does not arrive as testimony. It must learn to hear migration as claim, acoustic disruption as injury, behavioral change as warning, sentient suffering as legal fact, ecological degradation as debt, and silence as evidence of collapse.</p>
+        <p>And it offers a third reversal.</p>
+        <p>Modern finance has often issued present liquidity against future extraction, production, growth, and taxation. The Whale Nation asks whether liquidity can also be issued against future restoration, verified repair, ecological resilience, and the sovereign recognition of living infrastructure.</p>
+        <p>The human is not the only bearer of standing.</p>
+        <p>The state is not the only container of sovereignty.</p>
+        <p>Money is not only a claim on future extraction.</p>
+        <p>Law is not only a system for speaking humans.</p>
+        <p>Governance is not only the administration of people within territories.</p>
+        <p>The future of governance may also be the governance of obligations across living systems.</p>
+      </div>
+    </section>
+
+    <section class="section" id="whale-state">
+      <div class="content">
+        <div class="section-number">27 · The whale and the state</div>
+        <h2>The whale and the state</h2>
+        <p>The title of this paper is <strong>The Whale and the State</strong> because the whale does not simply ask to be protected by the state. It asks the state to recognize its own limits.</p>
+        <p>The whale shows the state that territory is not enough.</p>
+        <p>It shows law that speech is not enough.</p>
+        <p>It shows finance that extraction is not enough.</p>
+        <p>It shows governance that administration is not enough.</p>
+        <p>The whale moves through the world as if the map were only a partial truth. Its life is not contained by the lines through which modern sovereignty understands itself. Its suffering is not contained by the categories through which modern law notices harm. Its ecological value is not contained by the balance sheets through which modern finance recognizes wealth. Its communication is not contained by the forms through which modern procedure recognizes participation.</p>
+        <p>This does not make the state irrelevant. On the contrary, the Whale Nation requires states. It requires their recognition, their legal systems, their courts, their ports, their regulators, their fiscal commitments, their capacity to bind institutions and markets. But it asks states to become something more than containers of territorial command. It asks them to become participants in a wider fiduciary order.</p>
+        <p>The Whale Nation therefore does not abolish sovereignty. It reorients sovereignty. It invites sovereignty to become answerability.</p>
+        <p>The sovereign is no longer only the one who commands a territory. The sovereign becomes the one capable of upholding the relations upon which life depends.</p>
+      </div>
+    </section>
+
+    <section class="section dark" id="final">
+      <div class="content">
+        <div class="section-number">28 · Final invitation</div>
+        <h2>Final invitation</h2>
+        <p>The Whale Nation begins gently, almost impossibly, with the thought that whales might have a nation.</p>
+        <p>But as the thought develops, it changes shape.</p>
+        <p>It is not a fantasy state for animals. It is a recognition regime for ecological relation. It is not a replacement for existing sovereignty. It is an additional legal layer through which sovereignty becomes answerable to life. It is not conservation as usual. It is institutional innovation after the limits of conservation. It is not AI for nature. It is fiduciary intelligence learning with the ocean. It is not natural capital in the crude sense. It is restoration finance governed by obligation. It is not world government. It is a prototype for World Nation regimes: synthetic legal forms for planetary commons.</p>
+        <p>It is also not representation in the old sense. It is an invitation to reimagine participation.</p>
+        <p>It invites law to perform a task it already knows how to perform, but has too rarely performed for life: to recognize a subject, constitute an institution, assign duties, create standing, hold assets, authorize claims, and make power answerable.</p>
+        <p>It invites finance to value the future without destroying it.</p>
+        <p>It invites digital systems to become memory, evidence, warning, and accountability for living relations.</p>
+        <p>It invites states to recognize that their borders do not exhaust their obligations.</p>
+        <p>It invites science to help law hear suffering without pretending to master life.</p>
+        <p>It invites guardians to translate without possessing.</p>
+        <p>It invites legal process to include signals that do not arrive as human speech.</p>
+        <p>It invites monetary infrastructure to make restoration liquid without making life property.</p>
+        <p>And it invites us to understand whales not only as beings to be saved, but as teachers of constitutional form.</p>
+        <div class="pull">The old state begins by drawing a border.<br><br>The Whale Nation begins by listening to a migration.</div>
+        <p>The old state asks who commands this territory.</p>
+        <p>The Whale Nation asks what relations must be upheld for life to continue.</p>
+        <p>The old legal order asks who can speak.</p>
+        <p>The Whale Nation asks what must be heard.</p>
+        <p>The old financial order asks what future value can be extracted.</p>
+        <p>The Whale Nation asks what future repair can be made credible in the present.</p>
+        <p class="lead">This is the invitation at the heart of the project: to imagine a transnational trust that gives whales and their life-support systems legal standing, digital memory, participatory representation, diplomatic voice, restoration finance, and sovereign-backed ecological liquidity — not in order to imitate the state, but in order to teach the state, the law, and money how to become answerable to the living world.</p>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="content">
+        <div class="section-number">Sources and notes</div>
+        <h2>Selected source notes</h2>
+        <p>This concept paper is intentionally speculative and constitutional in style. The sources below support selected legal, scientific, governance, accounting, and financial reference points used in the paper.</p>
+        <ol class="source-list">
+          <li id="source-1"><strong>Te Awa Tupua Act.</strong> New Zealand legislation recognizes Te Awa Tupua as a legal person with the rights, powers, duties, and liabilities of a legal person. <a href="https://www.legislation.govt.nz/act/public/2017/0007/latest/whole.html">legislation.govt.nz</a></li>
+          <li id="source-2"><strong>EU Inc. and the 28th regime.</strong> The European Commission describes EU Inc. as a new harmonised corporate legal regime connected to the “28th regime” idea. <a href="https://commission.europa.eu/topics/business-and-industry/doing-business-eu/company-law-and-corporate-governance/eu-inc-new-harmonised-corporate-legal-regime_en">European Commission</a></li>
+          <li id="source-3"><strong>EU animal sentience.</strong> EUR-Lex states that Article 13 TFEU requires full regard to animals’ welfare requirements as sentient beings in relevant EU policy areas. <a href="https://eur-lex.europa.eu/EN/legal-content/glossary/animal-welfare.html">EUR-Lex</a></li>
+          <li id="source-4"><strong>UK Animal Welfare (Sentience) Act 2022.</strong> The Act establishes and maintains an Animal Sentience Committee. <a href="https://www.legislation.gov.uk/ukpga/2022/22">legislation.gov.uk</a></li>
+          <li id="source-5"><strong>Project CETI.</strong> Project CETI describes its work as applying advanced machine learning and robotics to listen to and translate sperm whale communication. <a href="https://www.projectceti.org/">projectceti.org</a></li>
+          <li id="source-6"><strong>Sperm whale communication.</strong> A 2024 <em>Nature Communications</em> paper reports contextual and combinatorial structure in sperm whale codas while noting much remains unknown. <a href="https://www.nature.com/articles/s41467-024-47221-8">Nature Communications</a></li>
+          <li id="source-7"><strong>BBNJ Agreement.</strong> The UN page for the Agreement on Marine Biological Diversity of Areas beyond National Jurisdiction sets out pillars including area-based management tools, environmental impact assessments, marine genetic resources, and capacity-building; the agreement entered into force in January 2026. <a href="https://www.un.org/bbnjagreement/en">United Nations</a></li>
+          <li id="source-8"><strong>SEEA Ecosystem Accounting.</strong> The UN SEEA page describes the framework and its adoption by the UN Statistical Commission in March 2021; ecosystem accounts have informed policy in more than 34 countries. <a href="https://seea.un.org/ecosystem-accounting">United Nations SEEA</a></li>
+          <li id="source-9"><strong>IMF Special Drawing Rights.</strong> The IMF describes the SDR as an international reserve asset, not a currency, and as a potential claim on freely usable currencies of IMF members. <a href="https://www.imf.org/en/topics/special-drawing-right">IMF</a></li>
+          <li id="source-10"><strong>Core Carbon Principles.</strong> The ICVCM Core Carbon Principles include provisions such as no double counting and other integrity requirements for carbon credits. <a href="https://icvcm.org/core-carbon-principles/">ICVCM</a></li>
+          <li id="source-11"><strong>Whales and carbon.</strong> NOAA describes whales as helping mitigate climate impacts by storing carbon in their bodies and transporting nutrients that benefit ocean food chains. <a href="https://www.fisheries.noaa.gov/feature-story/whales-and-carbon-sequestration-can-whales-store-carbon">NOAA Fisheries</a></li>
+          <li id="source-12"><strong>Blue Transformation.</strong> FAO’s State of World Fisheries and Aquaculture 2024 frames Blue Transformation in relation to aquatic food systems, food security, sustainability, and ecosystem recovery. <a href="https://openknowledge.fao.org/handle/20.500.14283/cd0683en">FAO</a></li>
+          <li id="source-13"><strong>MiCA.</strong> ESMA explains that the Markets in Crypto-Assets Regulation creates uniform EU market rules for crypto-assets and includes asset-referenced and e-money tokens. <a href="https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/markets-crypto-assets-regulation-mica">ESMA</a></li>
+          <li id="source-14"><strong>Bank of England stablecoin consultation.</strong> The Bank of England’s consultation addresses a proposed regulatory regime for sterling-denominated systemic stablecoins and backing assets. <a href="https://www.bankofengland.co.uk/paper/2025/cp/proposed-regulatory-regime-for-sterling-denominated-systemic-stablecoins">Bank of England</a></li>
+          <li id="source-15"><strong>FSB stablecoin recommendations.</strong> The Financial Stability Board’s recommendations seek consistent regulation, supervision, and oversight of global stablecoin arrangements. <a href="https://www.fsb.org/2023/07/high-level-recommendations-for-the-regulation-supervision-and-oversight-of-global-stablecoin-arrangements-final-report/">Financial Stability Board</a></li>
+          <li><strong>XCO diagram grammar.</strong> The HTML diagrams follow the supplied XCO diagram grammar: rectangle primitives, two line weights, hatching, risk/option/field nodes, DM Mono annotation, and scale markers. <a href="https://xco-style-guide-woad.vercel.app/diagrams">xCO diagrams</a></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
