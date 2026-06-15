@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>xCO Strategy Retrospective & Path Ahead — Hyper‑legible Briefing</title>
+  <meta name="description" content="A single-file embedded HTML briefing translating the xCO strategy session retrospective into a layered, highly legible communication artifact." />
+  <style>
+    :root{
+      --bg:#f7f5ef;
+      --paper:#fffdf8;
+      --ink:#171714;
+      --muted:#5d5a52;
+      --soft:#ece6d8;
+      --line:#d8d0bf;
+      --accent:#2f5d50;
+      --accent-2:#9b4d2e;
+      --accent-3:#204a73;
+      --accent-soft:#e5eee9;
+      --warning:#f2e3ca;
+      --shadow:0 16px 50px rgba(23,23,20,.08);
+      --radius:22px;
+      --max:1160px;
+      --side:270px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --serif: Georgia, "Times New Roman", Times, serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(47,93,80,.13), transparent 33rem),
+        radial-gradient(circle at 92% 7%, rgba(155,77,46,.11), transparent 27rem),
+        var(--bg);
+      color:var(--ink);
+      font-family:var(--sans);
+      line-height:1.55;
+      font-size:16px;
+    }
+    a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.18em}
+    .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{left:18px;top:18px;width:auto;height:auto;background:var(--ink);color:#fff;padding:10px 14px;border-radius:10px;z-index:99}
+    .layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);gap:30px;max-width:calc(var(--max) + var(--side) + 70px);margin:0 auto;padding:24px}
+    aside{
+      position:sticky;top:18px;align-self:start;height:calc(100vh - 36px);overflow:auto;
+      background:rgba(255,253,248,.75);backdrop-filter:blur(10px);border:1px solid var(--line);
+      border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)
+    }
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+    .mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--accent),#92ad96);display:grid;place-items:center;color:white;font-weight:800;letter-spacing:-.03em}
+    .brand h1{font-size:15px;line-height:1.1;margin:0;letter-spacing:-.02em}
+    .brand p{font-size:12px;color:var(--muted);margin:3px 0 0}
+    nav a{display:block;padding:9px 10px;border-radius:12px;color:var(--muted);font-size:14px;text-decoration:none;margin:2px 0}
+    nav a:hover,nav a:focus{background:var(--accent-soft);color:var(--ink);outline:0}
+    .sidebox{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
+    .search{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:inherit;font-size:14px}
+    .side-note{font-size:12px;color:var(--muted);margin:10px 0 0}
+    main{min-width:0;max-width:var(--max)}
+    .hero{
+      background:linear-gradient(180deg,rgba(255,253,248,.94),rgba(255,253,248,.82));
+      border:1px solid var(--line);border-radius:30px;padding:54px;box-shadow:var(--shadow);overflow:hidden;position:relative
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-120px;width:330px;height:330px;border-radius:50%;background:rgba(47,93,80,.08)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--accent);font-weight:800;margin:0 0 16px}
+    .eyebrow:before{content:"";width:8px;height:8px;border-radius:99px;background:var(--accent)}
+    h1,h2,h3,h4{letter-spacing:-.035em;line-height:1.08;margin:0 0 14px}
+    .hero h1{font-size:clamp(38px,6vw,76px);max-width:850px}
+    .subtitle{font-size:clamp(18px,2.2vw,25px);line-height:1.4;color:var(--muted);max-width:850px;margin:0 0 28px}
+    .thesis{font-family:var(--serif);font-size:clamp(24px,3vw,38px);line-height:1.2;margin:28px 0 0;padding:26px;border-left:6px solid var(--accent);background:var(--accent-soft);border-radius:0 20px 20px 0;max-width:930px}
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;position:relative;z-index:1}
+    button,.button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:10px 15px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    button:hover,.button:hover{background:var(--accent-soft);border-color:#b6cabf}
+    button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    section{margin:26px 0;background:rgba(255,253,248,.78);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px rgba(23,23,20,.045);padding:34px}
+    .section-title{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .section-title h2{font-size:clamp(28px,3.2vw,44px)}
+    .section-title p{max-width:720px;color:var(--muted);margin:0;font-size:17px}
+    .tag{font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:6px 9px;background:#fff;white-space:nowrap}
+    .grid{display:grid;gap:16px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;min-height:100%;position:relative;overflow:hidden}
+    .card h3{font-size:21px;margin-bottom:8px}
+    .card p{margin:0;color:var(--muted)}
+    .card strong{color:var(--ink)}
+    .number{font-family:var(--mono);font-size:12px;color:#fff;background:var(--accent);border-radius:999px;padding:5px 8px;display:inline-flex;margin-bottom:12px}
+    .callout{border-radius:20px;padding:22px;background:var(--warning);border:1px solid #e3cda9;margin:18px 0}
+    .callout h3{margin-bottom:6px}
+    .callout p{margin:0;color:#4d4638}
+    .mini{font-size:14px;color:var(--muted)}
+    .lede{font-size:20px;line-height:1.45;color:#35322c;max-width:830px}
+    .steps{counter-reset:step;display:grid;gap:12px;margin-top:14px}
+    .step{counter-increment:step;display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:start;background:#fff;border:1px solid var(--line);padding:15px;border-radius:16px}
+    .step:before{content:counter(step);width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;font-family:var(--mono)}
+    .step h3{font-size:18px;margin:0 0 4px}.step p{margin:0;color:var(--muted)}
+    .logic{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:22px 0 8px}
+    .logic div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;position:relative;min-height:108px}
+    .logic div:not(:last-child):after{content:"→";position:absolute;right:-13px;top:43%;z-index:2;background:var(--bg);border:1px solid var(--line);border-radius:99px;width:24px;height:24px;display:grid;place-items:center;color:var(--accent);font-weight:900}
+    .logic h3{font-size:15px;margin:0 0 7px}.logic p{font-size:13px;color:var(--muted);margin:0}
+    .matrix{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .matrix .card{border-left:5px solid var(--accent)}
+    .matrix .card:nth-child(2){border-left-color:var(--accent-2)}
+    .matrix .card:nth-child(3){border-left-color:var(--accent-3)}
+    .matrix .card:nth-child(4){border-left-color:#807043}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+    th,td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line)}
+    th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#4b463d}
+    tr:last-child td{border-bottom:0}
+    td{color:var(--muted)}td strong{color:var(--ink)}
+    details{background:#fff;border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden}
+    summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:800;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋";font-weight:900;color:var(--accent)}
+    details[open] summary:after{content:"–"}
+    details .detail-body{padding:0 20px 20px;color:var(--muted)}
+    details .detail-body p{margin:0 0 13px}
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+    .pill{display:inline-flex;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 10px;font-size:13px;color:#4f4a40}
+    .read-path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+    .read-path a{display:block;text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:20px;padding:18px}
+    .read-path a:hover{background:var(--accent-soft)}
+    .read-path span{font-family:var(--mono);font-size:12px;color:var(--accent);display:block;margin-bottom:8px}.read-path strong{font-size:19px}.read-path p{color:var(--muted);margin:7px 0 0}
+    .position-map{display:grid;grid-template-columns:1fr;gap:12px}
+    .position{display:grid;grid-template-columns:190px 1fr;gap:14px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+    .position h3{font-size:18px;margin:0}.position p{margin:0;color:var(--muted)}
+    .option-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.option-tags span{font-size:12px;background:var(--soft);border-radius:999px;padding:5px 8px;color:#50483d}
+    .footer{padding:24px 0 50px;color:var(--muted);font-size:13px;text-align:center}
+    .search-hidden{display:none !important}
+    body[data-mode="skim"] .depth-full{display:none}
+    body[data-mode="skim"] details:not(.always-open){display:none}
+    body[data-mode="skim"] .skim-note{display:block}
+    body[data-mode="full"] .skim-note{display:none}
+    .skim-note{display:none;background:#fff;border:1px dashed var(--accent);border-radius:16px;padding:13px;color:var(--muted);margin-top:14px}
+    @media (max-width:1040px){
+      .layout{grid-template-columns:1fr;padding:14px}
+      aside{position:relative;height:auto;top:auto;display:block}
+      nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+      .hero{padding:34px}.logic{grid-template-columns:1fr}.logic div:not(:last-child):after{right:50%;top:auto;bottom:-17px;transform:rotate(90deg)}
+      .grid.two,.grid.three,.grid.four,.read-path,.matrix{grid-template-columns:1fr}.position{grid-template-columns:1fr}
+    }
+    @media print{
+      body{background:#fff;color:#000;font-size:11pt}
+      .layout{display:block;max-width:none;padding:0}aside,.controls,.sidebox{display:none}.hero,section{box-shadow:none;border:1px solid #bbb;background:#fff;break-inside:avoid;padding:20px;margin:16px 0}.hero h1{font-size:34pt}.subtitle{font-size:14pt}details{break-inside:avoid}details:not([open]) .detail-body{display:block}summary:after{display:none}a{text-decoration:none;color:#000}
+    }
+  </style>
+</head>
+<body data-mode="full">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="layout">
+    <aside aria-label="Page navigation">
+      <div class="brand">
+        <div class="mark">xCO</div>
+        <div><h1>Strategy retrospective</h1><p>Hyper‑legible HTML paper</p></div>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Search this paper…" aria-label="Search this paper" />
+      <p class="side-note">Use the buttons at the top to switch between skim and full reading modes.</p>
+      <nav>
+        <a href="#start">Start here</a>
+        <a href="#one-page">One-page brief</a>
+        <a href="#logic">Logic chain</a>
+        <a href="#capital">Capital model</a>
+        <a href="#options">Options & positions</a>
+        <a href="#operating-system">Operating system</a>
+        <a href="#roadmap">Immediate moves</a>
+        <a href="#full-paper">Full paper</a>
+        <a href="#glossary">Glossary</a>
+      </nav>
+      <div class="sidebox">
+        <p class="side-note"><strong>Design intent:</strong> progressive disclosure, plain-language cards, reusable diagrams, and a full underlying paper for readers who need depth.</p>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header class="hero searchable" id="start">
+        <p class="eyebrow">Embedded single‑file briefing</p>
+        <h1>Building a civilization options infrastructure</h1>
+        <p class="subtitle">A hyper‑legible communication version of the xCO strategy retrospective: designed for overwhelmed readers, capital partners, collaborators, and internal alignment.</p>
+        <p class="thesis">xCO is building the capital, capability, tooling, and coordination infrastructure needed to identify cascading systemic risks and construct investable portfolios of response before those risks become irreversible breakdowns.</p>
+        <div class="controls" aria-label="Reading controls">
+          <button id="modeSkim" type="button">Skim mode</button>
+          <button id="modeFull" type="button" class="active">Full mode</button>
+          <button id="expandAll" type="button">Expand all</button>
+          <button id="collapseAll" type="button">Collapse all</button>
+          <button type="button" onclick="window.print()">Print / PDF</button>
+        </div>
+      </header>
+
+      <section class="searchable" id="one-page">
+        <div class="section-title">
+          <div>
+            <span class="tag">For first-time readers</span>
+            <h2>The whole story in seven moves</h2>
+            <p>This is the fastest route through the argument. It tells people what has changed, why xCO is needed, and what must happen next.</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div><h3>The work is possible — but the category is wrong.</h3><p>Capital can be raised, demand is emerging, and credibility exists. But this is not a conventional NGO, philanthropy, venture, or hosted network challenge. It is institutional engineering.</p></div></div>
+          <div class="step"><div><h3>Systemic risks are becoming practical risks.</h3><p>Climate, technology, ecological, social, and political volatility cascade through heat, water, food, housing, health, violence, infrastructure, trust, and capital optionality.</p></div></div>
+          <div class="step"><div><h3>Capital needs a pathway, not panic.</h3><p>Collapse narratives alone shut people down. The move is from fear to counter‑portfolio: show the risk, the pathway, and a credible field of response.</p></div></div>
+          <div class="step"><div><h3>Options are legible; xCO makes them stronger.</h3><p>Funders often understand Madrid, oceans, glaciers, health, education, land, or AI more easily than the xCO layer. The communication task is to show why the portfolio layer improves each option.</p></div></div>
+          <div class="step"><div><h3>The common denominator is multi‑agent risk.</h3><p>No single actor can cool cities, protect oceans, stabilize land, govern AI, or respond to glacial loss. xCO’s work is about enabling many actors to sense, coordinate, invest, govern, and act together.</p></div></div>
+          <div class="step"><div><h3>The core asset is capability infrastructure.</h3><p>The deeper investment is not just in projects, but in reusable system capabilities: risk sensing, demand construction, portfolio design, many‑to‑many coordination, legal instruments, media, tooling, and learning.</p></div></div>
+          <div class="step"><div><h3>The next phase is operating-system design.</h3><p>xCO now needs explicit routines for priorities, sprints, CRM, knowledge, roles, decision-making, communication assets, capital stack design, and tooling.</p></div></div>
+        </div>
+        <div class="read-path">
+          <a href="#logic"><span>5 minutes</span><strong>Understand the logic chain</strong><p>How risk becomes an investable response portfolio.</p></a>
+          <a href="#capital"><span>10 minutes</span><strong>Understand the capital model</strong><p>Why different capital holders need different docking points.</p></a>
+          <a href="#full-paper"><span>30+ minutes</span><strong>Read the full paper</strong><p>All sections retained as an expandable paper.</p></a>
+        </div>
+      </section>
+
+      <section class="searchable" id="logic">
+        <div class="section-title">
+          <div>
+            <span class="tag">Core communication device</span>
+            <h2>The logic chain</h2>
+            <p>A simple chain helps people move from abstract existential risk to practical capital relevance. This is the diagram that should appear in decks, the website, and funder briefings.</p>
+          </div>
+        </div>
+        <div class="logic" role="list" aria-label="xCO logic chain">
+          <div role="listitem"><h3>1. Volatility rises</h3><p>Biophysical, technological, ecological, and social shocks intensify.</p></div>
+          <div role="listitem"><h3>2. Risks cascade</h3><p>Heat, water, food, housing, health, violence, infrastructure, and trust interact.</p></div>
+          <div role="listitem"><h3>3. Social contracts strain</h3><p>Everyday vulnerabilities become legitimacy, governance, and stability problems.</p></div>
+          <div role="listitem"><h3>4. Existing institutions fall short</h3><p>Most institutions are not designed for multi‑agent systemic risk response.</p></div>
+          <div role="listitem"><h3>5. xCO identifies pathways</h3><p>Risk typologies, geographies, option spaces, and points of diffusible innovation.</p></div>
+          <div role="listitem"><h3>6. Portfolios are constructed</h3><p>Counter‑portfolios combine options, capabilities, tools, capital, and field building.</p></div>
+          <div role="listitem"><h3>7. Systems gain response capacity</h3><p>The goal is adaptive, democratic, distributed capability under volatility.</p></div>
+        </div>
+        <div class="callout">
+          <h3>Plain-language version</h3>
+          <p>xCO turns overwhelming systemic risk into practical portfolios of action — so capital can support the capacity of real places, institutions, and fields to respond before breakdown.</p>
+        </div>
+        <details class="depth-full always-open" open>
+          <summary>Example: why “Madrid gets hotter” is not enough</summary>
+          <div class="detail-body">
+            <p>A compelling capital argument does not stop at temperature. It shows the cascade: heat can increase accidental deaths, domestic violence, infrastructure stress, maintenance costs, supply-chain disruption, inequality, and public legitimacy risks.</p>
+            <p>The investment question then becomes: what portfolio of urban cooling, public-health, social, governance, media, legal, and capital interventions can reduce or reorganize that cascade?</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="searchable" id="capital">
+        <div class="section-title">
+          <div>
+            <span class="tag">Capital story</span>
+            <h2>Communicating the capital model</h2>
+            <p>The capital story should not ask every funder to understand everything at once. It should give each type of capital a clear entry point while preserving the coherence of the whole.</p>
+          </div>
+        </div>
+        <div class="grid three">
+          <div class="card"><span class="number">A</span><h3>Option-level capital</h3><p><strong>Most legible entry point.</strong> Supports concrete options such as cooling cities, oceans, glaciers, land, health, education, or AI-related interventions.</p></div>
+          <div class="card"><span class="number">B</span><h3>Systemic xCO capital</h3><p><strong>Harder but more distinctive.</strong> Funds the portfolio layer: risk analysis, option selection, capital architecture, learning, and coordination infrastructure.</p></div>
+          <div class="card"><span class="number">C</span><h3>Tooling capital</h3><p><strong>Potentially returnable.</strong> Funds reusable capabilities such as risk sensing, many‑to‑many contracting, portfolio intelligence, AI workflows, and CRM systems.</p></div>
+        </div>
+        <table>
+          <thead><tr><th>Capital holder</th><th>What they may understand first</th><th>What xCO should communicate</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Entrepreneurs / wealth creators</strong></td><td>Specific options and practical learning through action.</td><td>Invite them into concrete option portfolios while showing how xCO multiplies the option’s effectiveness.</td></tr>
+            <tr><td><strong>Large wealth holders / family offices</strong></td><td>Intrigue, but also complexity and reputational or governance caution.</td><td>Build relational trust; explain capital optionality, risk mitigation, learning returns, and long-horizon mission alignment.</td></tr>
+            <tr><td><strong>Next-generation wealth</strong></td><td>Often assumed to be risk-on, but may be risk-averse or bound by inherited governance.</td><td>Avoid simplistic assumptions. Offer structured participation with clear risk, learning, and values pathways.</td></tr>
+            <tr><td><strong>Foundations / endowments</strong></td><td>Mission execution and field-building relevance.</td><td>Show how xCO can deliver mission more systemically than isolated grants, while not becoming subservient to one capital source.</td></tr>
+            <tr><td><strong>Institutional or fund actors</strong></td><td>Clear structures, vehicles, return logic, and credibility.</td><td>Define instruments, legal architecture, accountability, and differentiated return profiles.</td></tr>
+          </tbody>
+        </table>
+        <div class="matrix depth-full">
+          <div class="card"><h3>Mission return</h3><p>Capital supports the mission outcomes that donors, foundations, or endowments exist to advance.</p></div>
+          <div class="card"><h3>Risk mitigation return</h3><p>Capital protects future optionality by reducing exposure to systemic risks that could impair wealth, assets, or social stability.</p></div>
+          <div class="card"><h3>Learning and data return</h3><p>Capital holders gain access to new knowledge, risk intelligence, and field learning.</p></div>
+          <div class="card"><h3>Participation return</h3><p>Capital holders may gain first rights or preferred access to later-stage opportunities where appropriate.</p></div>
+        </div>
+      </section>
+
+      <section class="searchable" id="options">
+        <div class="section-title">
+          <div>
+            <span class="tag">Option architecture</span>
+            <h2>From scattered projects to positions and portfolios</h2>
+            <p>To avoid fragmentation, xCO should communicate a small number of positions. Each position can contain multiple options, cohorts, and capabilities.</p>
+          </div>
+        </div>
+        <div class="callout">
+          <h3>The distinction that reduces overload</h3>
+          <p><strong>Risks</strong> are the systemic threats. <strong>Positions</strong> are strategic fields of response. <strong>Options</strong> are concrete interventions. <strong>Portfolios</strong> connect multiple options so they reinforce, compare, and diffuse learning.</p>
+        </div>
+        <div class="position-map">
+          <div class="position"><h3>Cooling cities</h3><div><p>Urban heat as a cascading social, health, infrastructure, and inequality risk.</p><div class="option-tags"><span>Madrid</span><span>Athens</span><span>Valencia</span><span>Paris</span><span>urban cooling</span></div></div></div>
+          <div class="position"><h3>Oceans</h3><div><p>Marine governance, blue economy, ecological finance, and planetary diplomacy.</p><div class="option-tags"><span>Whale nation</span><span>marine risk regions</span><span>blue economy</span><span>ocean governance</span></div></div></div>
+          <div class="position"><h3>Bioregional stability</h3><div><p>Place-based resilience across land, food, water, ownership, and local economies.</p><div class="option-tags"><span>RZ</span><span>land accelerator</span><span>food systems</span><span>water security</span></div></div></div>
+          <div class="position"><h3>Future of being human</h3><div><p>Human value, education, care, health, and social contracts under technological displacement.</p><div class="option-tags"><span>education</span><span>health</span><span>AI</span><span>mental health</span><span>post-labor value</span></div></div></div>
+          <div class="position"><h3>Planetary stability</h3><div><p>High-criticality planetary systems requiring new civics, diplomacy, and political pressure.</p><div class="option-tags"><span>Arctic</span><span>Antarctic</span><span>glaciers</span><span>Santiago</span><span>planetary civics</span></div></div></div>
+        </div>
+        <details class="depth-full">
+          <summary>Why individual options can be fragile</summary>
+          <div class="detail-body">
+            <p>A single option can stall when politics, relationships, or local implementation slow down. A position-level portfolio creates comparison, peer pressure, shared learning, legitimacy, and alternative routes for momentum.</p>
+            <p>For example, Madrid as a cooling option becomes stronger if connected to a wider cooling cities portfolio. The system can learn across cities and avoid overdependence on one place.</p>
+          </div>
+        </details>
+        <details class="depth-full">
+          <summary>How cohorts prevent overwhelm</summary>
+          <div class="detail-body">
+            <p>A cohort model distinguishes between live options, near-term options, pre-seed options, and longer-horizon options. This allows xCO to say “important, but not in this activation cycle” without losing the relationship or creating false expectations.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="searchable" id="operating-system">
+        <div class="section-title">
+          <div>
+            <span class="tag">Internal architecture</span>
+            <h2>The operating system xCO now needs</h2>
+            <p>The work has outgrown informal coordination. The next stage requires a designed operating system for priorities, sprints, relationships, knowledge, tools, decisions, and communication.</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <div class="card"><h3>1. Priority rhythm</h3><p>Monthly priorities translated into focused weekly sprints. Avoid fractional attention on cognitively heavy work.</p></div>
+          <div class="card"><h3>2. Single source of truth</h3><p>Clear rules for where information lives: CRM, learning system, option pipeline, decks, website, and internal decisions.</p></div>
+          <div class="card"><h3>3. Relationship system</h3><p>An operational CRM tracking people, capital type, interests, objections, next steps, relationship owner, and option/portfolio relevance.</p></div>
+          <div class="card"><h3>4. Learning system</h3><p>A disciplined way to capture hunches, assumptions, evidence, contradictions, unresolved questions, and decisions.</p></div>
+          <div class="card"><h3>5. Role binding</h3><p>Clarify who is core team, close collaborator, advisor, option partner, funder, or wider constellation member — and what each relationship means.</p></div>
+          <div class="card"><h3>6. AI workflow capability</h3><p>Use AI to accelerate research, drafting, modeling, media prototyping, and portfolio development — without overwhelming shared cognition.</p></div>
+        </div>
+        <div class="callout depth-full">
+          <h3>The new bottleneck</h3>
+          <p>AI can accelerate knowledge production dramatically. The constraint becomes the team’s ability to absorb, validate, socialize, institutionalize, and act on that knowledge together.</p>
+        </div>
+      </section>
+
+      <section class="searchable" id="roadmap">
+        <div class="section-title">
+          <div>
+            <span class="tag">Action architecture</span>
+            <h2>Immediate moves to make the story usable</h2>
+            <p>These are the practical communication and organizational assets that turn the strategy into something people can understand, fund, and join.</p>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Move</th><th>What it does</th><th>Useful output</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Logic chain diagram</strong></td><td>Makes the risk-to-capital-to-portfolio thesis visible.</td><td>One-page visual for website, deck, and funder conversations.</td></tr>
+            <tr><td><strong>2. Indicative portfolios</strong></td><td>Turns fear into response pathways.</td><td>Madrid / cooling cities, oceans, Santiago / glaciers as initial examples.</td></tr>
+            <tr><td><strong>3. Option taxonomy</strong></td><td>Prevents overload and fragmentation.</td><td>Risks → positions → options → cohorts → portfolios → capabilities.</td></tr>
+            <tr><td><strong>4. Capital stack explainer</strong></td><td>Shows different capital holders where they dock.</td><td>Mission equity, catalytic R&D, endowment, returnable tooling, institutional vehicles.</td></tr>
+            <tr><td><strong>5. CRM operationalization</strong></td><td>Stops relationship value from leaking out of the system.</td><td>Relationship owners, next steps, objections, interests, capital type.</td></tr>
+            <tr><td><strong>6. Operating system session</strong></td><td>Clarifies priorities, decision rights, channels, sprints, and knowledge flow.</td><td>Internal OS canvas and working agreements.</td></tr>
+            <tr><td><strong>7. Tooling sidecar thesis</strong></td><td>Separates demand construction from capability construction.</td><td>Sidecar fund or vehicle for risk sense, many-to-many systems, AI workflows, and portfolio tooling.</td></tr>
+            <tr><td><strong>8. Two communication decks</strong></td><td>Reduces bespoke explanation burden.</td><td>Funder deck and collaborator deck, both linked to website.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="searchable" id="full-paper">
+        <div class="section-title">
+          <div>
+            <span class="tag">Expandable full paper</span>
+            <h2>Full structured paper</h2>
+            <p>The complete argument is retained below in collapsible sections. This lets skimmers stay oriented while giving serious readers the depth they need.</p>
+          </div>
+        </div>
+        <p class="skim-note">Skim mode hides the long-form paper. Switch to full mode to read every section.</p>
+
+        <details open class="depth-full"><summary>Abstract</summary><div class="detail-body"><p>This paper synthesizes the key strategic reflections emerging from an xCO strategy session focused on capital formation, option development, organizational capability, and the evolving operating model required to respond to systemic and existential risks. The session surfaced a central thesis: the work ahead is both eminently possible and radically more complex than conventional philanthropic, NGO, or venture-building models are designed to hold.</p><p>xCO is not merely raising capital for discrete projects; it is attempting to build a new institutional infrastructure capable of identifying cascading systemic risks, constructing investable response portfolios, and enabling distributed, multi-agent forms of action.</p></div></details>
+
+        <details class="depth-full"><summary>1. Introduction: from formation to institutional engineering</summary><div class="detail-body"><p>The first phase of xCO has been a period of formation: composing the team, testing propositions, building credibility, developing relationships with capital holders, and beginning to translate systemic risk into investable options.</p><p>The next phase is qualitatively different. It is closer to building a technically sophisticated institutional machine capable of risk analysis, capital orchestration, option development, legal innovation, field building, and distributed coordination.</p></div></details>
+
+        <details class="depth-full"><summary>2. Core thesis: xCO as real-world risk response infrastructure</summary><div class="detail-body"><p>xCO exists to build and finance response capacity for systemic risks that conventional institutions are not equipped to handle. These risks are increasingly near-term, cascading, and socially destabilizing.</p><p>The central proposition: xCO builds capital and capability infrastructure to identify cascading systemic risks, construct investable response portfolios, and support distributed, democratic, multi-agent action before breakdown becomes irreversible.</p></div></details>
+
+        <details class="depth-full"><summary>3. Political and capital context</summary><div class="detail-body"><p>xCO sits between foundations concerned with preserving the existing NGO economy and capital actors focused on disruptive value creation. This middle position can create political friction with both sides.</p><p>There is also a “zombie fund” risk: funds that struggle to raise capital may repackage themselves around systemic themes without changing their operating logic. xCO must differentiate itself through rigorous logic chains, credible portfolios, and disciplined deployment mechanisms.</p></div></details>
+
+        <details class="depth-full"><summary>4. Capital formation learnings</summary><div class="detail-body"><p>Capital is available, but not naturally aligned. The challenge is to create the right institutional form, narrative, legal structure, and trust architecture for different types of capital to participate.</p><p>Entrepreneurs and wealth creators may support specific options, while large wealth holders may require longer relational trust. Next-generation wealth may not be as risk-on as often assumed. Option-level investment is generally easier to convert than systemic-level investment, which means xCO must show how the systemic layer strengthens every option.</p></div></details>
+
+        <details class="depth-full"><summary>5. The need for a clear logic chain</summary><div class="detail-body"><p>xCO must explain how existential and systemic risks translate into capital relevance, investable response pathways, and practical portfolios.</p><p>The chain is: volatility increases; risks cascade through everyday vulnerabilities; cascades threaten social contracts and capital optionality; existing institutions are poorly designed for multi-agent response; xCO identifies high-leverage risk pathways; xCO constructs portfolios of options; capital builds the field’s response capability.</p></div></details>
+
+        <details class="depth-full"><summary>6. From fear to counter‑portfolio</summary><div class="detail-body"><p>xCO cannot simply describe collapse. Fear-based narratives cause disengagement. The alternative is the counter‑portfolio: a structured, credible hypothesis about how to intervene in a risk pathway.</p><p>Indicative portfolios are strategically critical because they show that xCO is not merely diagnosing systemic risk but organizing a field of response.</p></div></details>
+
+        <details class="depth-full"><summary>7. Multi-agent problems as the common denominator</summary><div class="detail-body"><p>Across cooling cities, glacial systems, materials, oceans, land, education, health, and technological displacement, the shared problem is mass multi-agent coordination.</p><p>xCO’s work is not only to fund solutions. It is to build the capability infrastructure through which many actors can sense, coordinate, invest, govern, and act together without collapsing into authoritarianism or chaos.</p></div></details>
+
+        <details class="depth-full"><summary>8. Investment theory: capability infrastructure as the core asset</summary><div class="detail-body"><p>The deeper investment thesis concerns systemic capability. Specific outcomes matter, but xCO’s most distinctive asset is the ability to help systems respond automatically, intelligently, and democratically to emerging risks.</p><p>This includes risk sensing, demand construction, portfolio design, outcome acceleration, risk pooling, legal instruments, field-building, many-to-many coordination, media, capital stack innovation, and distributed governance.</p></div></details>
+
+        <details class="depth-full"><summary>9. Capital stack innovation</summary><div class="detail-body"><p>xCO needs a differentiated capital stack because different forms of capital require different return logics, instruments, rights, and expectations.</p><p>Returns may include mission return, risk mitigation, learning, data access, first rights to later-stage participation, strategic optionality, and financial return where appropriate. This is not merely fundraising; it is capital market design.</p></div></details>
+
+        <details class="depth-full"><summary>10. From individual projects to positions and portfolios</summary><div class="detail-body"><p>The option space is expanding: Madrid, oceans, glaciers, mental health, education, fair ownership, shared economy, AI, whale nation, land, and planetary civics.</p><p>The strategic risk is fragmentation. xCO should group options into broader positions, such as cooling cities, oceans, bioregional stability, future of being human, and planetary stability.</p></div></details>
+
+        <details class="depth-full"><summary>11. Sequencing and cohorts</summary><div class="detail-body"><p>Not every attractive possibility can be activated at once. A cohort model distinguishes live options, near-term options, exploratory options, and longer-horizon possibilities.</p><p>This protects the organization from overextension while maintaining relationships and future pathways.</p></div></details>
+
+        <details class="depth-full"><summary>12. Demand construction and capability construction</summary><div class="detail-body"><p>Demand construction builds the conditions for a specific option or position to become politically, socially, and financially actionable. Capability construction builds reusable tools and infrastructures required across many options.</p><p>These require different capital logics. Demand may be mission-driven; tooling and capability may include returnable capital.</p></div></details>
+
+        <details class="depth-full"><summary>13. Tooling as a strategic constraint</summary><div class="detail-body"><p>xCO cannot rely only on human coordination and conventional project management. Without tooling, the organization risks circling around rhetoric rather than deepening into action.</p><p>Tooling may include risk sensing, demand mapping, stakeholder coordination, media activation, legal structuring, capital orchestration, many-to-many contracting, portfolio intelligence, AI workflows, and CRM integration.</p></div></details>
+
+        <details class="depth-full"><summary>14. AI workflows and the new cognitive frontier</summary><div class="detail-body"><p>AI can accelerate knowledge production dramatically. Work that once took months can now be prototyped in days.</p><p>The new bottleneck is shared cognition: the ability to absorb, validate, socialize, institutionalize, and act on AI-generated knowledge without overwhelming the team.</p></div></details>
+
+        <details class="depth-full"><summary>15. Organizational learning and operating system</summary><div class="detail-body"><p>xCO needs a clearer operating system for roles, priorities, decisions, information flow, communication channels, sprint cycles, CRM integration, hunch tracking, and option selection.</p><p>The team does not simply need more coordination. It needs a designed operating system for high-complexity, high-trust, high-speed work.</p></div></details>
+
+        <details class="depth-full"><summary>16. Sprint-based work and prioritization</summary><div class="detail-body"><p>Fractional attention may be insufficient for cognitively heavy work. Building an indicative portfolio or logic chain may require focused sprints rather than scattered hours.</p><p>The operating rhythm should distinguish urgent capital-facing needs, option development, tooling, organizational design, communication, and learning.</p></div></details>
+
+        <details class="depth-full"><summary>17. Communication infrastructure</summary><div class="detail-body"><p>xCO needs a clear logic chain diagram, funder deck, collaborator deck, simple website, capital stack explanation, option taxonomy, indicative portfolio examples, and shared narrative around systemic risk and real-world hedging.</p><p>The challenge is to simplify without falsifying.</p></div></details>
+
+        <details class="depth-full"><summary>18. Relationship management and CRM</summary><div class="detail-body"><p>Relationship management is now a strategic constraint. A CRM is part of the capital strategy and organizational memory.</p><p>It should track who is being engaged, what capital or relationship they represent, interests, objections, next steps, relationship owner, and whether they connect to options, portfolios, tooling, or xCO itself.</p></div></details>
+
+        <details class="depth-full"><summary>19. Worldview construction as capital strategy</summary><div class="detail-body"><p>Many capital holders do not yet have a category for systemic risk allocation. xCO must help construct the worldview that makes its proposition legible.</p><p>Fundraising is therefore also field-building.</p></div></details>
+
+        <details class="depth-full"><summary>20. Talent, roles, and binding</summary><div class="detail-body"><p>The organization must clarify who is core, who is collaborator, who is advisor, who is option partner, and who is wider constellation member.</p><p>The question is not only boundary; it is binding: what kind of relationship holds each person to the work?</p></div></details>
+
+        <details class="depth-full"><summary>21. Learning system: hunches, assumptions, and evidence</summary><div class="detail-body"><p>xCO works in emergent territory and cannot pretend certainty. It needs a disciplined way to track assumptions, evidence, signals, unresolved questions, and implied decisions.</p><p>This helps move from intuition to disciplined strategic judgment.</p></div></details>
+
+        <details class="depth-full"><summary>22. Strategic priorities</summary><div class="detail-body"><p>The priorities are: clarify the logic chain; define the option taxonomy; operationalize CRM; create communication assets; design the operating system; advance tooling; develop capital stack and legal architecture; and build a culture capable of facing uncertainty without paralysis.</p></div></details>
+
+        <details class="depth-full"><summary>23. Conclusion: the work ahead</summary><div class="detail-body"><p>xCO is entering a decisive phase. Capital interest, option demand, strategic credibility, and recognition of institutional inadequacy are all real. But the risks of fragmentation, communication failure, relational leakage, and organizational overwhelm are also real.</p><p>The next phase must be institutional engineering: building the machinery through which systemic risk response becomes possible.</p></div></details>
+      </section>
+
+      <section class="searchable" id="glossary">
+        <div class="section-title">
+          <div>
+            <span class="tag">Shared vocabulary</span>
+            <h2>Glossary for readers</h2>
+            <p>Shared language reduces cognitive load. These terms should be used consistently across the website, deck, and internal documents.</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <div class="card"><h3>Civilization option</h3><p>A concrete pathway that preserves or expands society’s capacity to respond to systemic risk.</p></div>
+          <div class="card"><h3>Position</h3><p>A strategic field of response that can contain multiple options, such as cooling cities or oceans.</p></div>
+          <div class="card"><h3>Counter‑portfolio</h3><p>A portfolio designed to show credible action against a risk pathway, not just diagnose collapse.</p></div>
+          <div class="card"><h3>Capability infrastructure</h3><p>Reusable tools, methods, institutions, legal structures, data systems, and coordination capacities.</p></div>
+          <div class="card"><h3>Demand construction</h3><p>The work of making an option politically, socially, financially, and institutionally actionable.</p></div>
+          <div class="card"><h3>Systemic capability</h3><p>The ability of a system to sense, coordinate, adapt, govern, and respond under volatility.</p></div>
+        </div>
+      </section>
+
+      <section class="searchable">
+        <div class="section-title">
+          <div>
+            <span class="tag">How to use this file</span>
+            <h2>Recommended communication sequence</h2>
+            <p>Use the same artifact differently for different readers instead of creating many disconnected versions.</p>
+          </div>
+        </div>
+        <div class="grid three">
+          <div class="card"><h3>For capital partners</h3><p>Start with the thesis, logic chain, capital model, and one indicative portfolio. Avoid beginning with the full theory.</p></div>
+          <div class="card"><h3>For collaborators</h3><p>Start with options and positions, then operating system, roles, and how their work plugs into capability infrastructure.</p></div>
+          <div class="card"><h3>For the internal team</h3><p>Use the roadmap, operating system, full paper, and glossary as the basis for a working session.</p></div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <p>Prepared as a self-contained HTML briefing. No external assets, fonts, scripts, or dependencies are required.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const body=document.body;
+      const skim=document.getElementById('modeSkim');
+      const full=document.getElementById('modeFull');
+      const expand=document.getElementById('expandAll');
+      const collapse=document.getElementById('collapseAll');
+      const search=document.getElementById('search');
+      const details=[...document.querySelectorAll('details')];
+      const searchable=[...document.querySelectorAll('.searchable')];
+      function setMode(mode){
+        body.dataset.mode=mode;
+        skim.classList.toggle('active',mode==='skim');
+        full.classList.toggle('active',mode==='full');
+      }
+      skim.addEventListener('click',()=>setMode('skim'));
+      full.addEventListener('click',()=>setMode('full'));
+      expand.addEventListener('click',()=>details.forEach(d=>d.open=true));
+      collapse.addEventListener('click',()=>details.forEach(d=>{ if(!d.classList.contains('always-open')) d.open=false; }));
+      search.addEventListener('input',function(){
+        const q=this.value.trim().toLowerCase();
+        if(!q){ searchable.forEach(el=>el.classList.remove('search-hidden')); return; }
+        searchable.forEach(el=>{
+          const hit=el.innerText.toLowerCase().includes(q);
+          el.classList.toggle('search-hidden',!hit);
+          if(hit){ el.querySelectorAll('details').forEach(d=>d.open=true); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
