@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>xCO Portfolio Synthesis — Five Domains (Hyper‑legible)</title>
+  <meta name="description" content="A single-file hyper-legible synthesis of the xCO options portfolio, organised into five response domains, each holding strategic positions and live options on the ground." />
+  <style>
+    :root{
+      --bg:#f7f5ef;
+      --paper:#fffdf8;
+      --ink:#171714;
+      --muted:#5d5a52;
+      --soft:#ece6d8;
+      --line:#d8d0bf;
+      --accent:#2f5d50;
+      --accent-2:#9b4d2e;
+      --accent-3:#204a73;
+      --accent-soft:#e5eee9;
+      --warning:#f2e3ca;
+      --shadow:0 16px 50px rgba(23,23,20,.08);
+      --radius:22px;
+      --max:1160px;
+      --side:270px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --serif: Georgia, "Times New Roman", Times, serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(47,93,80,.13), transparent 33rem),
+        radial-gradient(circle at 92% 7%, rgba(155,77,46,.11), transparent 27rem),
+        var(--bg);
+      color:var(--ink);
+      font-family:var(--sans);
+      line-height:1.55;
+      font-size:16px;
+    }
+    a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.18em}
+    .skip{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip:focus{left:18px;top:18px;width:auto;height:auto;background:var(--ink);color:#fff;padding:10px 14px;border-radius:10px;z-index:99}
+    .layout{display:grid;grid-template-columns:var(--side) minmax(0,1fr);gap:30px;max-width:calc(var(--max) + var(--side) + 70px);margin:0 auto;padding:24px}
+    aside{
+      position:sticky;top:18px;align-self:start;height:calc(100vh - 36px);overflow:auto;
+      background:rgba(255,253,248,.75);backdrop-filter:blur(10px);border:1px solid var(--line);
+      border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)
+    }
+    .brand{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+    .mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--accent),#92ad96);display:grid;place-items:center;color:white;font-weight:800;letter-spacing:-.03em}
+    .brand h1{font-size:15px;line-height:1.1;margin:0;letter-spacing:-.02em}
+    .brand p{font-size:12px;color:var(--muted);margin:3px 0 0}
+    nav a{display:block;padding:9px 10px;border-radius:12px;color:var(--muted);font-size:14px;text-decoration:none;margin:2px 0}
+    nav a:hover,nav a:focus{background:var(--accent-soft);color:var(--ink);outline:0}
+    .sidebox{border-top:1px solid var(--line);margin-top:14px;padding-top:14px}
+    .search{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:inherit;font-size:14px}
+    .side-note{font-size:12px;color:var(--muted);margin:10px 0 0}
+    main{min-width:0;max-width:var(--max)}
+    .hero{
+      background:linear-gradient(180deg,rgba(255,253,248,.94),rgba(255,253,248,.82));
+      border:1px solid var(--line);border-radius:30px;padding:54px;box-shadow:var(--shadow);overflow:hidden;position:relative
+    }
+    .hero:after{content:"";position:absolute;right:-80px;top:-120px;width:330px;height:330px;border-radius:50%;background:rgba(47,93,80,.08)}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--accent);font-weight:800;margin:0 0 16px}
+    .eyebrow:before{content:"";width:8px;height:8px;border-radius:99px;background:var(--accent)}
+    h1,h2,h3,h4{letter-spacing:-.035em;line-height:1.08;margin:0 0 14px}
+    .hero h1{font-size:clamp(38px,6vw,76px);max-width:850px}
+    .subtitle{font-size:clamp(18px,2.2vw,25px);line-height:1.4;color:var(--muted);max-width:850px;margin:0 0 28px}
+    .thesis{font-family:var(--serif);font-size:clamp(22px,3vw,34px);line-height:1.22;margin:28px 0 0;padding:26px;border-left:6px solid var(--accent);background:var(--accent-soft);border-radius:0 20px 20px 0;max-width:930px}
+    .controls{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;position:relative;z-index:1}
+    button,.button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:10px 15px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    button:hover,.button:hover{background:var(--accent-soft);border-color:#b6cabf}
+    button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    section{margin:26px 0;background:rgba(255,253,248,.78);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 30px rgba(23,23,20,.045);padding:34px}
+    .section-title{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .section-title h2{font-size:clamp(28px,3.2vw,44px)}
+    .section-title p{max-width:720px;color:var(--muted);margin:0;font-size:17px}
+    .tag{font-family:var(--mono);font-size:12px;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:6px 9px;background:#fff;white-space:nowrap}
+    .grid{display:grid;gap:16px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;min-height:100%;position:relative;overflow:hidden}
+    .card h3{font-size:21px;margin-bottom:8px}
+    .card p{margin:0;color:var(--muted)}
+    .card strong{color:var(--ink)}
+    .number{font-family:var(--mono);font-size:12px;color:#fff;background:var(--accent);border-radius:999px;padding:5px 8px;display:inline-flex;margin-bottom:12px}
+    .callout{border-radius:20px;padding:22px;background:var(--warning);border:1px solid #e3cda9;margin:18px 0}
+    .callout h3{margin-bottom:6px}
+    .callout p{margin:0;color:#4d4638}
+    .mini{font-size:14px;color:var(--muted)}
+    .lede{font-size:20px;line-height:1.45;color:#35322c;max-width:830px}
+    .logic{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:22px 0 8px}
+    .logic div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;position:relative;min-height:118px}
+    .logic div:not(:last-child):after{content:"→";position:absolute;right:-13px;top:43%;z-index:2;background:var(--bg);border:1px solid var(--line);border-radius:99px;width:24px;height:24px;display:grid;place-items:center;color:var(--accent);font-weight:900}
+    .logic h3{font-size:15px;margin:0 0 7px}.logic p{font-size:13px;color:var(--muted);margin:0}
+    .matrix{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .matrix .card{border-left:5px solid var(--accent)}
+    .matrix .card:nth-child(2){border-left-color:var(--accent-2)}
+    .matrix .card:nth-child(3){border-left-color:var(--accent-3)}
+    .matrix .card:nth-child(4){border-left-color:#807043}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin:16px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}
+    th,td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line)}
+    th{background:var(--soft);font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#4b463d}
+    tr:last-child td{border-bottom:0}
+    td{color:var(--muted)}td strong{color:var(--ink)}
+    details{background:#fff;border:1px solid var(--line);border-radius:16px;margin:10px 0;overflow:hidden}
+    summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:800;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋";font-weight:900;color:var(--accent)}
+    details[open] summary:after{content:"–"}
+    details .detail-body{padding:0 20px 20px;color:var(--muted)}
+    details .detail-body p{margin:0 0 13px}
+    .footer{padding:24px 0 50px;color:var(--muted);font-size:13px;text-align:center}
+    .search-hidden{display:none !important}
+    /* domain component */
+    .domain-map{display:grid;grid-template-columns:1fr;gap:12px}
+    .domain{display:grid;grid-template-columns:248px 1fr;gap:18px;padding:20px;border:1px solid var(--line);border-radius:18px;background:#fff}
+    .domain-no{font-family:var(--mono);font-size:12px;color:#fff;background:var(--accent);border-radius:999px;padding:4px 9px;display:inline-flex;margin-bottom:9px}
+    .domain-head h3{font-size:20px;margin:0 0 6px}
+    .domain-head p{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+    .layer-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 7px}
+    .layer:first-child{margin-top:2px}
+    .layer{margin-top:14px}
+    .option-tags{display:flex;flex-wrap:wrap;gap:7px}
+    .option-tags span{font-size:13px;background:var(--soft);border-radius:999px;padding:6px 10px;color:#50483d}
+    .option-tags.live span{background:var(--accent-soft);color:var(--accent);border:1px solid #b6cabf;font-weight:700}
+    .option-tags.muted span{background:#fff;border:1px dashed var(--line);color:var(--muted)}
+    .option-tags .stage-exp{background:#ece6d8;color:#6b6354;border:1px solid var(--line);font-weight:600}
+    .option-tags .stage-dev{background:var(--warning);color:#8a571c;border:1px solid #e3cda9;font-weight:700}
+    .option-tags .stage-live{background:var(--accent-soft);color:var(--accent);border:1px solid #b6cabf;font-weight:700}
+    .stage-legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px;padding:13px 16px;background:#fff;border:1px solid var(--line);border-radius:14px}
+    .stage-legend span{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+    .stage-legend i{width:13px;height:13px;border-radius:4px;display:inline-block;flex:none}
+    .stage-legend b{color:var(--ink);font-weight:700}
+    .dot-exp{background:#ece6d8;border:1px solid var(--line)}
+    .dot-dev{background:var(--warning);border:1px solid #e3cda9}
+    .dot-live{background:var(--accent-soft);border:1px solid #b6cabf}
+    /* skim/full */
+    body[data-mode="skim"] .depth-full{display:none}
+    body[data-mode="skim"] details:not(.always-open){display:none}
+    body[data-mode="skim"] .skim-note{display:block}
+    body[data-mode="full"] .skim-note{display:none}
+    .skim-note{display:none;background:#fff;border:1px dashed var(--accent);border-radius:16px;padding:13px;color:var(--muted);margin-top:14px}
+    @media (max-width:1040px){
+      .layout{grid-template-columns:1fr;padding:14px}
+      aside{position:relative;height:auto;top:auto;display:block}
+      nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+      .hero{padding:34px}.logic{grid-template-columns:1fr}.logic div:not(:last-child):after{right:50%;top:auto;bottom:-17px;transform:rotate(90deg)}
+      .grid.two,.grid.three,.grid.four,.matrix{grid-template-columns:1fr}.domain{grid-template-columns:1fr}
+    }
+    @media print{
+      body{background:#fff;color:#000;font-size:11pt}
+      .layout{display:block;max-width:none;padding:0}aside,.controls,.sidebox{display:none}.hero,section{box-shadow:none;border:1px solid #bbb;background:#fff;break-inside:avoid;padding:20px;margin:16px 0}.hero h1{font-size:34pt}.subtitle{font-size:14pt}details{break-inside:avoid}details:not([open]) .detail-body{display:block}summary:after{display:none}a{text-decoration:none;color:#000}
+    }
+  </style>
+</head>
+<body data-mode="full">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="layout">
+    <aside aria-label="Page navigation">
+      <div class="brand">
+        <div class="mark">xCO</div>
+        <div><h1>Portfolio overview</h1><p>Five domains · hyper‑legible</p></div>
+      </div>
+      <input class="search" id="search" type="search" placeholder="Search this overview…" aria-label="Search this overview" />
+      <p class="side-note">Use the buttons at the top to switch between skim and full reading modes.</p>
+      <nav>
+        <a href="#start">Start here</a>
+        <a href="#logic">Logic chain</a>
+        <a href="#domains">The five domains</a>
+        <a href="#method">What each option builds</a>
+        <a href="#spine">Capabilities</a>
+        <a href="#capital">How capital takes part</a>
+        <a href="#deep">The domains in depth</a>
+        <a href="#glossary">Glossary</a>
+      </nav>
+      <div class="sidebox">
+        <p class="side-note"><strong>How to read this:</strong> domains hold <em>positions</em> (strategic fields of response); positions hold <em>options</em> (concrete interventions). Live options are the work already underway.</p>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header class="hero searchable" id="start">
+        <p class="eyebrow">An overview of the work</p>
+        <h1>The xCO options portfolio, in five domains</h1>
+        <p class="subtitle">A clear map of the work xCO is building: five systemic risks facing societies, and for each one a portfolio of response — strategic positions and concrete options already underway on the ground.</p>
+        <p class="thesis">xCO turns cascading civilizational risk into investable portfolios of response — organised into five domains, each holding strategic positions and anchored by live work already underway on the ground.</p>
+        <div class="controls" aria-label="Reading controls">
+          <button id="modeSkim" type="button">Skim mode</button>
+          <button id="modeFull" type="button" class="active">Full mode</button>
+          <button id="expandAll" type="button">Expand all</button>
+          <button id="collapseAll" type="button">Collapse all</button>
+          <button type="button" onclick="window.print()">Print / PDF</button>
+        </div>
+      </header>
+
+      <section class="searchable" id="logic">
+        <div class="section-title">
+          <div>
+            <span class="tag">Core communication device</span>
+            <h2>The logic chain</h2>
+            <p>How abstract existential risk becomes an investable response portfolio. This is the diagram for decks, the website, and funder briefings.</p>
+          </div>
+        </div>
+        <div class="logic">
+          <div><h3>1. Volatility rises</h3><p>Biophysical, technological, ecological and social shocks intensify.</p></div>
+          <div><h3>2. Risks cascade</h3><p>Heat, water, food, housing, health, violence, infrastructure and trust interact.</p></div>
+          <div><h3>3. Optionality is spent</h3><p>The set of futures a system can still reach narrows — before the harm is visible.</p></div>
+          <div><h3>4. Institutions fall short</h3><p>Most were built for single problems, not risks that cross many domains and actors at once.</p></div>
+          <div><h3>5. xCO maps the response</h3><p>It identifies where the risks are, who they hit, and where a response could take hold and spread.</p></div>
+          <div><h3>6. Portfolios form</h3><p>Each domain combines concrete options, shared capabilities and capital into one coordinated response.</p></div>
+          <div><h3>7. Capacity returns</h3><p>Places and institutions regain the ability to respond — and to keep responding to whatever comes next.</p></div>
+        </div>
+        <div class="callout">
+          <h3>Why timing is everything: the window closes early</h3>
+          <p>The chance to act on a risk usually disappears before its consequences become visible. A coastal town can become uninsurable — and therefore unsellable — long before any flood arrives. A region loses its ability to adapt to water shortage once the groundwater is gone, not when the first harvest fails. By the time the damage shows, the choices that could have prevented it have often already closed. So xCO works from the <strong>early warning signs</strong>, while there is still a decision to make.</p>
+        </div>
+      </section>
+
+      <section class="searchable" id="domains">
+        <div class="section-title">
+          <div>
+            <span class="tag">Portfolio architecture</span>
+            <h2>The five domains</h2>
+            <p>Each domain names a systemic risk. Its <strong>positions</strong> are the pathways of response; the <strong>options in play</strong> beneath show the concrete work, coloured by how far along it is.</p>
+          </div>
+        </div>
+        <div class="callout">
+          <h3>How the layers nest</h3>
+          <p><strong>Domains</strong> name the risk being managed. <strong>Positions</strong> are the pathways of response to that risk. <strong>Options</strong> are concrete interventions — a specific place or vehicle. A portfolio vehicle (such as RZ Studio or the Heart Power portfolio) can sit at either level, and a domain can hold more than one.</p>
+        </div>
+        <div class="stage-legend" aria-label="Maturity stages">
+          <span><i class="dot-exp"></i><b>Exploring</b>&nbsp;— internal, no partners yet</span>
+          <span><i class="dot-dev"></i><b>Developing</b>&nbsp;— co-commitment with partners</span>
+          <span><i class="dot-live"></i><b>Live</b>&nbsp;— allocation made in place</span>
+        </div>
+        <div class="domain-map">
+
+          <div class="domain">
+            <div class="domain-head">
+              <span class="domain-no">Domain 01</span>
+              <h3>Planetary breakdown</h3>
+              <p>The Earth systems that keep the climate stable are crossing thresholds that cannot be reversed.</p>
+            </div>
+            <div>
+              <div class="layer"><p class="layer-label">Positions</p><div class="option-tags"><span>Biodiversity preservation</span><span>Cryosphere stabilisation</span><span>Marine regeneration</span><span>Atmospheric‑river governance</span></div></div>
+              <div class="layer"><p class="layer-label">Options in play</p><div class="option-tags"><span class="stage-dev">One‑percent planetary trust</span><span class="stage-dev">Antarctic</span><span class="stage-dev">North Sea</span><span class="stage-dev">Whale Nation</span></div></div>
+            </div>
+          </div>
+
+          <div class="domain">
+            <div class="domain-head">
+              <span class="domain-no">Domain 02</span>
+              <h3>Failing territories</h3>
+              <p>Whole regions losing the water, soil, food and secure ownership that make them habitable.</p>
+            </div>
+            <div>
+              <div class="layer"><p class="layer-label">Positions</p><div class="option-tags"><span>Bioregional regeneration</span><span>Regenerative agriculture</span><span>Nutritional sovereignty</span><span>Self‑sovereign land</span></div></div>
+              <div class="layer"><p class="layer-label">Options in play</p><div class="option-tags"><span class="stage-live">Findhorn</span><span class="stage-live">Tastée</span><span class="stage-dev">Muga Valley</span><span class="stage-dev">Tayside</span><span class="stage-dev">Ecological land trust</span><span class="stage-dev">Terra‑region (Alps)</span><span class="stage-dev">Santiago</span><span class="stage-exp">Dartmoor</span></div><p class="mini" style="margin-top:8px">Several carried by RZ Studio.</p></div>
+            </div>
+          </div>
+
+          <div class="domain">
+            <div class="domain-head">
+              <span class="domain-no">Domain 03</span>
+              <h3>Unliveable cities</h3>
+              <p>Cities pushed past liveability by extreme heat and brittle, extractive construction.</p>
+            </div>
+            <div>
+              <div class="layer"><p class="layer-label">Positions</p><div class="option-tags"><span>Urban cooling</span><span>Zero‑extraction construction</span><span>Three‑degree neighbourhoods</span><span>Community energy</span></div></div>
+              <div class="layer"><p class="layer-label">Options in play</p><div class="option-tags"><span class="stage-dev">Madrid Cooling Coalition</span><span class="stage-dev">Copenhagen — zero‑extraction</span><span class="stage-exp">Birmingham — three‑degree neighbourhoods</span></div></div>
+            </div>
+          </div>
+
+          <div class="domain">
+            <div class="domain-head">
+              <span class="domain-no">Domain 04</span>
+              <h3>Authoritarian futures</h3>
+              <p>Volatility captured by coercion, and the slide from plural government to authoritarian control.</p>
+            </div>
+            <div>
+              <div class="layer"><p class="layer-label">Positions</p><div class="option-tags"><span>Civic resilience &amp; rapid response</span><span>Legal power &amp; accountability</span><span>Decision‑making &amp; civic finance</span><span>Democratic capacity &amp; deliberation</span></div></div>
+              <div class="layer"><p class="layer-label">Options in play</p><div class="option-tags"><span class="stage-dev">Decision‑making &amp; civic finance infrastructure</span></div><p class="mini" style="margin-top:8px">Carried by the Heart Power portfolio (UK).</p></div>
+            </div>
+          </div>
+
+          <div class="domain">
+            <div class="domain-head">
+              <span class="domain-no">Domain 05</span>
+              <h3>The crisis of being human</h3>
+              <p>Human worth, agency and livelihood eroded as AI absorbs what people were paid and valued for.</p>
+            </div>
+            <div>
+              <div class="layer"><p class="layer-label">Positions</p><div class="option-tags"><span>Future of being human</span><span>Human–machine relationships</span><span>Collective intelligence of a city</span><span>Cultural &amp; universal imagination</span></div></div>
+              <div class="layer"><p class="layer-label">Options in play</p><div class="option-tags"><span class="stage-exp">Exploring — no partners yet</span></div></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="callout" style="background:var(--accent-soft);border-color:#b6cabf">
+          <h3>Underneath all five</h3>
+          <p>A shared set of <strong>capabilities</strong> every domain draws on — risk‑sensing, coordination, legal instruments, media and learning — and a <strong>way for different kinds of capital to take part</strong>. Both are set out in the two sections that follow.</p>
+        </div>
+      </section>
+
+      <section class="searchable" id="method">
+        <div class="section-title">
+          <div>
+            <span class="tag">The deeper goal</span>
+            <h2>What each option really builds</h2>
+            <p>Every option begins with a concrete, near‑term goal — cool Madrid by around 7.5&deg;C, stabilise a watershed, hold a bioregion in balance. The goal is real and necessary, and it is what makes the larger work politically and financially possible. But it is the entry point, not the end.</p>
+          </div>
+        </div>
+        <div class="logic" style="grid-template-columns:repeat(3,1fr)">
+          <div><h3>The goal</h3><p>A concrete mission goal space — specific enough to mobilise politics, partners and funding around a clear target, and to show where abstract risk touches the continuity of everyday life.</p></div>
+          <div><h3>The real product</h3><p>Systemic capability. Cooling a city means citizens cooling and greening streets, distributed sensing, and coordination between people and institutions that did not exist before — the same capability the place will need for the next shock, and the one after.</p></div>
+          <div><h3>The horizon</h3><p>Civilizational optionality. Built in one place and spread to the next, these capabilities widen the range of futures societies can still reach. The concrete goal wins the permission; the capability is the real product; keeping futures open is the point.</p></div>
+        </div>
+        <div class="callout">
+          <h3>How the work is done matters as much as whether it is done</h3>
+          <p>Cooling a city in a way that concentrates power is a failure even if the temperature falls. The way a place is cooled or rebuilt determines the political economy that results: a centralised programme creates dependency; a distributed one builds civic agency, local fabrication, maintenance cultures and plural ownership. The aim is not efficiency alone — it is to expand future capacity.</p>
+        </div>
+        <p class="lede" style="margin-top:18px">This is also why xCO does not simply describe collapse. Fear alone shuts people down. Each domain shows a credible, fundable field of response — so capital and communities can act on risk they are already exposed to, rather than look away.</p>
+      </section>
+
+      <section class="searchable" id="spine">
+        <div class="section-title">
+          <div>
+            <span class="tag">The reusable layer</span>
+            <h2>The capabilities every domain draws on</h2>
+            <p>The most distinctive thing xCO builds is not any single option — it is a reusable sequence of capabilities that turns a sensed risk into action on the ground, and lets what works in one place be rebuilt elsewhere, at speed.</p>
+          </div>
+        </div>
+        <div class="logic">
+          <div><h3>1. Risk sensing</h3><p>Reading the early signs that a place is losing its room to act.</p></div>
+          <div><h3>2. Desire construction</h3><p>Building appetite for a better future — through media, campaigns and culture — so change is wanted, not imposed.</p></div>
+          <div><h3>3. Demand construction</h3><p>Turning that into structured demand — financial signal, political mandate, civic legitimacy — and designing the portfolio of interventions that meets it.</p></div>
+          <div><h3>4. Capital orchestration</h3><p>Matching the right kind of capital to the right part of the work.</p></div>
+          <div><h3>5. Financial facility</h3><p>The vehicle that holds and deploys capital in place — e.g. a city cooling bank.</p></div>
+          <div><h3>6. Outcome accelerator</h3><p>Where capital meets demand and many actors build and test real responses together — without a new monopoly forming at the centre.</p></div>
+          <div><h3>7. Learning system</h3><p>Capturing what works so it can travel and be rebuilt elsewhere.</p></div>
+        </div>
+        <p class="mini" style="margin-top:14px">Underpinning the sequence throughout: the new <strong>legal and financial instruments</strong> — outcome facilities, risk pools, fiduciary trusts — that let value flow where existing structures cannot hold it.</p>
+      </section>
+
+      <section class="searchable" id="capital">
+        <div class="section-title">
+          <div>
+            <span class="tag">For capital partners</span>
+            <h2>How capital takes part</h2>
+            <p>The binding constraint is not money, technology or expertise — it is the architecture that turns shared risk exposure into coordinated commitments. Capital takes part through three pools, each with a different job and return logic. The structure is still in formation; the figures below are indicative.</p>
+          </div>
+        </div>
+        <div class="grid three">
+          <div class="card"><span class="number">1</span><h3>Systemic risk-bearing capital</h3><p><strong>Non-returnable.</strong> Seeds the deal construction that builds each option — roughly £50k–£10m per option, around three options per viable position.</p></div>
+          <div class="card"><span class="number">2</span><h3>Tooling fund</h3><p><strong>Risk-on.</strong> Builds the new products, services and capabilities needed to arrange and run executions across the portfolio.</p></div>
+          <div class="card"><span class="number">3</span><h3>First-right-to-invest fund</h3><p><strong>Returnable.</strong> Puts the first commercial capital — roughly the first £10m — into each option's own financial facility, such as a Madrid Cooling Bank.</p></div>
+        </div>
+        <p class="lede" style="margin-top:8px">For any allocator with systemic exposure, this is not risk‑on capital making a bet. It is <strong>risk‑in</strong> capital — already exposed to cascade events through every other asset class — finally having an instrument to act on that exposure.</p>
+        <div class="matrix depth-full">
+          <div class="card"><h3>Mission return</h3><p>Capital advances the mission outcomes donors, foundations and endowments exist to pursue.</p></div>
+          <div class="card"><h3>Risk‑mitigation return</h3><p>Capital protects future optionality by reducing exposure to systemic risks that impair wealth and stability.</p></div>
+          <div class="card"><h3>Learning &amp; data return</h3><p>Capital holders gain new knowledge, risk intelligence and field learning ahead of consensus.</p></div>
+          <div class="card"><h3>Participation return</h3><p>First rights or preferred access to later‑stage opportunities where appropriate.</p></div>
+        </div>
+        <p class="mini" style="margin-top:12px">Which return maps to which pool is still being finalised.</p>
+      </section>
+
+      <section class="searchable" id="deep">
+        <div class="section-title">
+          <div>
+            <span class="tag">Going deeper</span>
+            <h2>The domains in depth</h2>
+            <p>The detail behind each domain — its risk, its positions, and the live work anchoring it. Skim mode hides these; full mode opens them.</p>
+          </div>
+        </div>
+        <p class="skim-note">Skim mode hides the detail. Switch to full mode to read every domain in full.</p>
+
+        <details open class="depth-full"><summary>Domain 01 — Planetary breakdown</summary><div class="detail-body">
+          <p>The risk here is irreversible: once these Earth systems cross their thresholds, the futures they support close for good. The domain covers the cryosphere (Alpine, Himalayan, Antarctic and Arctic ice that holds sea level, ocean currents and regional climate in place), ocean chemistry and marine life, atmospheric rivers, and the densest reservoirs of biodiversity. The response works to hold these systems above the line beyond which there is no return.</p>
+          <p>The furthest‑developed proposition is the <strong>One‑percent planetary trust</strong> — an effort to protect roughly one percent of the world's most critical biodiversity and land, the reservoir of evolutionary potential through which life retains the capacity to adapt (the Amazon and the Congo are subsets, not the whole). It is designed to run through a dual architecture: the trust holding strategic, long‑horizon responsibility, while local stewardship compacts hold operational custodianship, so planetary preservation and local livelihoods coexist without collapsing into centralised control. Alongside it, work is developing on <strong>Antarctic</strong> stabilisation and on marine regeneration in the <strong>North Sea</strong> and with <strong>Whale Nation</strong>.</p>
+        </div></details>
+
+        <details class="depth-full"><summary>Domain 02 — Failing territories</summary><div class="detail-body">
+          <p>The risk is that whole regions become unable to feed, water and house the people who live in them — soils exhausted, aquifers drained, food chains stretched thin, land enclosed. The response is place‑based: holding a whole living region in balance — soils, water, food and people as one interlocking system rather than a stack of sectors — so it stays habitable and productive under pressure.</p>
+          <p>Much of the live work runs through <strong>RZ Studio</strong>: <strong>Findhorn</strong> (regenerative agriculture, including salmon farming) is decided and in place; <strong>Muga Valley</strong>, <strong>Tayside</strong>, an <strong>ecological land trust</strong> and <strong>Tastée</strong> are developing; and <strong>Dartmoor</strong> is at an early stage. <strong>Terra‑region</strong> (the Alps) is developing through a separate partnership, and <strong>Santiago</strong> sits here too, as a question of glacier water and regional viability. Positions include regenerative agriculture (soil‑deep, water‑retentive, low‑input biological production), nutritional sovereignty — securing nutrition closer to home so a price shock anywhere is not a health crisis everywhere — and self‑sovereign land, holding land in common trust across generations rather than letting it concentrate into dispossession.</p>
+        </div></details>
+
+        <details class="depth-full"><summary>Domain 03 — Unliveable cities</summary><div class="detail-body">
+          <p>The risk is that extreme heat and brittle, extractive construction push cities past the point where ordinary life can continue — with health, the economy and social cohesion failing together. The guiding principle of the response is that every intervention should do several jobs at once: an urban forest should cool the city, recharge its aquifers, produce food, create habitat and give residents something to tend — all at the same time.</p>
+          <p>The <strong>Madrid Cooling Coalition</strong> is developing fast (cooling a city already hitting 47&deg;C is an organisational problem of coordinating thousands of actors, not only a technical one), and <strong>Copenhagen</strong> is developing the zero‑extraction pathway — building without virgin material extraction, where construction accounts for roughly 40% of global emissions, so new supply chains, instruments and demand have to be built at once. <strong>Birmingham</strong> is at an earlier stage on the three‑degree neighbourhoods work — rethinking cooling, water, materials, energy and social infrastructure together at the scale of the street.</p>
+        </div></details>
+
+        <details class="depth-full"><summary>Domain 04 — Authoritarian futures</summary><div class="detail-body">
+          <p>The risk is that, under mounting pressure, the demand for strong government is met by coercion: emergency powers that never lapse, plural debate narrowing into control. The response builds civic power that is materially consequential without becoming a new coercive centre of its own — legally empowered, financially resourced, locally grounded and able to coordinate across scales.</p>
+          <p>Its positions are mutually reinforcing: <strong>civic resilience &amp; rapid response</strong> (neighbourhood and municipal resilience, mutual aid and community‑owned lifeline systems, plus lawful shock absorbers that mobilise in hours), <strong>legal power &amp; accountability</strong> (litigation, investigative assemblies and registries that turn grievance into reform rather than rupture), <strong>decision‑making &amp; civic finance</strong> — the infrastructure for making contested collective choices and resourcing them, developed with the World Bank around the idea of soft civic assets as strategic assets — and <strong>democratic capacity &amp; deliberation</strong>, treated as a contractible, investable asset class including instruments such as the democracy bond.</p>
+          <p>This work is carried by the <strong>Heart Power portfolio</strong> (UK), a vehicle that seeds and connects civic options so they are stronger together than alone — built with the people who will hold them.</p>
+        </div></details>
+
+        <details class="depth-full"><summary>Domain 05 — The crisis of being human</summary><div class="detail-body">
+          <p>The risk is that, as AI absorbs more of what people were paid and valued for, human worth, agency and livelihood quietly erode — and the window to set the foundations differently is narrow.</p>
+          <p>This is the earliest domain, taking shape as three early typologies: the <strong>future of being human</strong> (what value and dignity mean in this new settlement), <strong>human–machine relationships</strong>, and the <strong>collective intelligence of a city</strong>. Alongside them sits work on <strong>cultural and universal imagination</strong>: building desire for new futures, lived at city scale, through art and culture — so people want a different future and help make it, rather than merely endure it.</p>
+        </div></details>
+
+      </section>
+
+      <section class="searchable" id="glossary">
+        <div class="section-title">
+          <div>
+            <span class="tag">Shared vocabulary</span>
+            <h2>A few terms</h2>
+            <p>The language used throughout this overview, in plain form.</p>
+          </div>
+        </div>
+        <div class="grid two">
+          <div class="card"><h3>Domain</h3><p>One of the five systemic risks the portfolio addresses — e.g. unliveable cities, or authoritarian futures. Each domain groups the pathways of response to that risk.</p></div>
+          <div class="card"><h3>Position</h3><p>A pathway of response to a domain's risk — e.g. urban cooling or bioregional regeneration. Can contain multiple options.</p></div>
+          <div class="card"><h3>Option</h3><p>A concrete intervention in a specific site or vehicle — e.g. the Madrid Cooling Coalition, or the one‑percent planetary trust.</p></div>
+          <div class="card"><h3>Maturity stage</h3><p>How far an option has travelled: <strong>Exploring</strong> (internal, no partners), <strong>Developing</strong> (co‑commitment with partners), or <strong>Live</strong> (allocation made in place).</p></div>
+          <div class="card"><h3>Mission goal space</h3><p>A concrete, near‑term target (such as cooling a city by several degrees) that mobilises politics and funding, and opens the deeper work behind it.</p></div>
+          <div class="card"><h3>Systemic capability</h3><p>The durable capacity an option builds in a place or field — coordination, instruments, civic infrastructure — that outlasts the original crisis.</p></div>
+          <div class="card"><h3>Civilizational optionality</h3><p>The structural ability of societies to coordinate under stress and keep multiple futures open. What xCO exists to expand.</p></div>
+          <div class="card"><h3>Risk‑in capital</h3><p>Capital already exposed to cascading risk through every other asset class — now able to act on that exposure directly.</p></div>
+        </div>
+      </section>
+
+      <div class="footer">
+        <p>A self‑contained overview of the xCO options portfolio. No external assets, fonts, scripts or dependencies required.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const body=document.body;
+      const skim=document.getElementById('modeSkim');
+      const full=document.getElementById('modeFull');
+      const expand=document.getElementById('expandAll');
+      const collapse=document.getElementById('collapseAll');
+      const search=document.getElementById('search');
+      const details=[...document.querySelectorAll('details')];
+      const searchable=[...document.querySelectorAll('.searchable')];
+      function setMode(mode){
+        body.dataset.mode=mode;
+        skim.classList.toggle('active',mode==='skim');
+        full.classList.toggle('active',mode==='full');
+      }
+      skim.addEventListener('click',()=>setMode('skim'));
+      full.addEventListener('click',()=>setMode('full'));
+      expand.addEventListener('click',()=>details.forEach(d=>d.open=true));
+      collapse.addEventListener('click',()=>details.forEach(d=>{ if(!d.classList.contains('always-open')) d.open=false; }));
+      search.addEventListener('input',function(){
+        const q=this.value.trim().toLowerCase();
+        if(!q){ searchable.forEach(el=>el.classList.remove('search-hidden')); return; }
+        searchable.forEach(el=>{
+          const hit=el.innerText.toLowerCase().includes(q);
+          el.classList.toggle('search-hidden',!hit);
+          if(hit){ el.querySelectorAll('details').forEach(d=>d.open=true); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
